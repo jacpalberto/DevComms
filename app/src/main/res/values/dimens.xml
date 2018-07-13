@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="event_title_fontsize">18sp</dimen>
+    <dimen name="event_data_fontsize">16sp</dimen>
+    <dimen name="event_time_fontsize">18sp</dimen>
+</resources>
