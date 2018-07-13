@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import com.jacpalberto.devcomms.extensions.replaceFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
 
     private var viewModel: DevCommsViewModel? = null
     private var isFilteredByTime: Boolean = true
+    private var isDataNull: Boolean = true
+    private val eventsByTimeFragment = EventsByTimeFragment
+    private val eventsByRoomFragment = EventsByRoomFragment
     private var item: MenuItem? = null
     private var menu: Menu? = null
 
@@ -30,18 +33,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        initObservers()
         initToolbar()
         initFragment()
-        initObservers()
     }
 
     private fun initFragment() {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
-        val fragment = EventsByTimeFragment
-        fragmentTransaction.add(R.id.containerLayout, fragment.newInstance())
-        fragmentTransaction.commit()
+        val filteredByTime = viewModel?.getFilteredByTime()
+        if (filteredByTime != null && filteredByTime)
+            replaceFragment(R.id.containerLayout, eventsByTimeFragment.newInstance())
+        else
+            replaceFragment(R.id.containerLayout, eventsByRoomFragment.newInstance())
     }
 
     private fun initToolbar() {
@@ -49,22 +51,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-        viewModel?.getEvents()?.observe(this,
-                Observer {
-                    if (it != null && !it.isEmpty()) item?.isVisible = true
-                })
+        val filteredByTime = viewModel?.getFilteredByTime()
+        if (filteredByTime != null) isFilteredByTime = filteredByTime
+
+        viewModel?.getEvents()?.observe(this, Observer { isDataNull = (it == null) })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_activity_menu, menu)
         this.menu = menu
         item = menu.findItem(R.id.action_filter_toggle)
+        updateMenuItem(isFilteredByTime)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_filter_toggle) {
-            toggle()
+            if (!isDataNull) toggle()
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -78,11 +81,15 @@ class MainActivity : AppCompatActivity() {
     private fun showListFilteredByTime() {
         isFilteredByTime = true
         updateMenuItem(isFilteredByTime)
+        viewModel?.setFilteredByTime(true)
+        replaceFragment(R.id.containerLayout, eventsByTimeFragment.newInstance())
     }
 
     private fun showListFilteredByRoom() {
         isFilteredByTime = false
         updateMenuItem(isFilteredByTime)
+        viewModel?.setFilteredByTime(false)
+        replaceFragment(R.id.containerLayout, eventsByRoomFragment.newInstance())
     }
 
     private fun updateMenuItem(filteredByTime: Boolean) {

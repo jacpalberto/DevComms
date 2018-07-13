@@ -7,7 +7,6 @@
         android:id="@+id/action_filter_toggle"
         android:icon="@android:drawable/ic_btn_speak_now"
         android:title="@string/filter"
-        android:visible="false"
         app:showAsAction="always" />
 
 </menu>

@@ -4,12 +4,15 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="toolbarColor">#000000</color>
-    <color name="eventCardColor">#fff9e8</color>
-    <color name="eventTitleBackground">#ffe8d7</color>
+    <color name="eventCardColor">#FFFFFF</color>
+    <color name="eventTitleBackground">#ecf7ff</color>
     <color name="eventTitleColor">#710106</color>
     <color name="eventSpeakerColor">#d13c13</color>
     <color name="eventRoomColor">#040b89</color>
     <color name="eventTypeColor">#ffffff</color>
     <color name="eventTimeColor">#048e37</color>
+    <color name="tabLayoutColor">#0694fc</color>
+    <color name="darkBlue">#040b89</color>
+    <color name="purple">#790055</color>
 
 </resources>

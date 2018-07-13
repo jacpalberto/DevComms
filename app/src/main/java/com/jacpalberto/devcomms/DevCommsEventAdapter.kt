@@ -29,6 +29,7 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>, private val
             eventSpeaker.text = event?.speaker
             eventType.text = event?.type
             eventTime.text = event?.hour
+            eventCommunity.text = event?.community
             if (isFilteredByTime) {
                 eventRoom.visibility = View.VISIBLE
                 eventRoom.text = event?.room
