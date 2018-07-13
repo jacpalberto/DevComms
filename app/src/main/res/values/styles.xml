@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="EventTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/eventTitleColor</item>
+        <item name="android:textSize">@dimen/event_title_fontsize</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@color/eventTitleBackground</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="EventData" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/eventSpeakerColor</item>
+        <item name="android:textSize">@dimen/event_data_fontsize</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <style name="EventTime" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/eventTimeColor</item>
+        <item name="android:textSize">@dimen/event_time_fontsize</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@color/eventTitleBackground</item>
+    </style>
+
+
+</resources>
