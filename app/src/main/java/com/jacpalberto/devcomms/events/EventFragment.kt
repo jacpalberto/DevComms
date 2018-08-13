@@ -1,4 +1,4 @@
-package com.jacpalberto.devcomms
+package com.jacpalberto.devcomms.events
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.res.Configuration
@@ -10,13 +10,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jacpalberto.devcomms.R
+import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
+import com.jacpalberto.devcomms.data.DevCommsEvent
+import com.jacpalberto.devcomms.data.DevCommsListEvent
 import kotlinx.android.synthetic.main.fragment_event.*
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
  */
 class EventFragment : Fragment() {
-    private var viewModel: DevCommsViewModel? = null
+    private var viewModel: EventsViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,7 +29,7 @@ class EventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = activity?.let { ViewModelProviders.of(it).get(DevCommsViewModel::class.java) }
+        viewModel = activity?.let { ViewModelProviders.of(it).get(EventsViewModel::class.java) }
         init()
     }
 

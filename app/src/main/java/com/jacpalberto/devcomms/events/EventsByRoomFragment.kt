@@ -1,18 +1,25 @@
-package com.jacpalberto.devcomms
+package com.jacpalberto.devcomms.events
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jacpalberto.devcomms.R
+import com.jacpalberto.devcomms.adapters.PagerAdapter
+import com.jacpalberto.devcomms.data.DevCommsEvent
+import com.jacpalberto.devcomms.data.DevCommsListEvent
+import com.jacpalberto.devcomms.extensions.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_room.*
 
 class EventsByRoomFragment : Fragment() {
-    private var viewModel: DevCommsViewModel? = null
+    companion object {
+        fun newInstance() = EventsByRoomFragment()
+    }
+    private var viewModel: EventsViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -21,7 +28,7 @@ class EventsByRoomFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = activity?.let { ViewModelProviders.of(it).get(DevCommsViewModel::class.java) }
+        viewModel = activity?.let { ViewModelProviders.of(it).get(EventsViewModel::class.java) }
         init()
     }
 
@@ -49,22 +56,8 @@ class EventsByRoomFragment : Fragment() {
         keys.forEach { tabLayout.addTab(tabLayout.newTab().setText(it)) }
         tabLayout.tabGravity = TabLayout.GRAVITY_CENTER
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                viewPager.currentItem = tab.position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-        })
-    }
-
-    companion object {
-        fun newInstance() = EventsByRoomFragment()
+        tabLayout.doOnTabSelected {
+            viewPager.currentItem = it.position
+        }
     }
 }

@@ -22,24 +22,43 @@
 
     <!--EventCardView styles-->
 
-    <style name="EventTitle" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/eventTitleColor</item>
-        <item name="android:textSize">@dimen/event_title_fontsize</item>
-        <item name="android:textAlignment">center</item>
+    <style name="EventTitle">
         <item name="android:background">@color/eventTitleBackground</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:elevation">1dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
-    <style name="EventData" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/eventSpeakerColor</item>
-        <item name="android:textSize">@dimen/event_data_fontsize</item>
-        <item name="android:textAlignment">textStart</item>
+    <style name="EventData">
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 
-    <style name="EventTime" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/eventTimeColor</item>
-        <item name="android:textSize">@dimen/event_time_fontsize</item>
+    <style name="EventTime">
         <item name="android:textAlignment">center</item>
         <item name="android:background">@color/eventTitleBackground</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">4dp</item>
     </style>
+
+    <!--EventTextAppearances-->
+
+    <style name="RegularTextStyle">
+        <item name="android:textColor">@color/eventSpeakerColor</item>
+        <item name="android:textSize">@dimen/event_data_fontsize</item>
+    </style>
+
+    <style name="TimeTextStyle">
+        <item name="android:textColor">@color/eventTimeColor</item>
+        <item name="android:textSize">@dimen/event_time_fontsize</item>
+    </style>
+
+    <style name="TitleTextStyle">
+        <item name="android:textColor">@color/eventTitleColor</item>
+        <item name="android:textSize">@dimen/event_title_fontsize</item>
+    </style>
+
 </resources>

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     tools:context=".SplashActivity">
 
     <ImageView
@@ -13,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:alpha="0"
-        app:srcCompat="@drawable/logo_dev_comms"
-        tools:alpha="1" />
+        app:srcCompat="@drawable/logo_community"
+        tools:alpha="1"
+        tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>

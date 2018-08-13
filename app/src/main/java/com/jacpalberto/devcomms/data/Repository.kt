@@ -1,4 +1,4 @@
-package com.jacpalberto.devcomms
+package com.jacpalberto.devcomms.data
 
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

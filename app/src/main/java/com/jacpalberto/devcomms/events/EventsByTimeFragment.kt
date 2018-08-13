@@ -1,4 +1,4 @@
-package com.jacpalberto.devcomms
+package com.jacpalberto.devcomms.events
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -10,10 +10,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jacpalberto.devcomms.R
+import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
+import com.jacpalberto.devcomms.data.DevCommsEvent
 import kotlinx.android.synthetic.main.fragment_events_by_time.*
 
 class EventsByTimeFragment : Fragment() {
-    private var viewModel: DevCommsViewModel? = null
+    companion object {
+        fun newInstance() = EventsByTimeFragment()
+    }
+
+    private var viewModel: EventsViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -22,7 +29,7 @@ class EventsByTimeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = activity?.let { ViewModelProviders.of(it).get(DevCommsViewModel::class.java) }
+        viewModel = activity?.let { ViewModelProviders.of(it).get(EventsViewModel::class.java) }
         init()
     }
 
@@ -42,9 +49,5 @@ class EventsByTimeFragment : Fragment() {
     private fun initRecycler() {
         val isPortraitScreen = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
         eventsRecycler.layoutManager = if (isPortraitScreen) LinearLayoutManager(activity) else GridLayoutManager(activity, 2)
-    }
-
-    companion object {
-        fun newInstance() = EventsByTimeFragment()
     }
 }
