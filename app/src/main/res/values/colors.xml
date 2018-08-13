@@ -13,6 +13,6 @@
     <color name="eventTimeColor">#048e37</color>
     <color name="tabLayoutColor">#0694fc</color>
     <color name="darkBlue">#040b89</color>
-    <color name="purple">#790055</color>
+    <color name="navigationBackground">#ecf7ff</color>
 
 </resources>

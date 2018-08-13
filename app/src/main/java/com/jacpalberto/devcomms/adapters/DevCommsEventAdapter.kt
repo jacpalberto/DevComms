@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_event.view.*
 /**
  * Created by Alberto Carrillo on 7/12/18.
  */
-class DevCommsEventAdapter(private var events: List<DevCommsEvent?>, private val isFilteredByTime: Boolean)
+class DevCommsEventAdapter(private var events: List<DevCommsEvent?>)
     : RecyclerView.Adapter<DevCommsEventAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,10 +32,8 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>, private val
             eventType.text = event?.type
             eventTime.text = event?.hour
             eventCommunity.text = event?.community
-            if (isFilteredByTime) {
-                eventRoom.visibility = View.VISIBLE
-                eventRoom.text = event?.room
-            }
+            eventRoom.visibility = View.VISIBLE
+            eventRoom.text = event?.room
         }
     }
 }

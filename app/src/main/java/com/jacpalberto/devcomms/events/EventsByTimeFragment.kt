@@ -43,7 +43,7 @@ class EventsByTimeFragment : Fragment() {
     }
 
     private fun showEvents(it: List<DevCommsEvent?>?) {
-        it?.let { events -> eventsRecycler.adapter = DevCommsEventAdapter(events, true) }
+        it?.let { events -> eventsRecycler.adapter = DevCommsEventAdapter(events) }
     }
 
     private fun initRecycler() {

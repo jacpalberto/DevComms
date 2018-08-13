@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".about.AboutActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/toolbarColor"
+        android:elevation="7dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="@string/about"
+        app:titleTextColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/aboutAppIcon"
+        style="@style/AboutIcons"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/aboutAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/about_app_title"
+        android:textAppearance="@style/AboutTitleStyle"
+        app:layout_constraintBottom_toBottomOf="@+id/aboutAppIcon"
+        app:layout_constraintStart_toEndOf="@+id/aboutAppIcon"
+        app:layout_constraintTop_toTopOf="@+id/aboutAppIcon" />
+
+    <TextView
+        android:id="@+id/aboutAppContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_app_content"
+        android:textAppearance="@style/AboutTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/aboutAppIcon"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAppTitle" />
+
+    <ImageView
+        android:id="@+id/aboutEventIcon"
+        style="@style/AboutIcons"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutAppContent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/aboutEventTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/about_event_title"
+        android:textAppearance="@style/AboutTitleStyle"
+        app:layout_constraintBottom_toBottomOf="@+id/aboutEventIcon"
+        app:layout_constraintStart_toEndOf="@+id/aboutEventIcon"
+        app:layout_constraintTop_toTopOf="@+id/aboutEventIcon" />
+
+    <TextView
+        android:id="@+id/aboutEventContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_event_content"
+        android:textSize="14sp"
+        android:textAppearance="@style/AboutTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/aboutEventIcon"
+        app:layout_constraintTop_toBottomOf="@+id/aboutEventTitle" />
+
+
+</android.support.constraint.ConstraintLayout>

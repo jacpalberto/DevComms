@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/eventsGroup"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/scheduleMenuItem"
+            android:checked="true"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="@string/schedule" />
+        <item
+            android:id="@+id/agendaMenuItem"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="@string/agenda" />
+    </group>
+    <group
+        android:id="@+id/settingsGroup"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/sponsorsMenuItem"
+            android:icon="@android:drawable/ic_input_delete"
+            android:title="@string/sponsors" />
+        <item
+            android:id="@+id/aboutMenuItem"
+            android:icon="@android:drawable/ic_dialog_email"
+            android:title="@string/about" />
+    </group>
+</menu>
