@@ -12,6 +12,7 @@ import android.view.MenuItem
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.about.AboutActivity
 import com.jacpalberto.devcomms.extensions.replaceFragment
+import com.jacpalberto.devcomms.sponsors.SponsorsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -43,11 +44,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initNavView() {
-        val toggle = ActionBarDrawerToggle(this,
-                drawerLayout,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
 
         toggle.apply {
             isDrawerIndicatorEnabled = false
@@ -70,6 +67,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.agendaMenuItem -> {
             }
             R.id.sponsorsMenuItem -> {
+                startActivity(SponsorsActivity.newIntent(this@MainActivity))
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             }
             R.id.aboutMenuItem -> {
                 startActivity(AboutActivity.newIntent(this@MainActivity))

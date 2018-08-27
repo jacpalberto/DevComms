@@ -3,6 +3,7 @@
     package="com.jacpalberto.devcomms">
 
     <application
+        android:name=".DevCommsApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".splash.SplashActivity"
             android:noHistory="true"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
@@ -24,6 +25,9 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".about.AboutActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".sponsors.SponsorsActivity"
             android:theme="@style/AppThemeNoActionBar" />
     </application>
 

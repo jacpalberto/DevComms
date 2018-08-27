@@ -15,6 +15,7 @@ import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import kotlinx.android.synthetic.main.fragment_events_by_time.*
 
+//TODO: update this fragment as filtered by room. to show several tabs if the events has several days.
 class EventsByTimeFragment : Fragment() {
     companion object {
         fun newInstance() = EventsByTimeFragment()
@@ -39,7 +40,7 @@ class EventsByTimeFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel?.getEvents()?.observe(this, Observer { showEvents(it) })
+        viewModel?.fetchEvents()?.observe(this, Observer { showEvents(it) })
     }
 
     private fun showEvents(it: List<DevCommsEvent?>?) {

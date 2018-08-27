@@ -1,9 +1,10 @@
-package com.jacpalberto.devcomms
+package com.jacpalberto.devcomms.splash
 
 import android.animation.Animator
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.animation.AccelerateDecelerateInterpolator
+import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.events.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 

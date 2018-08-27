@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -46,7 +45,7 @@ class EventFragment : Fragment() {
 
     private fun initRecycler() {
         val isPortraitScreen = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-        eventsRecycler.layoutManager = if (isPortraitScreen) LinearLayoutManager(activity) else GridLayoutManager(activity, 2)
+        eventsRecycler.layoutManager = GridLayoutManager(activity, if (isPortraitScreen) 1 else 2)
     }
 
     companion object {

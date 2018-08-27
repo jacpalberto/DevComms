@@ -11,7 +11,8 @@
     <string name="sponsors">Sponsors</string>
     <string name="about">About</string>
     <string name="about_app_title">About the app</string>
-    <string name="about_app_content">The Devcomms app is coded by the community members. Architecturally, this is built with the new Android Architecture components and Firebase. All of this is coded natively. See the repo and read more at: https://github.om/jacpalberto/Devcomms</string>
+    <string name="about_app_content">The Devcomms app is coded by the community members. Architecturally, this is built with the new Android Architecture components and Firebase. All of this is coded natively. \n\nSee the repo and read more at: https://github.om/jacpalberto/Devcomms</string>
     <string name="about_event_title">About the community</string>
-    <string name="about_event_content">Devcomms conferences around the world support the Android platform and create a global network for developers and companies. \nWe offer best-in-class presentations from leaders in all parts of the Android ecosystem, including core development, embedded solutions, augmented reality, business solutions, and games</string>
+    <string name="about_event_content">Devcomms conferences around the world support the Android platform and create a global network for developers and companies. \n\nWe offer best-in-class presentations from leaders in all parts of the Android ecosystem, including core development, embedded solutions, augmented reality, business solutions, and games</string>
+    <string name="sponsors_toolbar">Our Awesome sponsors</string>
 </resources>

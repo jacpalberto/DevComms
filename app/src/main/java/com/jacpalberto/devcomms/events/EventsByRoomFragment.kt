@@ -33,7 +33,7 @@ class EventsByRoomFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel?.getEvents()?.observe(this, Observer { filter(it) })
+        viewModel?.fetchEvents()?.observe(this, Observer { filter(it) })
     }
 
     private fun filter(it: List<DevCommsEvent?>?) {

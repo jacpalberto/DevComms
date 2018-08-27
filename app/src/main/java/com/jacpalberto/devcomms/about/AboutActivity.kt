@@ -28,6 +28,7 @@ class AboutActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(android.R.drawable.ic_dialog_map)
     }
 
+    //TODO: Add spans to emails
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
