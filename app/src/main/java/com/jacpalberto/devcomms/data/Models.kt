@@ -25,7 +25,7 @@ data class DevCommsEvent(@PrimaryKey val key: Int? = 0,
 }
 
 @Parcelize
-data class DevCommsEventList(val eventList: List<DevCommsEvent?>,
+data class DevCommsEventList(val eventList: List<DevCommsEvent>,
                              override var errorCode: Int = 0,
                              override var status: DataState = DataState.PROCESS)
     : Parcelable, BaseModel(errorCode, status)

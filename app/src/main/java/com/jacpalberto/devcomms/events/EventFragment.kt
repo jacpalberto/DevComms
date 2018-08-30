@@ -38,8 +38,7 @@ class EventFragment : Fragment() {
         showEvents(devCommsListEvent?.eventList)
     }
 
-    private fun showEvents(it: List<DevCommsEvent?>?) {
-        Log.d("EventFragment", it.toString())
+    private fun showEvents(it: List<DevCommsEvent>?) {
         it?.let { events -> eventsRecycler.adapter = DevCommsEventAdapter(events) }
     }
 

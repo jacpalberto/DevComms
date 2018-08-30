@@ -39,13 +39,13 @@ class EventsByDateFragment : Fragment() {
 
     private fun filter(it: DevCommsEventList?) {
         it?.let {
-            val eventsMap = it.eventList.groupBy { it?.date }
+            val eventsMap = it.eventList.groupBy { it.date }
             setupTabLayout(eventsMap.keys)
             setupViewPager(eventsMap)
         }
     }
 
-    private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent?>>) {
+    private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
         val fragmentList = mutableListOf<Fragment>()
         eventsMap.forEach { _, list ->
             fragmentList.add(EventFragment.newInstance(DevCommsEventList(list)))
@@ -56,6 +56,7 @@ class EventsByDateFragment : Fragment() {
     private fun setupTabLayout(keys: Set<String?>) {
         if (keys.size >= 2) {
             tabLayout.visibility = View.VISIBLE
+            tabLayout.removeAllTabs()
             keys.forEach { tabLayout.addTab(tabLayout.newTab().setText(it)) }
             tabLayout.tabGravity = TabLayout.GRAVITY_CENTER
             viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
