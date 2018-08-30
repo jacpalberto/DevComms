@@ -15,4 +15,7 @@
     <string name="about_event_title">About the community</string>
     <string name="about_event_content">Devcomms conferences around the world support the Android platform and create a global network for developers and companies. \n\nWe offer best-in-class presentations from leaders in all parts of the Android ecosystem, including core development, embedded solutions, augmented reality, business solutions, and games</string>
     <string name="sponsors_toolbar">Our Awesome sponsors</string>
+    <string name="connectivity_error">Ha ocurrido un error de conexión</string>
+    <string name="url_intent_error">No application can handle this request. Please install a web browser or check your URL.</string>
+    <string name="sponsor_logo">Sponsor logo</string>
 </resources>

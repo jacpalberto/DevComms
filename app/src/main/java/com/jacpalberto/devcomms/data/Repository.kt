@@ -1,6 +1,5 @@
 package com.jacpalberto.devcomms.data
 
-import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -12,13 +11,13 @@ import com.google.firebase.database.ValueEventListener
 object Repository {
     private val database = FirebaseDatabase.getInstance()
     private val eventsRef = database.getReference("posadev")
-    private val sponsorsRef = database.getReference("sponsors")
+    private val sponsorsRef = database.getReference("spnosors")
+    private val connectedRef = database.getReference(".info/connected")
 
     fun fetchEvents(onSuccess: (events: List<DevCommsEvent?>) -> Unit, onError: (error: DatabaseError) -> Unit) {
         eventsRef.orderByChild("time").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val events = dataSnapshot.children.map { it.getValue(DevCommsEvent::class.java) }
-                Log.d("Repository", events.toString())
                 onSuccess(events)
             }
 
@@ -28,25 +27,39 @@ object Repository {
         })
     }
 
-    fun fetchSponsors(): SponsorList {
-        var sponsorList: List<Sponsor> = emptyList()
-        var status = DataState.ERROR
-        var errorCode = 0
+    fun fetchSponsors(onResult: (sponsors: SponsorList) -> Unit) {
+        val sponsorList: List<Sponsor> = emptyList()
+        val errorCode = 0
+        connectedRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val connected = snapshot.getValue(Boolean::class.java)!!
+                if (connected) {
+                    fetchSponsorsFirebase(sponsorList, onResult, errorCode)
+                } else onResult(SponsorList(sponsorList, 400, DataState.ERROR))
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    fun fetchSponsorsFirebase(sponsorList: List<Sponsor>, onResult: (sponsors: SponsorList) -> Unit, errorCode: Int) {
+        var sponsorList1 = sponsorList
+        var status1: DataState
+        var errorCode1 = errorCode
+
         sponsorsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val sponsors = dataSnapshot.children.map { it.getValue(Sponsor::class.java) }
-                Log.d("Repository", sponsors.toString())
-                sponsors.forEach {
-                    if (it != null) sponsorList += it
-                }
-                status = DataState.SUCCESS
+                sponsors.forEach { if (it != null) sponsorList1 += it }
+                status1 = DataState.SUCCESS
+                onResult(SponsorList(sponsorList1, errorCode1, status1))
             }
 
             override fun onCancelled(error: DatabaseError) {
-                status = DataState.FAILURE
-                errorCode = error.code
+                status1 = DataState.FAILURE
+                errorCode1 = error.code
+                onResult(SponsorList(sponsorList1, errorCode1, status1))
             }
         })
-        return SponsorList(sponsorList, errorCode, status)
     }
 }

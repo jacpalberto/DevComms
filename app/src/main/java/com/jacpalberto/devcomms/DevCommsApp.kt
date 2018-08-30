@@ -1,21 +1,22 @@
 package com.jacpalberto.devcomms
 
 import android.app.Application
-import android.content.Context
+import android.arch.persistence.room.Room
 
 /**
  * Created by Alberto Carrillo on 8/24/18.
  */
 class DevCommsApp : Application() {
     companion object {
-        private var instance: DevCommsApp? = null
-
-        fun applicationContext(): Context {
-            return instance!!.applicationContext
-        }
+        var database: DevCommsDatabase? = null
     }
 
-    init {
-        instance = this
+    override fun onCreate() {
+        super.onCreate()
+        DevCommsApp.database = Room.databaseBuilder(this,
+                DevCommsDatabase::class.java,
+                "movies")
+                .allowMainThreadQueries()
+                .build()
     }
 }

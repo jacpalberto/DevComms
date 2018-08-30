@@ -1,6 +1,7 @@
 package com.jacpalberto.devcomms.data
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -22,17 +23,17 @@ data class DevCommsEvent(val key: String? = "",
 @Parcelize
 data class DevCommsListEvent(val eventList: List<DevCommsEvent?>) : Parcelable
 
-@Entity (tableName = "sponsors")
-@Parcelize
-data class Sponsor(@PrimaryKey val key: String? = "",
+@Entity(tableName = "sponsors")
+data class Sponsor(@PrimaryKey val key: Int = 0,
                    val imageUrl: String? = "",
                    val webPageUrl: String? = "",
-                   val title: String? = "") : Parcelable
+                   val title: String? = "") {
+    @Ignore constructor() : this(0, "", "", "")
+}
 
-@Parcelize
-data class SponsorList(val eventList: List<Sponsor> = emptyList(),
+data class SponsorList(val sponsorList: List<Sponsor> = emptyList(),
                        override var errorCode: Int = 0,
-                       override var status: DataState = DataState.PROCESS) : Parcelable, BaseModel(errorCode, status)
+                       override var status: DataState = DataState.PROCESS) : BaseModel(errorCode, status)
 
 open class BaseModel(open var errorCode: Int = 0,
                      open var status: DataState = DataState.NONE)

@@ -1,13 +1,20 @@
 package com.jacpalberto.devcomms.extensions
 
+import android.content.Context
 import android.support.annotation.IdRes
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
  */
+
+fun Context.showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, length).show()
+}
+
 fun AppCompatActivity.addFragment(@IdRes containerRes: Int, fragment: Fragment) {
     val fragmentManager = supportFragmentManager
     val fragmentTransaction = fragmentManager.beginTransaction()

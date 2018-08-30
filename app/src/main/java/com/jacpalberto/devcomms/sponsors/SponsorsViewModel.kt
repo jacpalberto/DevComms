@@ -1,20 +1,20 @@
 package com.jacpalberto.devcomms.sponsors
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.jacpalberto.devcomms.data.Sponsor
+import android.util.Log
+import com.jacpalberto.devcomms.data.SponsorList
 
 /**
  * Created by Alberto Carrillo on 8/13/18.
  */
 class SponsorsViewModel : ViewModel() {
-    private var sponsors: LiveData<List<Sponsor?>>? = null
+    private var sponsors: MutableLiveData<SponsorList>? = null
 
-    fun fetchSponsors(): LiveData<List<Sponsor?>>? {
-        if (sponsors == null){
+    fun fetchSponsors(): MutableLiveData<SponsorList>? {
+        if (sponsors == null) {
             sponsors = MutableLiveData()
-            sponsors = SponsorsModel.getSponsors()
+            SponsorsModel.fetchSponsors { sponsors?.postValue(it) }
         }
         return sponsors
     }
