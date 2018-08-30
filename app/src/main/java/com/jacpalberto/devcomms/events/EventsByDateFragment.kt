@@ -13,17 +13,18 @@ import com.jacpalberto.devcomms.adapters.PagerAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsListEvent
 import com.jacpalberto.devcomms.extensions.doOnTabSelected
-import kotlinx.android.synthetic.main.fragment_events_by_room.*
+import kotlinx.android.synthetic.main.fragment_events_by_date.*
 
-class EventsByRoomFragment : Fragment() {
+class EventsByDateFragment : Fragment() {
     companion object {
-        fun newInstance() = EventsByRoomFragment()
+        fun newInstance() = EventsByDateFragment()
     }
+
     private var viewModel: EventsViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_events_by_room, container, false)
+        return inflater.inflate(R.layout.fragment_events_by_date, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class EventsByRoomFragment : Fragment() {
 
     private fun filter(it: List<DevCommsEvent?>?) {
         it?.let {
-            val eventsMap = it.groupBy { it?.room }
+            val eventsMap = it.groupBy { it?.date }
             setupTabLayout(eventsMap.keys)
             setupViewPager(eventsMap)
         }
@@ -53,11 +54,14 @@ class EventsByRoomFragment : Fragment() {
     }
 
     private fun setupTabLayout(keys: Set<String?>) {
-        keys.forEach { tabLayout.addTab(tabLayout.newTab().setText(it)) }
-        tabLayout.tabGravity = TabLayout.GRAVITY_CENTER
-        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        tabLayout.doOnTabSelected {
-            viewPager.currentItem = it.position
+        if (keys.size >= 2) {
+            tabLayout.visibility = View.VISIBLE
+            keys.forEach { tabLayout.addTab(tabLayout.newTab().setText(it)) }
+            tabLayout.tabGravity = TabLayout.GRAVITY_CENTER
+            viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+            tabLayout.doOnTabSelected {
+                viewPager.currentItem = it.position
+            }
         }
     }
 }

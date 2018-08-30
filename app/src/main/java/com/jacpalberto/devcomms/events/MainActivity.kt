@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initFragment() {
-        replaceFragment(R.id.containerLayout, EventsByTimeFragment.newInstance())
+        replaceFragment(R.id.containerLayout, EventsByDateFragment.newInstance())
     }
 
     private fun initToolbar() {

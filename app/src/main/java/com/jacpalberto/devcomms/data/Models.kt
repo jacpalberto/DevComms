@@ -13,6 +13,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class DevCommsEvent(val key: String? = "",
                          val hour: String? = "",
+                         val date: String? = "",
                          val title: String? = "",
                          val speaker: String? = "",
                          val speakerPhotoUrl: String? = "",
