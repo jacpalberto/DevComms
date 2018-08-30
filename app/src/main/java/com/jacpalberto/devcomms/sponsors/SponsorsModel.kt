@@ -4,7 +4,7 @@ import android.os.AsyncTask
 import android.util.Log
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataState
-import com.jacpalberto.devcomms.data.Repository
+import com.jacpalberto.devcomms.data.FirebaseRepository
 import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.data.SponsorList
 
@@ -18,7 +18,7 @@ object SponsorsModel {
 
     fun fetchSponsors(onResult: (SponsorList) -> Unit) {
         lateinit var sponsorResult: SponsorList
-        Repository.fetchSponsors { response ->
+        FirebaseRepository.fetchSponsors { response ->
             if (response.status == DataState.FAILURE || response.status == DataState.ERROR) {
                 sponsorsList = sponsorsDao.getList()
                 sponsorResult = if (sponsorsList.isEmpty())
@@ -38,7 +38,7 @@ object SponsorsModel {
 
     private fun saveAll(sponsors: List<Sponsor>) {
         AsyncTask.execute {
-            sponsorsDao.save(sponsors)
-        }
+            sponsorsDao.deleteAll()
+            sponsorsDao.save(sponsors) }
     }
 }

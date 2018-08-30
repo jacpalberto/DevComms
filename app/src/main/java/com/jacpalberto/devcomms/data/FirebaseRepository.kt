@@ -8,7 +8,7 @@ import com.google.firebase.database.ValueEventListener
 /**
  * Created by Alberto Carrillo on 7/13/18.
  */
-object Repository {
+object FirebaseRepository {
     private val database = FirebaseDatabase.getInstance()
     private val eventsRef = database.getReference("posadev")
     private val sponsorsRef = database.getReference("spnosors")
@@ -30,19 +30,23 @@ object Repository {
     fun fetchSponsors(onResult: (sponsors: SponsorList) -> Unit) {
         val sponsorList: List<Sponsor> = emptyList()
         val errorCode = 0
+        checkConnectivity(isConnected = { fetchSponsorsFirebase(sponsorList, onResult, errorCode) },
+                isNotConnected = { onResult(SponsorList(sponsorList, 400, DataState.ERROR)) })
+    }
+
+    private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
         connectedRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val connected = snapshot.getValue(Boolean::class.java)!!
-                if (connected) {
-                    fetchSponsorsFirebase(sponsorList, onResult, errorCode)
-                } else onResult(SponsorList(sponsorList, 400, DataState.ERROR))
+                val connected = snapshot.getValue(Boolean::class.java) ?: false
+                if (connected) isConnected()
+                else isNotConnected()
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
     }
 
-    fun fetchSponsorsFirebase(sponsorList: List<Sponsor>, onResult: (sponsors: SponsorList) -> Unit, errorCode: Int) {
+    private fun fetchSponsorsFirebase(sponsorList: List<Sponsor>, onResult: (sponsors: SponsorList) -> Unit, errorCode: Int) {
         var sponsorList1 = sponsorList
         var status1: DataState
         var errorCode1 = errorCode
