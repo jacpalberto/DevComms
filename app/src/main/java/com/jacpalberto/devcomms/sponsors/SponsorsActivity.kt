@@ -9,9 +9,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.util.Log
 import android.widget.Toast
 import com.jacpalberto.devcomms.R
+import com.jacpalberto.devcomms.adapters.SponsorsAdapter
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.data.SponsorList
@@ -34,6 +34,7 @@ class SponsorsActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        sponsorListSwipe.setOnRefreshListener { viewModel?.refreshSponsors() }
         initToolbar()
         initRecyclerView()
         initObservers()
@@ -49,8 +50,14 @@ class SponsorsActivity : AppCompatActivity() {
         if (it?.status == DataState.FAILURE || it?.status == DataState.ERROR) {
             showToast(getString(R.string.connectivity_error))
         } else if (it?.status == DataState.SUCCESS) {
+            dismissProgress()
             showSponsors(it)
         }
+    }
+
+    private fun dismissProgress() {
+        if (sponsorListSwipe.isRefreshing)
+            sponsorListSwipe.isRefreshing = false
     }
 
     private fun showSponsors(sponsorList: SponsorList?) {
@@ -79,14 +86,20 @@ class SponsorsActivity : AppCompatActivity() {
     }
 
     private val onSponsorsLongClick = { sponsor: Sponsor ->
+        val title = if (sponsor.title.isNullOrEmpty()) "An awesome sponsor" else sponsor.title
         toast?.cancel()
-        toast = Toast.makeText(this, sponsor.title, Toast.LENGTH_SHORT)
+        toast = Toast.makeText(this, title, Toast.LENGTH_SHORT)
         toast!!.show()
         true
     }
     private val onSponsorsClick = { sponsor: Sponsor ->
         try {
-            val webPage = Uri.parse("http://" + sponsor.webPageUrl)
+            val webPageUrl = sponsor.webPageUrl
+            val url: String = if (webPageUrl == null || webPageUrl.isEmpty()) ""
+            else if (webPageUrl.contains("http://") || webPageUrl.contains("https://")) {
+                webPageUrl
+            } else "http://$webPageUrl"
+            val webPage = Uri.parse(url)
             startActivity(Intent(Intent.ACTION_VIEW, webPage))
         } catch (e: ActivityNotFoundException) {
             showToast(getString(R.string.url_intent_error))

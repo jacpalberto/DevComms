@@ -1,4 +1,4 @@
-package com.jacpalberto.devcomms.sponsors
+package com.jacpalberto.devcomms.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -16,14 +16,14 @@ class SponsorsAdapter(private var sponsors: List<Sponsor>,
                       private val onSponsorLongClick: (Sponsor) -> Boolean,
                       private val onSponsorClick: (Sponsor) -> Unit) : RecyclerView.Adapter<SponsorsAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SponsorsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sponsor, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun getItemCount() = sponsors.size
 
-    override fun onBindViewHolder(holder: SponsorsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(sponsors[position], onSponsorClick, onSponsorLongClick)
     }
 
@@ -32,13 +32,13 @@ class SponsorsAdapter(private var sponsors: List<Sponsor>,
         fun bind(sponsor: Sponsor,
                  onSponsorClick: (Sponsor) -> Unit,
                  onSponsorLongClick: (Sponsor) -> Boolean) = with(itemView) {
-
-            Picasso.get()
-                    .load(sponsor.imageUrl)
-                    .placeholder(R.drawable.logo_community)
-                    .resize(300, 300)
-                    .centerCrop()
-                    .into(this.sponsorImg)
+            if (sponsor.imageUrl != null)
+                Picasso.get()
+                        .load(if (sponsor.imageUrl.isNotEmpty()) sponsor.imageUrl else "placeholder")
+                        .placeholder(R.drawable.logo_community)
+                        .resize(300, 300)
+                        .centerCrop()
+                        .into(this.sponsorImg)
 
             sponsorImg.setOnClickListener { onSponsorClick(sponsor) }
             sponsorImg.setOnLongClickListener { onSponsorLongClick(sponsor) }

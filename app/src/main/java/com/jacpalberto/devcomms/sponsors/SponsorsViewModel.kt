@@ -18,4 +18,8 @@ class SponsorsViewModel : ViewModel() {
         }
         return sponsors
     }
+
+    fun refreshSponsors() {
+        SponsorsModel.fetchSponsors { sponsors?.postValue(it) }
+    }
 }
