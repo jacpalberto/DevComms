@@ -14,24 +14,35 @@ object FirebaseRepository {
     private val sponsorsRef = database.getReference("spnosors")
     private val connectedRef = database.getReference(".info/connected")
 
-    fun fetchEvents(onSuccess: (events: List<DevCommsEvent?>) -> Unit, onError: (error: DatabaseError) -> Unit) {
-        eventsRef.orderByChild("time").addListenerForSingleValueEvent(object : ValueEventListener {
+    fun fetchEvents(onResult: (events: DevCommsEventList) -> Unit) {
+        checkConnectivity(isConnected = { fetchFirebaseEvents(onResult) },
+                isNotConnected = { onResult(DevCommsEventList(emptyList(), 400, DataState.ERROR)) })
+    }
+
+    private fun fetchFirebaseEvents(onResult: (events: DevCommsEventList) -> Unit) {
+        var status: DataState
+        var eventList: List<DevCommsEvent> = emptyList()
+        var errorCode = 0
+
+        eventsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val events = dataSnapshot.children.map { it.getValue(DevCommsEvent::class.java) }
-                onSuccess(events)
+                events.forEach { if (it != null) eventList += it }
+                status = DataState.SUCCESS
+                onResult(DevCommsEventList(eventList, errorCode, status))
             }
 
             override fun onCancelled(error: DatabaseError) {
-                onError(error)
+                status = DataState.FAILURE
+                errorCode = error.code
+                onResult(DevCommsEventList(eventList, errorCode, status))
             }
         })
     }
 
     fun fetchSponsors(onResult: (sponsors: SponsorList) -> Unit) {
-        val sponsorList: List<Sponsor> = emptyList()
-        val errorCode = 0
-        checkConnectivity(isConnected = { fetchSponsorsFirebase(sponsorList, onResult, errorCode) },
-                isNotConnected = { onResult(SponsorList(sponsorList, 400, DataState.ERROR)) })
+        checkConnectivity(isConnected = { fetchFirebaseSponsors(onResult) },
+                isNotConnected = { onResult(SponsorList(emptyList(), 400, DataState.ERROR)) })
     }
 
     private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
@@ -46,23 +57,23 @@ object FirebaseRepository {
         })
     }
 
-    private fun fetchSponsorsFirebase(sponsorList: List<Sponsor>, onResult: (sponsors: SponsorList) -> Unit, errorCode: Int) {
-        var sponsorList1 = sponsorList
-        var status1: DataState
-        var errorCode1 = errorCode
+    private fun fetchFirebaseSponsors(onResult: (sponsors: SponsorList) -> Unit) {
+        var status: DataState
+        var sponsorList: List<Sponsor> = emptyList()
+        var errorCode = 0
 
         sponsorsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val sponsors = dataSnapshot.children.map { it.getValue(Sponsor::class.java) }
-                sponsors.forEach { if (it != null) sponsorList1 += it }
-                status1 = DataState.SUCCESS
-                onResult(SponsorList(sponsorList1, errorCode1, status1))
+                sponsors.forEach { if (it != null) sponsorList += it }
+                status = DataState.SUCCESS
+                onResult(SponsorList(sponsorList, errorCode, status))
             }
 
             override fun onCancelled(error: DatabaseError) {
-                status1 = DataState.FAILURE
-                errorCode1 = error.code
-                onResult(SponsorList(sponsorList1, errorCode1, status1))
+                status = DataState.FAILURE
+                errorCode = error.code
+                onResult(SponsorList(sponsorList, errorCode, status))
             }
         })
     }

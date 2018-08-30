@@ -2,21 +2,20 @@ package com.jacpalberto.devcomms.events
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.FirebaseRepository
+import com.jacpalberto.devcomms.data.DevCommsEventList
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
  */
 class EventsViewModel : ViewModel() {
-    private var events: MutableLiveData<List<DevCommsEvent?>>? = null
+    private var events: MutableLiveData<DevCommsEventList>? = null
 
-    fun fetchEvents(): MutableLiveData<List<DevCommsEvent?>> {
+    fun fetchEvents(): MutableLiveData<DevCommsEventList>? {
         if (events == null) {
             events = MutableLiveData()
-            FirebaseRepository.fetchEvents(onSuccess = { events?.value = it }, onError = { })
+            EventsModel.fetchEvents { events?.postValue(it) }
         }
-        return events as MutableLiveData<List<DevCommsEvent?>>
+        return events
     }
 }
 

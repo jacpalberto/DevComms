@@ -11,7 +11,8 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-data class DevCommsEvent(val key: String? = "",
+@Entity(tableName = "events")
+data class DevCommsEvent(@PrimaryKey val key: Int? = 0,
                          val hour: String? = "",
                          val date: String? = "",
                          val title: String? = "",
@@ -19,10 +20,15 @@ data class DevCommsEvent(val key: String? = "",
                          val speakerPhotoUrl: String? = "",
                          val community: String? = "",
                          val type: String? = "",
-                         val room: String? = "") : Parcelable
+                         val room: String? = "") : Parcelable {
+    @Ignore constructor() : this(0, "", "", "", "", "", "", "", "")
+}
 
 @Parcelize
-data class DevCommsListEvent(val eventList: List<DevCommsEvent?>) : Parcelable
+data class DevCommsEventList(val eventList: List<DevCommsEvent?>,
+                             override var errorCode: Int = 0,
+                             override var status: DataState = DataState.PROCESS)
+    : Parcelable, BaseModel(errorCode, status)
 
 @Entity(tableName = "sponsors")
 data class Sponsor(@PrimaryKey val key: Int = 0,
@@ -34,7 +40,8 @@ data class Sponsor(@PrimaryKey val key: Int = 0,
 
 data class SponsorList(val sponsorList: List<Sponsor> = emptyList(),
                        override var errorCode: Int = 0,
-                       override var status: DataState = DataState.PROCESS) : BaseModel(errorCode, status)
+                       override var status: DataState = DataState.PROCESS)
+    : BaseModel(errorCode, status)
 
 open class BaseModel(open var errorCode: Int = 0,
                      open var status: DataState = DataState.NONE)

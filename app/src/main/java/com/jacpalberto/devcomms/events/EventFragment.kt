@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.DevCommsListEvent
+import com.jacpalberto.devcomms.data.DevCommsEventList
 import kotlinx.android.synthetic.main.fragment_event.*
 
 /**
@@ -34,7 +34,7 @@ class EventFragment : Fragment() {
 
     private fun init() {
         initRecycler()
-        val devCommsListEvent = arguments?.getParcelable<DevCommsListEvent>(EVENT_LIST)
+        val devCommsListEvent = arguments?.getParcelable<DevCommsEventList>(EVENT_LIST)
         showEvents(devCommsListEvent?.eventList)
     }
 
@@ -50,7 +50,7 @@ class EventFragment : Fragment() {
 
     companion object {
         const val EVENT_LIST = "EVENT_LIST"
-        fun newInstance(eventList: DevCommsListEvent) = EventFragment().apply {
+        fun newInstance(eventList: DevCommsEventList) = EventFragment().apply {
             arguments = Bundle().apply { putParcelable(EVENT_LIST, eventList) }
         }
     }

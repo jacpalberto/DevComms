@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.PagerAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.DevCommsListEvent
+import com.jacpalberto.devcomms.data.DevCommsEventList
 import com.jacpalberto.devcomms.extensions.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
 
@@ -37,9 +37,9 @@ class EventsByDateFragment : Fragment() {
         viewModel?.fetchEvents()?.observe(this, Observer { filter(it) })
     }
 
-    private fun filter(it: List<DevCommsEvent?>?) {
+    private fun filter(it: DevCommsEventList?) {
         it?.let {
-            val eventsMap = it.groupBy { it?.date }
+            val eventsMap = it.eventList.groupBy { it?.date }
             setupTabLayout(eventsMap.keys)
             setupViewPager(eventsMap)
         }
@@ -48,7 +48,7 @@ class EventsByDateFragment : Fragment() {
     private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent?>>) {
         val fragmentList = mutableListOf<Fragment>()
         eventsMap.forEach { _, list ->
-            fragmentList.add(EventFragment.newInstance(DevCommsListEvent(list)))
+            fragmentList.add(EventFragment.newInstance(DevCommsEventList(list)))
         }
         viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(it, fragmentList) }
     }
