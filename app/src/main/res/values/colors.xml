@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="toolbarColor">#000000</color>
+
+    <!--Event-->
     <color name="eventCardColor">#FFFFFF</color>
     <color name="eventTitleBackground">#ecf7ff</color>
     <color name="eventTitleColor">#710106</color>
@@ -11,9 +13,14 @@
     <color name="eventRoomColor">#040b89</color>
     <color name="eventTypeColor">#ffffff</color>
     <color name="eventTimeColor">#048e37</color>
-    <color name="tabLayoutColor">#0694fc</color>
-    <color name="darkBlue">#040b89</color>
-    <color name="navigationBackground">#ecf7ff</color>
-    <color name="lightGray">#d2d2d2</color>
 
+    <!--Detail-->
+    <color name="detailNormalText">#1e1e1e</color>
+    <color name="detailTitleText">#000000</color>
+    <color name="detailHyperlinkText">#030043</color>
+
+    <color name="tabLayoutColor">#0694fc</color>
+    <color name="tabTextColor">#040b89</color>
+    <color name="navigationBackground">#ecf7ff</color>
+    <color name="dividerColor">#d2d2d2</color>
 </resources>

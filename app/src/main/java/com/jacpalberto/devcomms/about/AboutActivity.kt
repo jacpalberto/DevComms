@@ -24,11 +24,14 @@ class AboutActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(android.R.drawable.ic_dialog_map)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_back_white)
+        }
     }
 
-    //TODO: Add spans to emails
+    //TODO 1: Add spans to emails
+    //TODO 2: Add styles to about
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

@@ -37,9 +37,9 @@ class EventsByDateFragment : Fragment() {
         viewModel?.fetchEvents()?.observe(this, Observer { filter(it) })
     }
 
-    private fun filter(it: DevCommsEventList?) {
-        it?.let {
-            val eventsMap = it.eventList.groupBy { it.date }
+    private fun filter(eventList: DevCommsEventList?) {
+        eventList?.let { events ->
+            val eventsMap = events.eventList.groupBy { it.date }
             setupTabLayout(eventsMap.keys)
             setupViewPager(eventsMap)
         }
@@ -58,7 +58,7 @@ class EventsByDateFragment : Fragment() {
             tabLayout.visibility = View.VISIBLE
             tabLayout.removeAllTabs()
             keys.forEach { tabLayout.addTab(tabLayout.newTab().setText(it)) }
-            tabLayout.tabGravity = TabLayout.GRAVITY_CENTER
+            tabLayout.tabGravity = TabLayout.GRAVITY_FILL
             viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
             tabLayout.doOnTabSelected {
                 viewPager.currentItem = it.position

@@ -76,7 +76,7 @@ class SponsorsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(android.R.drawable.ic_dialog_map)
+            setHomeAsUpIndicator(R.drawable.ic_back_white)
         }
     }
 
@@ -86,10 +86,10 @@ class SponsorsActivity : AppCompatActivity() {
     }
 
     private val onSponsorsLongClick = { sponsor: Sponsor ->
-        val title = if (sponsor.title.isNullOrEmpty()) "An awesome sponsor" else sponsor.title
-        toast?.cancel()
-        toast = Toast.makeText(this, title, Toast.LENGTH_SHORT)
-        toast!!.show()
+        val title: String = if (sponsor.title.isNullOrEmpty()) "An awesome sponsor"
+        else sponsor.title
+                ?: "An awesome sponsor"
+        showToast(title)
         true
     }
     private val onSponsorsClick = { sponsor: Sponsor ->
@@ -105,5 +105,11 @@ class SponsorsActivity : AppCompatActivity() {
             showToast(getString(R.string.url_intent_error))
             e.printStackTrace()
         }
+    }
+
+    private fun showToast(message: String) {
+        toast?.cancel()
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+        toast!!.show()
     }
 }

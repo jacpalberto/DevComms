@@ -16,20 +16,17 @@ object EventsModel {
     fun fetchEvents(onResult: (DevCommsEventList) -> Unit) {
         lateinit var eventsResult: DevCommsEventList
         FirebaseRepository.fetchEvents { response ->
-            Log.d("EventsModel", response.toString())
             if (response.status == DataState.FAILURE || response.status == DataState.ERROR) {
                 eventList = eventsDao.getList()
                 eventsResult = if (eventList.isEmpty())
                     DevCommsEventList(eventList, status = DataState.FAILURE)
                 else DevCommsEventList(eventList, status = DataState.SUCCESS)
-                Log.d("EventsModelfail", eventsResult.toString())
                 onResult(eventsResult)
             } else {
                 saveAll(response.eventList)
                 AsyncTask.execute {
                     eventList = eventsDao.getList()
                     eventsResult = DevCommsEventList(eventList, status = DataState.SUCCESS)
-                    Log.d("EventsModelsucc", eventsResult.toString())
                     onResult(eventsResult)
                 }
             }

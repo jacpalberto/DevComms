@@ -17,11 +17,12 @@ data class DevCommsEvent(@PrimaryKey val key: Int? = 0,
                          val date: String? = "",
                          val title: String? = "",
                          val speaker: String? = "",
+                         val description: String? = "",
                          val speakerPhotoUrl: String? = "",
                          val community: String? = "",
                          val type: String? = "",
                          val room: String? = "") : Parcelable {
-    @Ignore constructor() : this(0, "", "", "", "", "", "", "", "")
+    @Ignore constructor() : this(0, "", "", "", "", "", "", "", "", "")
 }
 
 @Parcelize

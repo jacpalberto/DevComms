@@ -18,4 +18,6 @@
     <string name="connectivity_error">Ha ocurrido un error de conexión</string>
     <string name="url_intent_error">No application can handle this request. Please install a web browser or check your URL.</string>
     <string name="sponsor_logo">Sponsor logo</string>
+    <string name="event_room_plus_date">%1s, %2s</string>
+
 </resources>

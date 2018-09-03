@@ -17,14 +17,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabGravity="center"
         app:tabIndicatorColor="@color/navigationBackground"
         app:tabIndicatorHeight="5dp"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/darkBlue"
+        app:tabSelectedTextColor="@color/tabTextColor"
         app:tabTextAppearance="@style/CustomTabLayoutTheme"
-        app:tabTextColor="@color/darkBlue"
+        app:tabTextColor="@color/tabTextColor"
         tools:visibility="visible" />
 
     <android.support.v4.view.ViewPager

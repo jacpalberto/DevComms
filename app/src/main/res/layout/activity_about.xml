@@ -85,5 +85,4 @@
         app:layout_constraintStart_toEndOf="@+id/aboutEventIcon"
         app:layout_constraintTop_toBottomOf="@+id/aboutEventTitle" />
 
-
 </android.support.constraint.ConstraintLayout>

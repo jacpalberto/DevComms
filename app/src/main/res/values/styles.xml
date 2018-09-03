@@ -54,7 +54,6 @@
     </style>
 
     <!--EventTextAppearances-->
-
     <style name="RegularTextStyle">
         <item name="android:textColor">@color/eventSpeakerColor</item>
         <item name="android:textSize">@dimen/event_data_font_size</item>
@@ -71,7 +70,6 @@
     </style>
 
     <!-- About Styles-->
-
     <style name="AboutIcons">
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">16dp</item>
@@ -90,4 +88,22 @@
         <item name="android:textSize">@dimen/about_data_font_size</item>
     </style>
 
+    <!-- Detail styles -->
+    <style name="DetailTextStyle">
+        <item name="android:textSize">@dimen/detail_data_font_size</item>
+    </style>
+
+    <style name="DetailTextStyle.Normal">
+        <item name="android:textColor">@color/detailNormalText</item>
+    </style>
+
+    <style name="DetailTextStyle.Title">
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">@dimen/detail_title_font_size</item>
+        <item name="android:textColor">@color/detailTitleText</item>
+    </style>
+
+    <style name="DetailTextStyle.Hyperlink">
+        <item name="android:textColor">@color/detailHyperlinkText</item>
+    </style>
 </resources>

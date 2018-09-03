@@ -23,12 +23,13 @@ fun AppCompatActivity.addFragment(@IdRes containerRes: Int, fragment: Fragment) 
     fragmentTransaction.commit()
 }
 
-fun AppCompatActivity.replaceFragment(@IdRes containerRes: Int, fragment: Fragment) {
+fun AppCompatActivity.replaceFragment(@IdRes containerRes: Int, fragment: Fragment, addToBackStack: Boolean = false) {
     val fragmentManager = supportFragmentManager
     val fragmentTransaction = fragmentManager.beginTransaction()
 
     fragmentTransaction.replace(containerRes, fragment)
-    fragmentTransaction.commit()
+    if (addToBackStack) fragmentTransaction.addToBackStack(fragment.tag)
+    fragmentTransaction.commitNow()
 }
 
 inline fun TabLayout.doOnTabSelected(crossinline onTabSelectedListener: (TabLayout.Tab) -> Unit = {}) {
