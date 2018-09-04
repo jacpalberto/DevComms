@@ -32,6 +32,9 @@
         <activity
             android:name=".eventDetail.EventDetailActivity"
             android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".speakerDetail.SpeakerDetailActivity"
+            android:theme="@style/AppThemeNoActionBar" />
     </application>
 
 </manifest>

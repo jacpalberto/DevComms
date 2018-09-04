@@ -12,7 +12,7 @@ import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.PagerAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
-import com.jacpalberto.devcomms.extensions.doOnTabSelected
+import com.jacpalberto.devcomms.utils.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
 
 class EventsByDateFragment : Fragment() {

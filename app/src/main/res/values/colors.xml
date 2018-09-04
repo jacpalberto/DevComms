@@ -15,12 +15,14 @@
     <color name="eventTimeColor">#048e37</color>
 
     <!--Detail-->
+    <color name="detailSpeakerTitle">#070094</color>
     <color name="detailNormalText">#1e1e1e</color>
     <color name="detailTitleText">#000000</color>
-    <color name="detailHyperlinkText">#030043</color>
+    <color name="detailHyperlinkText">#140cbf</color>
 
-    <color name="tabLayoutColor">#0694fc</color>
+    <color name="tabLayoutColor">#a9d0f7</color>
     <color name="tabTextColor">#040b89</color>
+    <color name="tabIndicatorColor">#0694fc</color>
     <color name="navigationBackground">#ecf7ff</color>
     <color name="dividerColor">#d2d2d2</color>
 </resources>

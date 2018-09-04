@@ -15,7 +15,6 @@ import com.jacpalberto.devcomms.adapters.SponsorsAdapter
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.data.SponsorList
-import com.jacpalberto.devcomms.extensions.showToast
 import kotlinx.android.synthetic.main.activity_sponsors.*
 
 class SponsorsActivity : AppCompatActivity() {

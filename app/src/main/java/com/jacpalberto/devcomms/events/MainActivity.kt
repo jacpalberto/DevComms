@@ -11,7 +11,7 @@ import android.view.Gravity
 import android.view.MenuItem
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.about.AboutActivity
-import com.jacpalberto.devcomms.extensions.replaceFragment
+import com.jacpalberto.devcomms.utils.replaceFragment
 import com.jacpalberto.devcomms.sponsors.SponsorsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         toggle.apply {
             isDrawerIndicatorEnabled = false
-            setHomeAsUpIndicator(android.R.drawable.ic_secure)
+            setHomeAsUpIndicator(R.drawable.ic_menu)
             syncState()
             setToolbarNavigationClickListener { drawerLayout.openDrawer(GravityCompat.START) }
         }

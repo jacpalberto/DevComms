@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
-import com.jacpalberto.devcomms.extensions.replaceFragment
 import kotlinx.android.synthetic.main.fragment_event.*
 
 /**

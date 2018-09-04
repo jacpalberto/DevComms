@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".speakerDetail.SpeakerDetailActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbarColor"
+        android:elevation="7dp"
+        android:minHeight="?android:attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="@string/app_name"
+        app:titleTextColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+            <ImageView
+                android:id="@+id/speakerImageView"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/speakerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/DetailTextStyle.SpeakerTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/speakerImageView"
+                tools:text="Stephen D'Amico" />
+
+            <ImageView
+                android:id="@+id/companyImageView"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/ic_company"
+                app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/speakerTitle"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/companyNameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="@style/DetailTextStyle.Hyperlink"
+                app:layout_constraintBottom_toBottomOf="@id/companyImageView"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toTopOf="@id/companyImageView"
+                tools:text="SeatGeek" />
+
+            <ImageView
+                android:id="@+id/wepPageImageView"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_web"
+                app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/companyNameTextView"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/webPageTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="@style/DetailTextStyle.Hyperlink"
+                app:layout_constraintBottom_toBottomOf="@id/wepPageImageView"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toTopOf="@id/wepPageImageView"
+                tools:text="blog.sddamico.com" />
+
+            <ImageView
+                android:id="@+id/githubImageView"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_github"
+                app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/webPageTextView"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/githubTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="@style/DetailTextStyle.Hyperlink"
+                app:layout_constraintBottom_toBottomOf="@id/githubImageView"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toTopOf="@id/githubImageView"
+                tools:text="github.com/stephenDamico" />
+
+            <ImageView
+                android:id="@+id/descriptionImageView"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_document"
+                app:layout_constraintBottom_toBottomOf="@id/speakerDescriptionTextView"
+                app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/speakerDescriptionTextView"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/speakerDescriptionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/DetailTextStyle.Normal"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/githubTextView"
+                tools:text="Android Tech Lead @SeatGeek, previously Android Engineer ESPN. Computer Engineering Ulowa. Wisconsin native,  Android Tech Lead @SeatGeek, previously Android Engineer ESPN. Computer Engineering Ulowa. Wisconsin native" />
+
+            <android.support.constraint.Group
+                android:id="@+id/companyGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="companyImageView,companyNameTextView"
+                tools:visibility="visible" />
+
+            <android.support.constraint.Group
+                android:id="@+id/wepPageGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="wepPageImageView,webPageTextView"
+                tools:visibility="visible" />
+
+            <android.support.constraint.Group
+                android:id="@+id/githubGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="githubImageView,githubTextView"
+                tools:visibility="visible" />
+
+            <android.support.constraint.Group
+                android:id="@+id/descriptionGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="descriptionImageView,speakerDescriptionTextView"
+                tools:visibility="visible" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

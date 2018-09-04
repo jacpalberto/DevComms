@@ -18,12 +18,24 @@ data class DevCommsEvent(@PrimaryKey val key: Int? = 0,
                          val title: String? = "",
                          val speaker: String? = "",
                          val description: String? = "",
+                         val speakerDescription: String? = "",
                          val speakerPhotoUrl: String? = "",
                          val community: String? = "",
                          val type: String? = "",
+                         val company: String? = "",
+                         val githubUrl: String? = "",
+                         val webPageUrl: String? = "",
                          val room: String? = "") : Parcelable {
-    @Ignore constructor() : this(0, "", "", "", "", "", "", "", "", "")
+    @Ignore constructor() : this(0)
 }
+
+@Parcelize
+data class SpeakerDetail(val speaker: String? = "",
+                         val speakerDescription: String? = "",
+                         val speakerPhotoUrl: String? = "",
+                         val company: String? = "",
+                         val githubUrl: String? = "",
+                         val webPageUrl: String? = "") : Parcelable
 
 @Parcelize
 data class DevCommsEventList(val eventList: List<DevCommsEvent>,
@@ -36,7 +48,7 @@ data class Sponsor(@PrimaryKey val key: Int = 0,
                    val imageUrl: String? = "",
                    val webPageUrl: String? = "",
                    val title: String? = "") {
-    @Ignore constructor() : this(0, "", "", "")
+    @Ignore constructor() : this(0)
 }
 
 data class SponsorList(val sponsorList: List<Sponsor> = emptyList(),

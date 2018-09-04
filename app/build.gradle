@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    //firebase
+    //firebase database
     implementation 'com.google.firebase:firebase-database:16.0.1'
 
     //Architecture components
