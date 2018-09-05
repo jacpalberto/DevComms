@@ -15,6 +15,7 @@ import com.jacpalberto.devcomms.adapters.SponsorsAdapter
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.data.SponsorList
+import com.jacpalberto.devcomms.utils.startWebIntent
 import kotlinx.android.synthetic.main.activity_sponsors.*
 
 class SponsorsActivity : AppCompatActivity() {
@@ -86,24 +87,12 @@ class SponsorsActivity : AppCompatActivity() {
 
     private val onSponsorsLongClick = { sponsor: Sponsor ->
         val title: String = if (sponsor.title.isNullOrEmpty()) "An awesome sponsor"
-        else sponsor.title
-                ?: "An awesome sponsor"
+        else sponsor.title ?: "An awesome sponsor"
         showToast(title)
         true
     }
     private val onSponsorsClick = { sponsor: Sponsor ->
-        try {
-            val webPageUrl = sponsor.webPageUrl
-            val url: String = if (webPageUrl == null || webPageUrl.isEmpty()) ""
-            else if (webPageUrl.contains("http://") || webPageUrl.contains("https://")) {
-                webPageUrl
-            } else "http://$webPageUrl"
-            val webPage = Uri.parse(url)
-            startActivity(Intent(Intent.ACTION_VIEW, webPage))
-        } catch (e: ActivityNotFoundException) {
-            showToast(getString(R.string.url_intent_error))
-            e.printStackTrace()
-        }
+        startWebIntent(sponsor.webPageUrl)
     }
 
     private fun showToast(message: String) {

@@ -68,12 +68,12 @@
                 android:id="@+id/companyImageView"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginTop="32dp"
                 android:src="@drawable/ic_company"
+                app:layout_constraintBottom_toBottomOf="@+id/companyNameTextView"
                 app:layout_constraintEnd_toEndOf="@id/guidelineStart"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/speakerTitle"
+                app:layout_constraintTop_toTopOf="@+id/companyNameTextView"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -81,23 +81,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
                 android:textAppearance="@style/DetailTextStyle.Hyperlink"
-                app:layout_constraintBottom_toBottomOf="@id/companyImageView"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toTopOf="@id/companyImageView"
+                app:layout_constraintTop_toBottomOf="@+id/speakerTitle"
                 tools:text="SeatGeek" />
 
             <ImageView
                 android:id="@+id/wepPageImageView"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginTop="16dp"
                 android:src="@drawable/ic_web"
+                app:layout_constraintBottom_toBottomOf="@+id/webPageTextView"
                 app:layout_constraintEnd_toEndOf="@id/guidelineStart"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/companyNameTextView"
+                app:layout_constraintTop_toTopOf="@+id/webPageTextView"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -105,23 +107,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
                 android:textAppearance="@style/DetailTextStyle.Hyperlink"
-                app:layout_constraintBottom_toBottomOf="@id/wepPageImageView"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toTopOf="@id/wepPageImageView"
+                app:layout_constraintTop_toBottomOf="@+id/companyNameTextView"
                 tools:text="blog.sddamico.com" />
 
             <ImageView
                 android:id="@+id/githubImageView"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginTop="16dp"
                 android:src="@drawable/ic_github"
+                app:layout_constraintBottom_toBottomOf="@+id/githubTextView"
                 app:layout_constraintEnd_toEndOf="@id/guidelineStart"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/webPageTextView"
+                app:layout_constraintTop_toTopOf="@+id/githubTextView"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -129,11 +133,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
                 android:textAppearance="@style/DetailTextStyle.Hyperlink"
-                app:layout_constraintBottom_toBottomOf="@id/githubImageView"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toTopOf="@id/githubImageView"
+                app:layout_constraintTop_toBottomOf="@+id/webPageTextView"
                 tools:text="github.com/stephenDamico" />
 
             <ImageView

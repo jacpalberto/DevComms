@@ -8,10 +8,11 @@ import android.view.View
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.SpeakerDetail
 import com.jacpalberto.devcomms.utils.CircleTransform
+import com.jacpalberto.devcomms.utils.applyClickableSpan
+import com.jacpalberto.devcomms.utils.startWebIntent
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_speaker_detail.*
 
-//TODO: add clickable links and verify if it is a valid web page
 class SpeakerDetailActivity : AppCompatActivity() {
     companion object {
         private const val DETAIL = "DETAIL"
@@ -71,13 +72,17 @@ class SpeakerDetailActivity : AppCompatActivity() {
     private fun showWebPage(webPageUrl: String?) {
         if (webPageUrl.isNullOrEmpty()) return
         wepPageGroup.visibility = View.VISIBLE
-        webPageTextView.text = webPageUrl
+        webPageTextView.applyClickableSpan(applicationContext, webPageUrl) {
+            startWebIntent(webPageUrl)
+        }
     }
 
     private fun showGithub(githubUrl: String?) {
         if (githubUrl.isNullOrEmpty()) return
         githubGroup.visibility = View.VISIBLE
-        githubTextView.text = githubUrl
+        githubTextView.applyClickableSpan(applicationContext, githubUrl) {
+            startWebIntent(githubUrl)
+        }
     }
 
     private fun showDescription(speakerDescription: String?) {
