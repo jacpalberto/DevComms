@@ -12,6 +12,9 @@ import com.jacpalberto.devcomms.utils.applyClickableSpan
 import com.jacpalberto.devcomms.utils.startWebIntent
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_speaker_detail.*
+import android.os.Build
+import android.transition.Fade
+
 
 class SpeakerDetailActivity : AppCompatActivity() {
     companion object {
@@ -44,6 +47,15 @@ class SpeakerDetailActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_back_white)
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val fade = Fade()
+            fade.excludeTarget(R.id.toolbar, true)
+            fade.excludeTarget(android.R.id.statusBarBackground, true)
+            fade.excludeTarget(android.R.id.navigationBarBackground, true)
+
+            window.enterTransition = fade
+            window.exitTransition = fade
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -54,8 +66,8 @@ class SpeakerDetailActivity : AppCompatActivity() {
     private fun showSpeakerDetail() {
         with(speakerDetail) {
             if (this == null) return
-            showSpeakerPhoto(speakerPhotoUrl)
             speakerTitle.text = speaker
+            showSpeakerPhoto(speakerPhotoUrl)
             showCompany(company)
             showWebPage(webPageUrl)
             showGithub(githubUrl)

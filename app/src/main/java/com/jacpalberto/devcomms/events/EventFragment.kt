@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
@@ -30,6 +31,10 @@ class EventFragment : Fragment() {
         startActivity(EventDetailActivity.newIntent(activity as Context, event))
     }
 
+    private val onFavoriteClick = { event: DevCommsEvent ->
+        Toast.makeText(activity, event.toString(), Toast.LENGTH_SHORT).show()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_event, container, false)
@@ -47,7 +52,7 @@ class EventFragment : Fragment() {
     }
 
     private fun showEvents(it: List<DevCommsEvent>?) {
-        it?.let { events -> eventsRecycler.adapter = DevCommsEventAdapter(events, onEventClick) }
+        it?.let { events -> eventsRecycler.adapter = DevCommsEventAdapter(events, onEventClick, onFavoriteClick) }
     }
 
     private fun initRecycler() {

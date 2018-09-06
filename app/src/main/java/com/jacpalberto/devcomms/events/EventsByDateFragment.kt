@@ -34,10 +34,10 @@ class EventsByDateFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel?.fetchEvents()?.observe(this, Observer { filter(it) })
+        viewModel?.fetchEvents()?.observe(this, Observer { filterEventsByDate(it) })
     }
 
-    private fun filter(eventList: DevCommsEventList?) {
+    private fun filterEventsByDate(eventList: DevCommsEventList?) {
         eventList?.let { events ->
             val eventsMap = events.eventList.groupBy { it.date }
             setupTabLayout(eventsMap.keys)
@@ -50,7 +50,7 @@ class EventsByDateFragment : Fragment() {
         eventsMap.forEach { _, list ->
             fragmentList.add(EventFragment.newInstance(DevCommsEventList(list)))
         }
-        viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(it, fragmentList) }
+        viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(childFragmentManager, fragmentList) }
     }
 
     private fun setupTabLayout(keys: Set<String?>) {

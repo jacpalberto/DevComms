@@ -91,6 +91,7 @@ class SponsorsActivity : AppCompatActivity() {
         showToast(title)
         true
     }
+
     private val onSponsorsClick = { sponsor: Sponsor ->
         startWebIntent(sponsor.webPageUrl)
     }

@@ -12,12 +12,13 @@ import kotlinx.android.synthetic.main.item_event.view.*
  * Created by Alberto Carrillo on 7/12/18.
  */
 class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
-                           var onEventClick: (DevCommsEvent) -> Unit)
+                           var onEventClick: (DevCommsEvent) -> Unit,
+                           var onFavoriteClick: (DevCommsEvent) -> Unit)
     : RecyclerView.Adapter<DevCommsEventAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_event, parent, false)
-        return ViewHolder(itemView, onEventClick)
+        return ViewHolder(itemView, onEventClick, onFavoriteClick)
     }
 
     override fun getItemCount() = events.size
@@ -26,7 +27,9 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
         holder.bind(events[position])
     }
 
-    class ViewHolder(itemView: View, var func: (DevCommsEvent) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, var func: (DevCommsEvent) -> Unit,
+                     var onFavoriteClick: (DevCommsEvent) -> Unit) : RecyclerView.ViewHolder(itemView) {
+
         fun bind(event: DevCommsEvent?) = with(itemView) {
             eventTitle.text = event?.title
             eventSpeaker.text = event?.speaker
@@ -36,6 +39,7 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
             if (event != null) eventCardView.setOnClickListener { func(event) }
+            if (event != null) favoriteImageView.setOnClickListener { onFavoriteClick(event) }
         }
     }
 }

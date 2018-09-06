@@ -79,7 +79,8 @@
     </style>
 
     <style name="AboutTitleStyle">
-        <item name="android:textColor">@color/detailHyperlinkText</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/aboutTitle</item>
         <item name="android:textSize">@dimen/about_title_font_size</item>
     </style>
 
@@ -97,8 +98,8 @@
     </style>
 
     <style name="DetailTextStyle.Title">
-        <item name="android:textStyle">bold|italic</item>
         <item name="android:textColor">@color/detailTitleText</item>
+        <item name="android:textStyle">bold|italic</item>
         <item name="android:textSize">@dimen/detail_title_font_size</item>
     </style>
 

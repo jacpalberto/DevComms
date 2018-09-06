@@ -18,7 +18,11 @@
     <color name="detailSpeakerTitle">#070094</color>
     <color name="detailNormalText">#1e1e1e</color>
     <color name="detailTitleText">#000000</color>
-    <color name="detailHyperlinkText">#140cbf</color>
+    <color name="detailHyperlinkText">#4600a7</color>
+
+    <!--About-->
+    <color name="aboutTitle">#070094</color>
+
 
     <color name="tabLayoutColor">#a9d0f7</color>
     <color name="tabTextColor">#040b89</color>

@@ -3,20 +3,23 @@ package com.jacpalberto.devcomms.eventDetail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
+import android.view.Window
+import android.widget.ImageView
+import android.widget.TextView
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.SpeakerDetail
-import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.speakerDetail.SpeakerDetailActivity
 import com.jacpalberto.devcomms.utils.CircleTransform
-import com.jacpalberto.devcomms.utils.showToast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_event_detail.*
 
@@ -38,6 +41,7 @@ class EventDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
+
         devCommsEvent = intent.getParcelableExtra(EVENT)
         viewModel = ViewModelProviders.of(this).get(EventDetailViewModel::class.java)
         init()
@@ -77,13 +81,25 @@ class EventDetailActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.d("onBack", "pressed")
+
+    }
+
     private fun startSpeakerDetail() {
         if (speakerDetail == null || (speakerDetail?.company.isNullOrEmpty()
                         && speakerDetail?.githubUrl.isNullOrEmpty()
                         && speakerDetail?.speakerDescription.isNullOrEmpty()
                         && speakerDetail?.webPageUrl.isNullOrEmpty()))
             return
-        startActivity(speakerDetail?.let { SpeakerDetailActivity.newIntent(this, it) })
+
+        speakerDetail?.let {
+            val transitionIntent = SpeakerDetailActivity.newIntent(this, it)
+
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, *getSharedElementsPairList())
+            ActivityCompat.startActivity(this, transitionIntent, options.toBundle())
+        }
     }
 
     private fun showEventDetail(event: DevCommsEvent?) {
@@ -122,18 +138,20 @@ class EventDetailActivity : AppCompatActivity() {
         eventDescription.text = event.description
     }
 
-    private val onSponsorsClick = { detail: SpeakerDetail ->
-        try {
-            val webPageUrl = detail.webPageUrl
-            val url: String = if (webPageUrl == null || webPageUrl.isEmpty()) ""
-            else if (webPageUrl.contains("http://") || webPageUrl.contains("https://")) {
-                webPageUrl
-            } else "http://$webPageUrl"
-            val webPage = Uri.parse(url)
-            startActivity(Intent(Intent.ACTION_VIEW, webPage))
-        } catch (e: ActivityNotFoundException) {
-            showToast(getString(R.string.url_intent_error))
-            e.printStackTrace()
+    private fun getSharedElementsPairList(): Array<android.support.v4.util.Pair<View, String>> {
+        val navigationBar = findViewById<View>(android.R.id.navigationBarBackground)
+        val statusBar = findViewById<View>(android.R.id.statusBarBackground)
+        val speakerImage = findViewById<ImageView>(R.id.speakerImageView)
+        val speakerTitle = findViewById<TextView>(R.id.speakerTitle)
+
+        val pairList = mutableListOf(
+                Pair(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME),
+                Pair(toolbar as View, "toolbar"),
+                Pair(speakerImage as View, "speakerImage"),
+                Pair(speakerTitle as View, "speakerName")).apply {
+            if (navigationBar != null)
+                add(Pair(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME))
         }
+        return pairList.toTypedArray()
     }
 }
