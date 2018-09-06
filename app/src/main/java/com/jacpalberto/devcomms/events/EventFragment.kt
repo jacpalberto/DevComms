@@ -13,6 +13,7 @@ import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
+import com.jacpalberto.devcomms.data.FirebaseRepository
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import kotlinx.android.synthetic.main.fragment_event.*
 
@@ -31,6 +32,7 @@ class EventFragment : Fragment() {
         startActivity(EventDetailActivity.newIntent(activity as Context, event))
     }
 
+    //TODO: add favorite functionality
     private val onFavoriteClick = { event: DevCommsEvent ->
         Toast.makeText(activity, event.toString(), Toast.LENGTH_SHORT).show()
     }

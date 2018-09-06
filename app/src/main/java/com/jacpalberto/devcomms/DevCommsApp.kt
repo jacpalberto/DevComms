@@ -15,8 +15,7 @@ class DevCommsApp : Application() {
         super.onCreate()
         DevCommsApp.database = Room.databaseBuilder(this,
                 DevCommsDatabase::class.java,
-                //TODO: CHANGE DATABASE NAME
-                "movies")
+                getString(R.string.db_name))
                 .allowMainThreadQueries()
                 .build()
     }
