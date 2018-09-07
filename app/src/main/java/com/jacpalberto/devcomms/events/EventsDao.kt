@@ -17,9 +17,12 @@ interface EventsDao {
     @Query("SELECT * FROM events")
     fun getList(): List<DevCommsEvent>
 
+    @Query("SELECT * FROM events WHERE isFavorite = 1")
+    fun getFavoriteList(): List<DevCommsEvent>
+
     @Query("DELETE FROM events")
     fun deleteAll()
 
-    @Query("DELETE FROM events")
-    fun deleteOuterElements()
+    @Query("UPDATE events SET isFavorite = :isFavorite WHERE `key` =:key")
+    fun updateFavorite(key: Int, isFavorite: Boolean)
 }

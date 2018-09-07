@@ -14,11 +14,17 @@ import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
 import com.jacpalberto.devcomms.utils.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
+import android.support.v7.app.AppCompatActivity
 
-class EventsByDateFragment : Fragment() {
+
+/**
+ * Created by Alberto Carrillo on 9/7/18.
+ */
+
+class AgendaByDateFragment : Fragment() {
     companion object {
-        fun newInstance() = EventsByDateFragment()
-        val TAG = EventsByDateFragment::class.java.name ?: "EventsByDateFragment"
+        fun newInstance() = AgendaByDateFragment()
+        val TAG = AgendaByDateFragment::class.java.name ?: "AgendaByDateFragment"
     }
 
     private var viewModel: EventsViewModel? = null
@@ -35,7 +41,7 @@ class EventsByDateFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel?.fetchEvents()?.observe(this, Observer { filterEventsByDate(it) })
+        viewModel?.fetchFavoriteEvents()?.observe(this, Observer { filterEventsByDate(it) })
     }
 
     private fun filterEventsByDate(eventList: DevCommsEventList?) {
@@ -55,15 +61,23 @@ class EventsByDateFragment : Fragment() {
     }
 
     private fun setupTabLayout(keys: Set<String?>) {
+        tabLayout.removeAllTabs()
         if (keys.size >= 2) {
             tabLayout.visibility = View.VISIBLE
-            tabLayout.removeAllTabs()
+            updateToolbarTitle(getString(R.string.my_agenda))
             keys.forEach { tabLayout.addTab(tabLayout.newTab().setText(it)) }
-            tabLayout.tabGravity = TabLayout.GRAVITY_FILL
             viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
             tabLayout.doOnTabSelected {
                 viewPager.currentItem = it.position
             }
+        } else if (keys.size == 1) {
+            tabLayout.visibility = View.GONE
+            updateToolbarTitle(getString(R.string.my_agenda) + " " + keys.first()?.toLowerCase())
         }
+    }
+
+    private fun updateToolbarTitle(title: String) {
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = title
     }
 }

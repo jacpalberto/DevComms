@@ -15,10 +15,11 @@ object SponsorsModel {
     private val db by lazy { DevCommsApp.database }
     private val sponsorsDao by lazy { db!!.sponsorsDao() }
     private var sponsorsList: List<Sponsor> = emptyList()
+    private val repository = FirebaseRepository()
 
     fun fetchSponsors(onResult: (SponsorList) -> Unit) {
         lateinit var sponsorResult: SponsorList
-        FirebaseRepository.fetchSponsors { response ->
+        repository.fetchSponsors { response ->
             if (response.status == DataState.FAILURE || response.status == DataState.ERROR) {
                 sponsorsList = sponsorsDao.getList()
                 sponsorResult = if (sponsorsList.isEmpty())

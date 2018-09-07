@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.item_event.view.*
  * Created by Alberto Carrillo on 7/12/18.
  */
 class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
-                           var onEventClick: (DevCommsEvent) -> Unit,
-                           var onFavoriteClick: (DevCommsEvent) -> Unit)
+                           private var onEventClick: (DevCommsEvent) -> Unit,
+                           private var onFavoriteClick: (Int, DevCommsEvent) -> Unit)
     : RecyclerView.Adapter<DevCommsEventAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,8 +27,13 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
         holder.bind(events[position])
     }
 
+    fun updateFavoriteStatus(position: Int, isFavorite: Boolean) {
+        events[position]?.isFavorite = isFavorite
+        notifyItemChanged(position)
+    }
+
     class ViewHolder(itemView: View, var func: (DevCommsEvent) -> Unit,
-                     var onFavoriteClick: (DevCommsEvent) -> Unit) : RecyclerView.ViewHolder(itemView) {
+                     var onFavoriteClick: (Int, DevCommsEvent) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(event: DevCommsEvent?) = with(itemView) {
             eventTitle.text = event?.title
@@ -38,8 +43,12 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
             eventCommunity.text = event?.community
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
-            if (event != null) eventCardView.setOnClickListener { func(event) }
-            if (event != null) favoriteImageView.setOnClickListener { onFavoriteClick(event) }
+            event?.let { devCommsEvent ->
+                if (devCommsEvent.isFavorite == true) favoriteImageView.setImageResource(R.drawable.ic_favorite)
+                else favoriteImageView.setImageResource(R.drawable.ic_not_favorite)
+                eventCardView.setOnClickListener { func(devCommsEvent) }
+                favoriteImageView.setOnClickListener { onFavoriteClick(layoutPosition, devCommsEvent) }
+            }
         }
     }
 }

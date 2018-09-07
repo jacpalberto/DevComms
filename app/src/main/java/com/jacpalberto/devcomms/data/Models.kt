@@ -9,7 +9,6 @@ import kotlinx.android.parcel.Parcelize
 /**
  * Created by Alberto Carrillo on 7/12/18.
  */
-//TODO: add favorite field
 @Parcelize
 @Entity(tableName = "events")
 data class DevCommsEvent(@PrimaryKey val key: Int? = 0,
@@ -25,6 +24,7 @@ data class DevCommsEvent(@PrimaryKey val key: Int? = 0,
                          val company: String? = "",
                          val githubUrl: String? = "",
                          val webPageUrl: String? = "",
+                         var isFavorite: Boolean? = false,
                          val room: String? = "") : Parcelable {
     @Ignore constructor() : this(0)
 }

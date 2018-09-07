@@ -67,12 +67,12 @@ fun AppCompatActivity.addFragment(@IdRes containerRes: Int, fragment: Fragment) 
     fragmentTransaction.commit()
 }
 
-fun AppCompatActivity.replaceFragment(@IdRes containerRes: Int, fragment: Fragment, addToBackStack: Boolean = false) {
-    val fragmentManager = supportFragmentManager
-    val fragmentTransaction = fragmentManager.beginTransaction()
+fun AppCompatActivity.replaceFragment(@IdRes containerRes: Int,
+                                      fragment: Fragment,
+                                      tag: String = fragment.tag ?: "") {
+    val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-    fragmentTransaction.replace(containerRes, fragment)
-    if (addToBackStack) fragmentTransaction.addToBackStack(fragment.tag)
+    fragmentTransaction.replace(containerRes, fragment, tag)
     fragmentTransaction.commitNow()
 }
 

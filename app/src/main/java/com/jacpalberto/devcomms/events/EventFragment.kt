@@ -1,5 +1,6 @@
 package com.jacpalberto.devcomms.events
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
@@ -13,9 +14,11 @@ import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
-import com.jacpalberto.devcomms.data.FirebaseRepository
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import kotlinx.android.synthetic.main.fragment_event.*
+import android.support.v7.widget.SimpleItemAnimator
+
+
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
@@ -28,13 +31,19 @@ class EventFragment : Fragment() {
         }
     }
 
+    private var viewModel: EventsViewModel? = null
+    private lateinit var adapter: DevCommsEventAdapter
+
     private val onEventClick = { event: DevCommsEvent ->
         startActivity(EventDetailActivity.newIntent(activity as Context, event))
     }
 
-    //TODO: add favorite functionality
-    private val onFavoriteClick = { event: DevCommsEvent ->
-        Toast.makeText(activity, event.toString(), Toast.LENGTH_SHORT).show()
+    private val onFavoriteClick = { position: Int, event: DevCommsEvent ->
+        if (viewModel != null) {
+            val isFavorite = event.isFavorite ?: false
+            viewModel?.toggleFavorite(event.key ?: 0, !isFavorite)
+            adapter.updateFavoriteStatus(position, !isFavorite)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +53,7 @@ class EventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = activity?.let { ViewModelProviders.of(it).get(EventsViewModel::class.java) }
         init()
     }
 
@@ -54,11 +64,15 @@ class EventFragment : Fragment() {
     }
 
     private fun showEvents(it: List<DevCommsEvent>?) {
-        it?.let { events -> eventsRecycler.adapter = DevCommsEventAdapter(events, onEventClick, onFavoriteClick) }
+        it?.let { events ->
+            adapter = DevCommsEventAdapter(events, onEventClick, onFavoriteClick)
+            eventsRecycler.adapter = adapter
+        }
     }
 
     private fun initRecycler() {
         val isPortraitScreen = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
         eventsRecycler.layoutManager = GridLayoutManager(activity, if (isPortraitScreen) 1 else 2)
+        (eventsRecycler.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
     }
 }

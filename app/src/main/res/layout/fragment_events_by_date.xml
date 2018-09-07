@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tabGravity="fill"
         app:tabIndicatorColor="@color/tabIndicatorColor"
         app:tabIndicatorHeight="5dp"
         app:tabMaxWidth="0dp"

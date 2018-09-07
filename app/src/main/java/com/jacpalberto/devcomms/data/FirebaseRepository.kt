@@ -8,7 +8,7 @@ import com.google.firebase.database.ValueEventListener
 /**
  * Created by Alberto Carrillo on 7/13/18.
  */
-object FirebaseRepository {
+class FirebaseRepository {
     private val database = FirebaseDatabase.getInstance()
     private val eventsRef = database.getReference("posadev")
     private val sponsorsRef = database.getReference("spnosors")
