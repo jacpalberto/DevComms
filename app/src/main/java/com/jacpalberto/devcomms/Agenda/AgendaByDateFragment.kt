@@ -1,10 +1,11 @@
-package com.jacpalberto.devcomms.events
+package com.jacpalberto.devcomms.Agenda
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,9 @@ import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.PagerAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
+import com.jacpalberto.devcomms.events.EventsViewModel
 import com.jacpalberto.devcomms.utils.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
-import android.support.v7.app.AppCompatActivity
 
 
 /**
@@ -22,6 +23,7 @@ import android.support.v7.app.AppCompatActivity
  */
 
 class AgendaByDateFragment : Fragment() {
+
     companion object {
         fun newInstance() = AgendaByDateFragment()
         val TAG = AgendaByDateFragment::class.java.name ?: "AgendaByDateFragment"
@@ -55,13 +57,15 @@ class AgendaByDateFragment : Fragment() {
     private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
         val fragmentList = mutableListOf<Fragment>()
         eventsMap.forEach { _, list ->
-            fragmentList.add(EventFragment.newInstance(DevCommsEventList(list)))
+            fragmentList.add(AgendaFragment.newInstance(DevCommsEventList(list)))
         }
         viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(childFragmentManager, fragmentList) }
     }
 
     private fun setupTabLayout(keys: Set<String?>) {
         tabLayout.removeAllTabs()
+        emptyListTextView.visibility = if (keys.isEmpty()) View.VISIBLE else View.GONE
+
         if (keys.size >= 2) {
             tabLayout.visibility = View.VISIBLE
             updateToolbarTitle(getString(R.string.my_agenda))

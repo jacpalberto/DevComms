@@ -1,5 +1,6 @@
 package com.jacpalberto.devcomms.utils
 
+import android.animation.Animator
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -90,4 +91,22 @@ inline fun TabLayout.doOnTabSelected(crossinline onTabSelectedListener: (TabLayo
 
         }
     })
+}
+
+fun createAnimationOnAnimationEnd(animator: (p0: Animator?) -> Unit = {}): Animator.AnimatorListener {
+    return object : Animator.AnimatorListener {
+        override fun onAnimationRepeat(animation: Animator?) {
+        }
+
+        override fun onAnimationEnd(animation: Animator?) {
+            animator(animation)
+        }
+
+        override fun onAnimationCancel(animation: Animator?) {
+        }
+
+        override fun onAnimationStart(animation: Animator?) {
+        }
+
+    }
 }

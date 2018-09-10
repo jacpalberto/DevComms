@@ -1,4 +1,4 @@
-package com.jacpalberto.devcomms.events
+package com.jacpalberto.devcomms.Agenda
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -6,31 +6,37 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.SimpleItemAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.jacpalberto.devcomms.R
-import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
+import com.jacpalberto.devcomms.adapters.AgendaAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
+import com.jacpalberto.devcomms.events.EventsViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
-import android.support.v7.widget.SimpleItemAnimator
 
 /**
- * Created by Alberto Carrillo on 7/13/18.
+ * Created by Alberto Carrillo on 9/7/18.
  */
-class EventFragment : Fragment() {
+class AgendaFragment : Fragment() {
     companion object {
         const val EVENT_LIST = "EVENT_LIST"
-        fun newInstance(eventList: DevCommsEventList) = EventFragment().apply {
+        fun newInstance(eventList: DevCommsEventList) = AgendaFragment().apply {
             arguments = Bundle().apply { putParcelable(EVENT_LIST, eventList) }
         }
     }
 
     private var viewModel: EventsViewModel? = null
-    private lateinit var adapter: DevCommsEventAdapter
+    private lateinit var adapter: AgendaAdapter
+
+    private val onEmptyAgenda = {
+        if (viewModel != null){
+            viewModel!!.updateAgenda()
+        }
+    }
 
     private val onEventClick = { event: DevCommsEvent ->
         startActivity(EventDetailActivity.newIntent(activity as Context, event))
@@ -40,7 +46,7 @@ class EventFragment : Fragment() {
         if (viewModel != null) {
             val isFavorite = event.isFavorite ?: false
             viewModel?.toggleFavorite(event.key ?: 0, !isFavorite)
-            adapter.updateFavoriteStatus(position, !isFavorite)
+            adapter.removeEventFromFavorites(position)
         }
     }
 
@@ -63,7 +69,7 @@ class EventFragment : Fragment() {
 
     private fun showEvents(it: List<DevCommsEvent>?) {
         it?.let { events ->
-            adapter = DevCommsEventAdapter(events, onEventClick, onFavoriteClick)
+            adapter = AgendaAdapter(events.toMutableList(), onEventClick, onFavoriteClick, onEmptyAgenda)
             eventsRecycler.adapter = adapter
         }
     }

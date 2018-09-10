@@ -36,4 +36,21 @@
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         tools:background="@color/eventTitleBackground" />
 
+    <TextView
+        android:id="@+id/emptyListTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingEnd="32dp"
+        android:paddingStart="32dp"
+        android:text="No lectures have been added to your calendar yet"
+        android:textAppearance="@style/AboutTextStyle"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".25"
+        tools:visibility="visible" />
+
 </android.support.constraint.ConstraintLayout>

@@ -5,13 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
+import com.jacpalberto.devcomms.Agenda.AgendaByDateFragment
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.about.AboutActivity
 import com.jacpalberto.devcomms.utils.replaceFragment

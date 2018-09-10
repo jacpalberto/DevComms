@@ -34,8 +34,8 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun setHyperLinkSpannables() {
-        aboutAppContent.addHyperlinkSpanables(applicationContext)
-        aboutEventContent.addHyperlinkSpanables(applicationContext)
+        aboutAppContent.addHyperlinkSpannables(applicationContext)
+        aboutEventContent.addHyperlinkSpannables(applicationContext)
     }
 
     private fun initToolbar() {
@@ -53,7 +53,7 @@ class AboutActivity : AppCompatActivity() {
 
 }
 
-private fun TextView.addHyperlinkSpanables(context: Context) {
+private fun TextView.addHyperlinkSpannables(context: Context) {
     val splitAppText = this.text.split(" ")
     val ssb = SpannableStringBuilder()
     splitAppText.forEach {
