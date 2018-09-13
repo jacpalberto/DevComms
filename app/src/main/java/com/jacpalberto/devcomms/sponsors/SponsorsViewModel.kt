@@ -10,16 +10,17 @@ import com.jacpalberto.devcomms.data.SponsorList
  */
 class SponsorsViewModel : ViewModel() {
     private var sponsors: MutableLiveData<SponsorList>? = null
+    private val model = SponsorsModel()
 
     fun fetchSponsors(): MutableLiveData<SponsorList>? {
         if (sponsors == null) {
             sponsors = MutableLiveData()
-            SponsorsModel.fetchSponsors { sponsors?.postValue(it) }
+            model.fetchSponsors { sponsors?.postValue(it) }
         }
         return sponsors
     }
 
     fun refreshSponsors() {
-        SponsorsModel.fetchSponsors { sponsors?.postValue(it) }
+        model.fetchSponsors { sponsors?.postValue(it) }
     }
 }

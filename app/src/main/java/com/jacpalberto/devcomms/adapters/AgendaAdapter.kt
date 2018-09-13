@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.DevCommsEvent
+import com.jacpalberto.devcomms.utils.CircleTransform
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_event.view.*
 
 /**
@@ -50,7 +52,19 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
                 else favoriteImageView.setImageResource(R.drawable.ic_not_favorite)
                 eventCardView.setOnClickListener { func(devCommsEvent) }
                 favoriteImageView.setOnClickListener { onFavoriteClick(layoutPosition, devCommsEvent) }
+                showSpeakerImage(event, event.speakerPhotoUrl)
             }
+        }
+
+        private fun View.showSpeakerImage(event: DevCommsEvent?, speakerPhotoUrl: String?) {
+            if (event?.speakerPhotoUrl != null)
+                Picasso.get()
+                        .load(if (!speakerPhotoUrl.isNullOrEmpty()) speakerPhotoUrl else "placeholder")
+                        .transform(CircleTransform())
+                        .placeholder(R.drawable.java_dev_day)
+                        .resize(300, 300)
+                        .centerCrop()
+                        .into(this.speakerImageView)
         }
     }
 }

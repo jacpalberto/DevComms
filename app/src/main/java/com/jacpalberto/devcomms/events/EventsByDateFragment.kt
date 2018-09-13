@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,7 @@ class EventsByDateFragment : Fragment() {
     }
 
     private fun init() {
+        setToolbarTitle()
         viewModel?.fetchEvents()?.observe(this, Observer { filterEventsByDate(it) })
     }
 
@@ -65,5 +67,10 @@ class EventsByDateFragment : Fragment() {
                 viewPager.currentItem = it.position
             }
         }
+    }
+
+    private fun setToolbarTitle() {
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = getString(R.string.app_name)
     }
 }

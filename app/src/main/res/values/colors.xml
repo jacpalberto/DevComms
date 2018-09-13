@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="toolbarColor">#000000</color>
+    <color name="colorPrimaryDark">#93040b</color>
+    <!--<color name="colorPrimaryDark">#365b8d</color>-->
+    <color name="colorAccent">#ce373e</color>
+    <color name="toolbarColor">#ce373e</color>
+    <!--<color name="toolbarColor">#699dd5</color>-->
+    <color name="logoBackground">#f1f1f2</color>
 
     <!--Event-->
     <color name="eventCardColor">#FFFFFF</color>
     <color name="eventTitleBackground">#ecf7ff</color>
+    <color name="eventTimeBackground">#ecf7ff</color>
     <color name="eventTitleColor">#710106</color>
     <color name="eventSpeakerColor">#d13c13</color>
     <color name="eventRoomColor">#040b89</color>
@@ -27,6 +31,7 @@
     <color name="tabLayoutColor">#a9d0f7</color>
     <color name="tabTextColor">#040b89</color>
     <color name="tabIndicatorColor">#0694fc</color>
+
     <color name="navigationBackground">#ecf7ff</color>
     <color name="dividerColor">#d2d2d2</color>
 </resources>

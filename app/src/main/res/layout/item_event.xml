@@ -25,19 +25,19 @@
             android:id="@+id/eventTitle"
             style="@style/EventTitle"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="50dp"
             android:textAppearance="@style/TitleTextStyle"
             app:layout_constraintEnd_toStartOf="@id/favoriteImageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Firebase Realtime Database" />
+            tools:text="Firebase Realtime DatabaseFirebase Realtime Database" />
 
         <ImageView
             android:id="@+id/favoriteImageView"
-            android:layout_width="50dp"
+            android:layout_width="36dp"
             android:layout_height="0dp"
             android:background="@color/eventTitleBackground"
-            android:padding="10dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_not_favorite"
             app:layout_constraintBottom_toBottomOf="@id/eventTitle"
@@ -50,12 +50,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/speaker_photo"
-            android:padding="8dp"
-            android:src="@drawable/ic_default_speaker"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+            android:padding="4dp"
+            app:layout_constraintBottom_toTopOf="@id/eventTime"
+            app:layout_constraintEnd_toStartOf="@id/guidelineStart"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventTitle" />
+            app:layout_constraintTop_toBottomOf="@id/eventTitle"
+            tools:src="@drawable/java_dev_day" />
 
         <TextView
             android:id="@+id/eventSpeaker"
@@ -97,6 +97,7 @@
             style="@style/EventData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
             android:textAppearance="@style/RegularTextStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -109,9 +110,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TimeTextStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/eventType"
+            app:layout_constraintBottom_toBottomOf="@id/eventType"
+            app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="2:00 - 2:45" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

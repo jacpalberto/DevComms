@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".splash.SplashActivity">
+    android:background="@color/logoBackground"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/logoImageView"
@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:alpha="0"
-        app:srcCompat="@drawable/logo_community"
+        android:padding="16dp"
+        app:srcCompat="@drawable/java_dev_day"
         tools:alpha="1"
         tools:ignore="ContentDescription" />
 
