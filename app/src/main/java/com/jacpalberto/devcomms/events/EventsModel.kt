@@ -1,7 +1,6 @@
 package com.jacpalberto.devcomms.events
 
 import android.os.AsyncTask
-import android.util.Log
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.*
 
@@ -12,7 +11,7 @@ class EventsModel {
     private val db by lazy { DevCommsApp.database }
     private val eventsDao by lazy { db!!.eventsDao() }
     private var eventList: List<DevCommsEvent> = emptyList()
-    private val repository = FirebaseRepository()
+    private val repository = EventsRepository()
 
     fun fetchEvents(onResult: (DevCommsEventList) -> Unit) {
         lateinit var eventsResult: DevCommsEventList

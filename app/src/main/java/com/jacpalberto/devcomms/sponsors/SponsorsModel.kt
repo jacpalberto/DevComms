@@ -1,25 +1,20 @@
 package com.jacpalberto.devcomms.sponsors
 
 import android.os.AsyncTask
-import android.util.Log
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataState
-import com.jacpalberto.devcomms.data.FirebaseRepository
 import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.data.SponsorList
-import com.google.firebase.firestore.FirebaseFirestore
-
 
 
 /**
  * Created by Alberto Carrillo on 8/20/18.
  */
 class SponsorsModel {
-    var dbFs = FirebaseFirestore.getInstance()
     private val db by lazy { DevCommsApp.database }
     private val sponsorsDao by lazy { db!!.sponsorsDao() }
     private var sponsorsList: List<Sponsor> = emptyList()
-    private val repository = FirebaseRepository()
+    private val repository = SponsorRepository()
 
     fun fetchSponsors(onResult: (SponsorList) -> Unit) {
         lateinit var sponsorResult: SponsorList
@@ -44,6 +39,7 @@ class SponsorsModel {
     private fun saveAll(sponsors: List<Sponsor>) {
         AsyncTask.execute {
             sponsorsDao.deleteAll()
-            sponsorsDao.save(sponsors) }
+            sponsorsDao.save(sponsors)
+        }
     }
 }

@@ -1,17 +1,19 @@
-package com.jacpalberto.devcomms.data
+package com.jacpalberto.devcomms.events
 
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.jacpalberto.devcomms.data.DataState
+import com.jacpalberto.devcomms.data.DevCommsEvent
+import com.jacpalberto.devcomms.data.DevCommsEventList
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
  */
-class FirebaseRepository {
+class EventsRepository {
     private val database = FirebaseDatabase.getInstance()
     private val eventsRef = database.getReference("posadev")
-    private val sponsorsRef = database.getReference("spnosors")
     private val connectedRef = database.getReference(".info/connected")
 
     fun fetchEvents(onResult: (events: DevCommsEventList) -> Unit) {
@@ -40,11 +42,6 @@ class FirebaseRepository {
         })
     }
 
-    fun fetchSponsors(onResult: (sponsors: SponsorList) -> Unit) {
-        checkConnectivity(isConnected = { fetchFirebaseSponsors(onResult) },
-                isNotConnected = { onResult(SponsorList(emptyList(), 400, DataState.ERROR)) })
-    }
-
     private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
         connectedRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -57,24 +54,4 @@ class FirebaseRepository {
         })
     }
 
-    private fun fetchFirebaseSponsors(onResult: (sponsors: SponsorList) -> Unit) {
-        var status: DataState
-        var sponsorList: List<Sponsor> = emptyList()
-        var errorCode = 0
-
-        sponsorsRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val sponsors = dataSnapshot.children.map { it.getValue(Sponsor::class.java) }
-                sponsors.forEach { if (it != null) sponsorList += it }
-                status = DataState.SUCCESS
-                onResult(SponsorList(sponsorList, errorCode, status))
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                status = DataState.FAILURE
-                errorCode = error.code
-                onResult(SponsorList(sponsorList, errorCode, status))
-            }
-        })
-    }
 }
