@@ -18,38 +18,45 @@ data class DevCommsEvent(@PrimaryKey val key: Int? = 0,
                          val type: String? = "",
                          val description: String? = "",
                          val community: String? = "",
+
                          val speaker: String? = "",
                          val speakerDescription: String? = "",
                          val speakerPhotoUrl: String? = "",
                          val company: String? = "",
                          val githubUrl: String? = "",
                          val webPageUrl: String? = "",
+
                          var isFavorite: Boolean? = false,
                          val room: String? = "") : Parcelable {
     @Ignore constructor() : this(0)
 }
 
 @Parcelize
-data class SpeakerDetail(val speaker: String? = "",
-                         val speakerDescription: String? = "",
-                         val speakerPhotoUrl: String? = "",
-                         val company: String? = "",
-                         val githubUrl: String? = "",
-                         val webPageUrl: String? = "") : Parcelable
+data class SpeakerDetail(val first_name: String? = "",
+                         val last_name: String? = "",
+                         val bio: String? = "",
+                         val country: String? = "",
+                         val photo_url: String? = "",
+                         val twitter: String? = "",
+                         val github: String? = "",
+                         val email: String? = "") : Parcelable
+
+@Entity(tableName = "sponsors")
+data class Sponsor(@PrimaryKey val key: Int = 0,
+                   val logo_url: String? = "",
+                   val contact: String? = "",
+                   val brief: String? = "",
+                   val web: String? = "",
+                   val name: String? = "") {
+
+    @Ignore constructor() : this(0)
+}
 
 @Parcelize
 data class DevCommsEventList(val eventList: List<DevCommsEvent>,
                              override var errorCode: Int = 0,
                              override var status: DataState = DataState.PROCESS)
     : Parcelable, BaseModel(errorCode, status)
-
-@Entity(tableName = "sponsors")
-data class Sponsor(@PrimaryKey val key: Int = 0,
-                   val imageUrl: String? = "",
-                   val webPageUrl: String? = "",
-                   val title: String? = "") {
-    @Ignore constructor() : this(0)
-}
 
 data class SponsorList(val sponsorList: List<Sponsor> = emptyList(),
                        override var errorCode: Int = 0,

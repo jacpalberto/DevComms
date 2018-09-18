@@ -2,10 +2,8 @@ package com.jacpalberto.devcomms.sponsors
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -86,14 +84,14 @@ class SponsorsActivity : AppCompatActivity() {
     }
 
     private val onSponsorsLongClick = { sponsor: Sponsor ->
-        val title: String = if (sponsor.title.isNullOrEmpty()) "An awesome sponsor"
-        else sponsor.title ?: "An awesome sponsor"
+        val title: String = if (sponsor.name.isNullOrEmpty()) "An awesome sponsor"
+        else sponsor.name ?: "An awesome sponsor"
         showToast(title)
         true
     }
 
     private val onSponsorsClick = { sponsor: Sponsor ->
-        startWebIntent(sponsor.webPageUrl)
+        startWebIntent(sponsor.contact)
     }
 
     private fun showToast(message: String) {

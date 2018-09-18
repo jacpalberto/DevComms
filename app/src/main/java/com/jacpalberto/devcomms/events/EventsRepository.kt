@@ -53,5 +53,4 @@ class EventsRepository {
             override fun onCancelled(error: DatabaseError) {}
         })
     }
-
 }

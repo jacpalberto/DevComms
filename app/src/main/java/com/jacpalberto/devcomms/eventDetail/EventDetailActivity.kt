@@ -88,10 +88,10 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun startSpeakerDetail() {
-        if (speakerDetail == null || (speakerDetail?.company.isNullOrEmpty()
-                        && speakerDetail?.githubUrl.isNullOrEmpty()
-                        && speakerDetail?.speakerDescription.isNullOrEmpty()
-                        && speakerDetail?.webPageUrl.isNullOrEmpty()))
+        if (speakerDetail == null || (speakerDetail?.twitter.isNullOrEmpty()
+                        && speakerDetail?.github.isNullOrEmpty()
+                        && speakerDetail?.bio.isNullOrEmpty()
+                        && speakerDetail?.email.isNullOrEmpty()))
             return
 
         speakerDetail?.let {

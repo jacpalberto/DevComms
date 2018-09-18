@@ -32,9 +32,9 @@ class SponsorsAdapter(private var sponsors: List<Sponsor>,
         fun bind(sponsor: Sponsor,
                  onSponsorClick: (Sponsor) -> Unit,
                  onSponsorLongClick: (Sponsor) -> Boolean) = with(itemView) {
-            if (sponsor.imageUrl != null)
+            if (sponsor.logo_url != null)
                 Picasso.get()
-                        .load(if (sponsor.imageUrl.isNotEmpty()) sponsor.imageUrl else "placeholder")
+                        .load(if (sponsor.logo_url.isNotEmpty()) sponsor.logo_url else "placeholder")
                         .placeholder(R.drawable.logo_community)
                         .resize(300, 300)
                         .centerCrop()

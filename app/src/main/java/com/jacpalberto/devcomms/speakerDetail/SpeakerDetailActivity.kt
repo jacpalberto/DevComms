@@ -66,12 +66,12 @@ class SpeakerDetailActivity : AppCompatActivity() {
     private fun showSpeakerDetail() {
         with(speakerDetail) {
             if (this == null) return
-            speakerTitle.text = speaker
-            showSpeakerPhoto(speakerPhotoUrl)
-            showCompany(company)
-            showWebPage(webPageUrl)
-            showGithub(githubUrl)
-            showDescription(speakerDescription)
+            speakerTitle.text = getString(R.string.complete_name, first_name, last_name)
+            showSpeakerPhoto(photo_url)
+            showCompany(twitter)
+            showWebPage(email)
+            showGithub(github)
+            showDescription(bio)
         }
     }
 

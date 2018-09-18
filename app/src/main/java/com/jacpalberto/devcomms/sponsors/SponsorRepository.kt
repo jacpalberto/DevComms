@@ -1,6 +1,10 @@
 package com.jacpalberto.devcomms.sponsors
 
 import android.util.Log
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.Sponsor
@@ -11,26 +15,44 @@ import com.jacpalberto.devcomms.data.SponsorList
  */
 //TODO: replace JavaDevDay from string to BuildConfig variable
 class SponsorRepository {
-    private var db = FirebaseFirestore.getInstance()
-    private var appName = "JavaDevDay"
-    private val sponsorsRef = db.collection("App/$appName/sponsors")
+    private val db = FirebaseFirestore.getInstance()
+    val event = "jdd-18"
+    val eventRef = db.collection("events").document(event)
+    var sponsorList = emptyList<Sponsor>()
+    private val connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected")
 
     fun fetchSponsors(onResult: (sponsors: SponsorList) -> Unit) {
-        fetchFirestoreSponsors(onResult)
+        checkConnectivity(isConnected = { fetchFirestoreSponsors(onResult) },
+                isNotConnected = { onResult(SponsorList(emptyList(), 400, DataState.ERROR)) })
+    }
+
+    private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
+        connectedRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val connected = snapshot.getValue(Boolean::class.java) ?: false
+                if (connected) isConnected()
+                else isNotConnected()
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun fetchFirestoreSponsors(onResult: (sponsors: SponsorList) -> Unit) {
         var sponsorList: List<Sponsor> = emptyList()
-        sponsorsRef.get().addOnCompleteListener {
+        eventRef.get().addOnCompleteListener {
             if (it.isSuccessful) {
-                it.result.forEach { sponsor -> sponsorList += sponsor.toObject(Sponsor::class.java) }
-                onResult(SponsorList(sponsorList, 0, DataState.SUCCESS))
-            } else onFailure(onResult, sponsorList)
-        }.addOnFailureListener {
-            onFailure(onResult, sponsorList)
-        }.addOnCanceledListener {
-            onFailure(onResult, sponsorList)
+                Log.d("MainActivity2", it.result.data.toString())
+            }
         }
+       //sponsorsRef.get().addOnCompleteListener {
+       //    if (it.isSuccessful) {
+       //        it.result.forEach { sponsor -> sponsorList += sponsor.toObject(Sponsor::class.java) }
+       //        onResult(SponsorList(sponsorList, 0, DataState.SUCCESS))
+       //    } else onFailure(onResult, sponsorList)
+       //}.addOnFailureListener {
+       //    onFailure(onResult, sponsorList)
+       //}
     }
 
     private fun onFailure(onResult: (sponsors: SponsorList) -> Unit, sponsorList: List<Sponsor>) {

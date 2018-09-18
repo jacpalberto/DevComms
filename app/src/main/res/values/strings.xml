@@ -11,6 +11,7 @@
     <string name="schedule">Schedule</string>
     <string name="agenda">Agenda</string>
     <string name="my_agenda">My agenda</string>
+    <string name="complete_name">%s1 %s2</string>
     <string name="sponsors">Sponsors</string>
     <string name="about">About</string>
     <string name="about_app_title">About the app</string>
