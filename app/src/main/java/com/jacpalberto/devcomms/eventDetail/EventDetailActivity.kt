@@ -58,7 +58,7 @@ class EventDetailActivity : AppCompatActivity() {
     private fun initSpeakerDetail() {
         with(devCommsEvent) {
             if (this == null) return
-            speakerDetail = SpeakerDetail(speaker, speakerDescription, speakerPhotoUrl, company, githubUrl, webPageUrl)
+            //speakerDetail = SpeakerDetail(speaker, speakerDescription, speakerPhotoUrl, company, githubUrl, webPageUrl)
         }
     }
 
@@ -90,8 +90,7 @@ class EventDetailActivity : AppCompatActivity() {
     private fun startSpeakerDetail() {
         if (speakerDetail == null || (speakerDetail?.twitter.isNullOrEmpty()
                         && speakerDetail?.github.isNullOrEmpty()
-                        && speakerDetail?.bio.isNullOrEmpty()
-                        && speakerDetail?.email.isNullOrEmpty()))
+                        && speakerDetail?.bio.isNullOrEmpty()))
             return
 
         speakerDetail?.let {
@@ -105,19 +104,19 @@ class EventDetailActivity : AppCompatActivity() {
     private fun showEventDetail(event: DevCommsEvent?) {
         event?.let {
             eventTitle.text = it.title
-            eventRoomDate.text = getString(R.string.event_room_plus_date, it.room, it.date)
+            //eventRoomDate.text = getString(R.string.event_room_plus_date, it.room, it.date)
             showEventDescription(event)
             showSpeaker(event)
         }
     }
 
     private fun showSpeaker(event: DevCommsEvent) {
-        if (event.speaker.isNullOrEmpty())
-            return
-        speakerGroup.visibility = View.VISIBLE
-        speakerTitle.text = event.speaker
-        speakerDescriptionTextView.text = event.speakerDescription
-        showSpeakerPhoto(event.speakerPhotoUrl)
+       // if (event.speaker.isNullOrEmpty())
+       //     return
+       // speakerGroup.visibility = View.VISIBLE
+       // speakerTitle.text = event.speaker
+       // speakerDescriptionTextView.text = event.speakerDescription
+       // showSpeakerPhoto(event.speakerPhotoUrl)
     }
 
     private fun showSpeakerPhoto(speakerPhotoUrl: String?) {

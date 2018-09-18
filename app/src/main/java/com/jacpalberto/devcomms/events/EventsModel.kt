@@ -1,6 +1,7 @@
 package com.jacpalberto.devcomms.events
 
 import android.os.AsyncTask
+import android.util.Log
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.*
 
@@ -47,7 +48,7 @@ class EventsModel {
         }
     }
 
-    fun toggleFavorite(key: Int, isFavorite: Boolean) {
+    fun toggleFavorite(key: String, isFavorite: Boolean) {
         eventsDao.updateFavorite(key, isFavorite)
     }
 

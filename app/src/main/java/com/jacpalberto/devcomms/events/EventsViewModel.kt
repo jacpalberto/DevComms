@@ -33,7 +33,7 @@ class EventsViewModel : ViewModel() {
         model.fetchFavoriteEvents { favoriteEvents?.postValue(it) }
     }
 
-    fun toggleFavorite(key: Int, isFavorite: Boolean) {
+    fun toggleFavorite(key: String, isFavorite: Boolean) {
         model.toggleFavorite(key, isFavorite)
     }
 }

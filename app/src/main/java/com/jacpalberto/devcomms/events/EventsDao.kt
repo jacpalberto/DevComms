@@ -24,5 +24,5 @@ interface EventsDao {
     fun deleteAll()
 
     @Query("UPDATE events SET isFavorite = :isFavorite WHERE `key` =:key")
-    fun updateFavorite(key: Int, isFavorite: Boolean)
+    fun updateFavorite(key: String, isFavorite: Boolean)
 }

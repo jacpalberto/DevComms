@@ -69,7 +69,7 @@ class SpeakerDetailActivity : AppCompatActivity() {
             speakerTitle.text = getString(R.string.complete_name, first_name, last_name)
             showSpeakerPhoto(photo_url)
             showCompany(twitter)
-            showWebPage(email)
+            //showWebPage(email)
             showGithub(github)
             showDescription(bio)
         }

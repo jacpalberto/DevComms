@@ -39,10 +39,10 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
 
         fun bind(event: DevCommsEvent?) = with(itemView) {
             eventTitle.text = event?.title
-            eventSpeaker.text = event?.speaker
+            //eventSpeaker.text = event?.speaker
             eventType.text = event?.type
-            eventTime.text = event?.hour
-            eventCommunity.text = event?.community
+            //eventTime.text = event?.hour
+            //eventCommunity.text = event?.community
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
             event?.let { devCommsEvent ->
@@ -51,13 +51,13 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
                 eventCardView.setOnClickListener { func(devCommsEvent) }
                 favoriteImageView.setOnClickListener { onFavoriteClick(layoutPosition, devCommsEvent) }
             }
-            showSpeakerImage(event, event?.speakerPhotoUrl)
+            showSpeakerImage(event?.speakerDetail?.photo_url)
         }
 
-        private fun View.showSpeakerImage(event: DevCommsEvent?, speakerPhotoUrl: String?) {
-            if (event?.speakerPhotoUrl != null)
+        private fun View.showSpeakerImage(speakerPhotoUrl: String?) {
+            if (speakerPhotoUrl != null)
                 Picasso.get()
-                        .load(if (!speakerPhotoUrl.isNullOrEmpty()) speakerPhotoUrl else "placeholder")
+                        .load(if (!speakerPhotoUrl.isEmpty()) speakerPhotoUrl else "placeholder")
                         .transform(CircleTransform())
                         .placeholder(R.drawable.java_dev_day)
                         .resize(300, 300)

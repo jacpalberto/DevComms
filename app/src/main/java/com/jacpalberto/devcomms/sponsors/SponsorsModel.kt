@@ -1,6 +1,7 @@
 package com.jacpalberto.devcomms.sponsors
 
 import android.os.AsyncTask
+import android.util.Log
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.Sponsor

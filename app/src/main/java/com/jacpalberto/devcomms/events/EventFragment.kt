@@ -39,7 +39,7 @@ class EventFragment : Fragment() {
     private val onFavoriteClick = { position: Int, event: DevCommsEvent ->
         if (viewModel != null) {
             val isFavorite = event.isFavorite ?: false
-            viewModel?.toggleFavorite(event.key ?: 0, !isFavorite)
+            viewModel?.toggleFavorite(event.key, !isFavorite)
             adapter.updateFavoriteStatus(position, !isFavorite)
         }
     }
