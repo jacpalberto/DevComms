@@ -42,7 +42,10 @@ class EventsByDateFragment : Fragment() {
 
     private fun filterEventsByDate(eventList: DevCommsEventList?) {
         eventList?.let { events ->
-            val eventsMap = events.eventList.groupBy { it.time_start?.time.toString() }
+            val eventsMap = events.eventList.groupBy {
+
+                it.time_start?.time.toString()
+            }
             setupTabLayout(eventsMap.keys)
             setupViewPager(eventsMap)
         }

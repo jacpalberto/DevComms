@@ -25,10 +25,11 @@ class EventsRepository {
     }
 
     private fun fetchFirestoreEvents(onResult: (events: DevCommsEventList) -> Unit) {
+        eventsList.clear()
         agendaRef.get().addOnCompleteListener {
             if (it.isSuccessful) {
                 val eventListResponse = it.result
-                eventListResponse.forEachIndexed { index, document ->
+                eventListResponse.forEach { document ->
                     val agenda = document.toObject(AgendaResponse::class.java)
                     agenda.key = document.id
 
@@ -37,9 +38,8 @@ class EventsRepository {
                             val speaker = speakerResponse.result.toObject(SpeakerDetail::class.java)
                             agenda.speakerDetail = speaker
                             eventsList.add(parseAgendaToDevCommsEvent(agenda))
-                            if (index == eventsList.size - 1) {
+                            if (eventsList.size == eventListResponse.size()) {
                                 onResult(DevCommsEventList(eventsList, 0, DataState.SUCCESS))
-                                Log.d("EventsRepo",eventsList.toString())
                             }
                         }
                     }

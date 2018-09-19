@@ -1,15 +1,13 @@
 package com.jacpalberto.devcomms.data
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 import android.os.Parcelable
 import com.google.firebase.firestore.DocumentReference
 import com.google.gson.annotations.SerializedName
 import com.jacpalberto.devcomms.sponsors.models.Location
 import com.jacpalberto.devcomms.sponsors.models.SponsorResponse
 import kotlinx.android.parcel.Parcelize
+import java.time.OffsetDateTime
 import java.util.*
 
 /**
@@ -21,8 +19,8 @@ data class DevCommsEvent(@PrimaryKey val key: String = "",
                          val title: String? = "",
                          val type: String? = "",
                          val description: String? = "",
-                         @Embedded val time_end: Date? = Date(),
-                         @Embedded val time_start: Date? = Date(),
+                         val time_end: Date? = null,
+                         val time_start: Date? = null,
                          @Embedded var speakerDetail: SpeakerDetail? = SpeakerDetail(),
                          var isFavorite: Boolean? = false,
                          val room: String? = "") : Parcelable {

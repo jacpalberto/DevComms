@@ -34,6 +34,7 @@ class EventsModel {
                 AsyncTask.execute {
                     eventList = eventsDao.getList()
                     eventsResult = DevCommsEventList(eventList, status = DataState.SUCCESS)
+                    eventsResult.eventList.forEach { Log.d("EventsRepo", it.time_start.toString() + " - " + it.time_start?.time) }
                     onResult(eventsResult)
                 }
             }

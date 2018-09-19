@@ -1,11 +1,13 @@
 package com.jacpalberto.devcomms.adapters
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.DevCommsEvent
+import com.jacpalberto.devcomms.data.SpeakerDetail
 import com.jacpalberto.devcomms.utils.CircleTransform
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_event.view.*
@@ -42,7 +44,7 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
         fun bind(event: DevCommsEvent?) = with(itemView) {
             val speaker = event?.speakerDetail
             eventTitle.text = event?.title
-            eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
+            showSpeaker(speaker)
             eventType.text = event?.type
             //eventTime.text = event?.hour
             eventRoom.visibility = View.VISIBLE
@@ -56,12 +58,18 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
             }
         }
 
+        private fun View.showSpeaker(speaker: SpeakerDetail?) {
+            if (speaker?.first_name.isNullOrEmpty() && speaker?.last_name.isNullOrEmpty())
+                return
+            eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
+        }
+
         private fun View.showSpeakerImage(speakerPhotoUrl: String?) {
             if (speakerPhotoUrl != null)
                 Picasso.get()
                         .load(if (!speakerPhotoUrl.isNullOrEmpty()) speakerPhotoUrl else "placeholder")
                         .transform(CircleTransform())
-                        .placeholder(R.drawable.java_dev_day)
+                        .error(R.drawable.java_dev_day)
                         .resize(300, 300)
                         .centerCrop()
                         .into(this.speakerImageView)

@@ -64,9 +64,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/RegularTextStyle"
+            app:layout_constraintBottom_toTopOf="@+id/eventRoom"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/eventTitle"
+            app:layout_constraintTop_toBottomOf="@+id/eventTitle"
             tools:text="Speaker: Alberto Carrillo" />
 
         <TextView
@@ -76,9 +78,11 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/RegularTextStyle"
             android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/eventType"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/eventSpeaker"
+            app:layout_constraintTop_toBottomOf="@+id/eventSpeaker"
             tools:text="Room: Room1"
             tools:visibility="visible" />
 
@@ -89,9 +93,11 @@
             android:layout_height="wrap_content"
             android:paddingBottom="4dp"
             android:textAppearance="@style/RegularTextStyle"
+            app:layout_constraintBottom_toTopOf="@+id/eventTime"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/eventRoom"
+            app:layout_constraintTop_toBottomOf="@+id/eventRoom"
             tools:text="Workshop" />
 
         <TextView
@@ -100,9 +106,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TimeTextStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/eventType"
+            app:layout_constraintTop_toBottomOf="@+id/eventType"
             tools:text="2:00 - 2:45" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
