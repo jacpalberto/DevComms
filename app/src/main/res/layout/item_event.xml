@@ -25,7 +25,8 @@
             android:id="@+id/eventTitle"
             style="@style/EventTitle"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
+            android:maxLines="2"
             android:textAppearance="@style/TitleTextStyle"
             app:layout_constraintEnd_toStartOf="@id/favoriteImageView"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +51,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/speaker_photo"
-            android:padding="4dp"
-            app:layout_constraintBottom_toTopOf="@id/eventTime"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/eventTime"
             app:layout_constraintEnd_toStartOf="@id/guidelineStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/eventTitle"
@@ -69,17 +70,6 @@
             tools:text="Speaker: Alberto Carrillo" />
 
         <TextView
-            android:id="@+id/eventCommunity"
-            style="@style/EventData"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/RegularTextStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/eventSpeaker"
-            tools:text="Community: GDG Android" />
-
-        <TextView
             android:id="@+id/eventRoom"
             style="@style/EventData"
             android:layout_width="0dp"
@@ -88,7 +78,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/eventCommunity"
+            app:layout_constraintTop_toBottomOf="@id/eventSpeaker"
             tools:text="Room: Room1"
             tools:visibility="visible" />
 
@@ -110,9 +100,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TimeTextStyle"
-            app:layout_constraintBottom_toBottomOf="@id/eventType"
-            app:layout_constraintEnd_toEndOf="@id/guidelineStart"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/eventType"
             tools:text="2:00 - 2:45" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

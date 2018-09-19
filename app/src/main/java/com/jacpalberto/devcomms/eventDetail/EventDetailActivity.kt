@@ -56,10 +56,9 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun initSpeakerDetail() {
-        with(devCommsEvent) {
-            if (this == null) return
-            //speakerDetail = SpeakerDetail(speaker, speakerDescription, speakerPhotoUrl, company, githubUrl, webPageUrl)
-        }
+        if (devCommsEvent == null) return
+        speakerDetail = devCommsEvent?.speakerDetail
+
     }
 
     private fun initListeners() {
@@ -81,12 +80,6 @@ class EventDetailActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        Log.d("onBack", "pressed")
-
-    }
-
     private fun startSpeakerDetail() {
         if (speakerDetail == null || (speakerDetail?.twitter.isNullOrEmpty()
                         && speakerDetail?.github.isNullOrEmpty()
@@ -104,19 +97,20 @@ class EventDetailActivity : AppCompatActivity() {
     private fun showEventDetail(event: DevCommsEvent?) {
         event?.let {
             eventTitle.text = it.title
-            //eventRoomDate.text = getString(R.string.event_room_plus_date, it.room, it.date)
+            eventRoomDate.text = getString(R.string.event_room_plus_date, it.room, it.time_start)
             showEventDescription(event)
             showSpeaker(event)
         }
     }
 
     private fun showSpeaker(event: DevCommsEvent) {
-       // if (event.speaker.isNullOrEmpty())
-       //     return
-       // speakerGroup.visibility = View.VISIBLE
-       // speakerTitle.text = event.speaker
-       // speakerDescriptionTextView.text = event.speakerDescription
-       // showSpeakerPhoto(event.speakerPhotoUrl)
+        val speaker = event.speakerDetail
+        if (speaker?.first_name.isNullOrEmpty())
+            return
+        speakerGroup.visibility = View.VISIBLE
+        speakerTitle.text = getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
+        speakerDescriptionTextView.text = speaker?.bio
+        showSpeakerPhoto(speaker?.photo_url)
     }
 
     private fun showSpeakerPhoto(speakerPhotoUrl: String?) {

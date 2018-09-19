@@ -8,12 +8,12 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:transitionName="toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/toolbarColor"
         android:elevation="7dp"
         android:minHeight="?android:attr/actionBarSize"
+        android:transitionName="toolbar"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/app_name"
         app:titleTextColor="@android:color/white" />
@@ -44,11 +44,11 @@
                 app:layout_constraintGuide_percent="0.9" />
 
             <ImageView
-                android:transitionName="speakerImage"
                 android:id="@+id/speakerImageView"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_marginTop="16dp"
+                android:transitionName="speakerImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -57,56 +57,56 @@
 
             <TextView
                 android:id="@+id/speakerTitle"
-                android:transitionName="speakerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAppearance="@style/DetailTextStyle.SpeakerTitle"
+                android:transitionName="speakerName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/speakerImageView"
                 tools:text="Stephen D'Amico" />
 
             <ImageView
-                android:id="@+id/companyImageView"
+                android:id="@+id/flagImageView"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_company"
-                app:layout_constraintBottom_toBottomOf="@+id/companyNameTextView"
+                android:src="@drawable/ic_twitter"
+                app:layout_constraintBottom_toBottomOf="@+id/twitterTextView"
                 app:layout_constraintEnd_toEndOf="@id/guidelineStart"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/companyNameTextView"
+                app:layout_constraintTop_toTopOf="@+id/twitterTextView"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/companyNameTextView"
+                android:id="@+id/countryTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:textAppearance="@style/DetailTextStyle.Title"
+                android:textAppearance="@style/DetailTextStyle.Normal"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@+id/speakerTitle"
-                tools:text="SeatGeek" />
+                tools:text="Mexico" />
 
             <ImageView
-                android:id="@+id/wepPageImageView"
+                android:id="@+id/companyImageView"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_web"
-                app:layout_constraintBottom_toBottomOf="@+id/webPageTextView"
+                android:src="@drawable/ic_flag"
+                app:layout_constraintBottom_toBottomOf="@+id/countryTextView"
                 app:layout_constraintEnd_toEndOf="@id/guidelineStart"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/webPageTextView"
+                app:layout_constraintTop_toTopOf="@+id/countryTextView"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/webPageTextView"
+                android:id="@+id/twitterTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -116,8 +116,8 @@
                 android:textAppearance="@style/DetailTextStyle.Hyperlink"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@+id/companyNameTextView"
-                tools:text="blog.sddamico.com" />
+                app:layout_constraintTop_toBottomOf="@+id/countryTextView"
+                tools:text="Sierisimo" />
 
             <ImageView
                 android:id="@+id/githubImageView"
@@ -142,7 +142,7 @@
                 android:textAppearance="@style/DetailTextStyle.Hyperlink"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@+id/webPageTextView"
+                app:layout_constraintTop_toBottomOf="@+id/twitterTextView"
                 tools:text="github.com/stephenDamico" />
 
             <ImageView
@@ -174,15 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="companyImageView,companyNameTextView"
-                tools:visibility="visible" />
-
-            <android.support.constraint.Group
-                android:id="@+id/wepPageGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="wepPageImageView,webPageTextView"
+                app:constraint_referenced_ids="companyImageView,twitterTextView"
                 tools:visibility="visible" />
 
             <android.support.constraint.Group

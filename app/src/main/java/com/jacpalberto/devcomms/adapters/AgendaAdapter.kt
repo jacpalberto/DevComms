@@ -40,11 +40,11 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
                      var onFavoriteClick: (Int, DevCommsEvent) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(event: DevCommsEvent?) = with(itemView) {
+            val speaker = event?.speakerDetail
             eventTitle.text = event?.title
-            //eventSpeaker.text = event?.speaker
+            eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
             eventType.text = event?.type
             //eventTime.text = event?.hour
-            //eventCommunity.text = event?.community
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
             event?.let { devCommsEvent ->

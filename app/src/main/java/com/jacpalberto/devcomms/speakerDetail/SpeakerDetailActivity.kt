@@ -68,24 +68,24 @@ class SpeakerDetailActivity : AppCompatActivity() {
             if (this == null) return
             speakerTitle.text = getString(R.string.complete_name, first_name, last_name)
             showSpeakerPhoto(photo_url)
-            showCompany(twitter)
-            //showWebPage(email)
+            showCountry(country)
+            showTwitter(twitter)
             showGithub(github)
             showDescription(bio)
         }
     }
 
-    private fun showCompany(company: String?) {
-        if (company.isNullOrEmpty()) return
+    private fun showCountry(country: String?) {
+        if (country.isNullOrEmpty()) return
         companyGroup.visibility = View.VISIBLE
-        companyNameTextView.text = company
+        countryTextView.text = country
     }
 
-    private fun showWebPage(webPageUrl: String?) {
-        if (webPageUrl.isNullOrEmpty()) return
-        wepPageGroup.visibility = View.VISIBLE
-        webPageTextView.applyClickableSpan(applicationContext, webPageUrl) {
-            startWebIntent(webPageUrl)
+    private fun showTwitter(twitter: String?) {
+        if (twitter.isNullOrEmpty()) return
+        companyGroup.visibility = View.VISIBLE
+        twitterTextView.applyClickableSpan(applicationContext, twitter) {
+            startWebIntent("www.twitter.com/$twitter")
         }
     }
 
@@ -93,7 +93,7 @@ class SpeakerDetailActivity : AppCompatActivity() {
         if (githubUrl.isNullOrEmpty()) return
         githubGroup.visibility = View.VISIBLE
         githubTextView.applyClickableSpan(applicationContext, githubUrl) {
-            startWebIntent(githubUrl)
+            startWebIntent("www.github.com/$githubUrl")
         }
     }
 

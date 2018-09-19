@@ -41,14 +41,14 @@
     <style name="EventData">
         <item name="android:layout_marginEnd">6dp</item>
         <item name="android:layout_marginStart">6dp</item>
-        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginTop">6dp</item>
     </style>
 
     <style name="EventTime">
         <item name="android:textAlignment">center</item>
         <item name="android:background">@color/eventTimeBackground</item>
-        <item name="android:paddingBottom">3dp</item>
-        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingTop">4dp</item>
     </style>
 
     <!--EventTextAppearances-->

@@ -46,16 +46,15 @@ class AgendaByDateFragment : Fragment() {
         viewModel?.fetchFavoriteEvents()?.observe(this, Observer { filterEventsByDate(it) })
     }
 
-    //TODO setup view pager
     private fun filterEventsByDate(eventList: DevCommsEventList?) {
         eventList?.let { events ->
-            //val eventsMap = events.eventList.groupBy { it.date }
-            //setupTabLayout(eventsMap.keys)
-            //setupViewPager(eventsMap)
+            val eventsMap = events.eventList.groupBy { it.time_start?.time.toString() }
+            setupTabLayout(eventsMap.keys)
+            setupViewPager(eventsMap)
         }
     }
 
-    private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
+    private fun setupViewPager(eventsMap: Map<String, List<DevCommsEvent>>) {
         val fragmentList = mutableListOf<Fragment>()
         eventsMap.forEach { _, list ->
             fragmentList.add(AgendaFragment.newInstance(DevCommsEventList(list)))

@@ -38,11 +38,11 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
                      var onFavoriteClick: (Int, DevCommsEvent) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(event: DevCommsEvent?) = with(itemView) {
+            val speaker = event?.speakerDetail
             eventTitle.text = event?.title
-            //eventSpeaker.text = event?.speaker
+            eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
             eventType.text = event?.type
-            //eventTime.text = event?.hour
-            //eventCommunity.text = event?.community
+            eventTime.text = "${event?.time_start?.time.toString()} ${event?.time_end?.time.toString()}"
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
             event?.let { devCommsEvent ->
@@ -55,14 +55,13 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
         }
 
         private fun View.showSpeakerImage(speakerPhotoUrl: String?) {
-            if (speakerPhotoUrl != null)
-                Picasso.get()
-                        .load(if (!speakerPhotoUrl.isEmpty()) speakerPhotoUrl else "placeholder")
-                        .transform(CircleTransform())
-                        .placeholder(R.drawable.java_dev_day)
-                        .resize(300, 300)
-                        .centerCrop()
-                        .into(this.speakerImageView)
+            Picasso.get()
+                    .load(if (!speakerPhotoUrl.isNullOrEmpty()) speakerPhotoUrl else "placeholder")
+                    .transform(CircleTransform())
+                    .error(R.drawable.java_dev_day)
+                    .resize(300, 300)
+                    .centerCrop()
+                    .into(this.speakerImageView)
         }
     }
 }
