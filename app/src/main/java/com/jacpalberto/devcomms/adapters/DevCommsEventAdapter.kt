@@ -42,7 +42,7 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
             eventTitle.text = event?.title
             eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
             eventType.text = event?.type
-            eventTime.text = "${event?.time_start?.time.toString()} ${event?.time_end?.time.toString()}"
+            eventTime.text = "${event?.startTimeString} - ${event?.endTimeString}"
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
             event?.let { devCommsEvent ->

@@ -46,7 +46,7 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
             eventTitle.text = event?.title
             showSpeaker(speaker)
             eventType.text = event?.type
-            //eventTime.text = event?.hour
+            eventTime.text = "${event?.startTimeString} - ${event?.endTimeString}"
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
             event?.let { devCommsEvent ->

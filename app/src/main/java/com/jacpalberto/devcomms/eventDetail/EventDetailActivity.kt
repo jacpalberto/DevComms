@@ -97,7 +97,8 @@ class EventDetailActivity : AppCompatActivity() {
     private fun showEventDetail(event: DevCommsEvent?) {
         event?.let {
             eventTitle.text = it.title
-            eventRoomDate.text = getString(R.string.event_room_plus_date, it.room, it.time_start)
+            eventRoomDate.text = getString(R.string.event_room_plus_date,
+                    it.room, it.startDateString + " " + it.startTimeString)
             showEventDescription(event)
             showSpeaker(event)
         }

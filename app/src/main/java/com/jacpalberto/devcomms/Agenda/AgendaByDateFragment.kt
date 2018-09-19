@@ -48,13 +48,13 @@ class AgendaByDateFragment : Fragment() {
 
     private fun filterEventsByDate(eventList: DevCommsEventList?) {
         eventList?.let { events ->
-            val eventsMap = events.eventList.groupBy { it.time_start?.time.toString() }
+            val eventsMap = events.eventList.groupBy { it.startDateString }
             setupTabLayout(eventsMap.keys)
             setupViewPager(eventsMap)
         }
     }
 
-    private fun setupViewPager(eventsMap: Map<String, List<DevCommsEvent>>) {
+    private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
         val fragmentList = mutableListOf<Fragment>()
         eventsMap.forEach { _, list ->
             fragmentList.add(AgendaFragment.newInstance(DevCommsEventList(list)))

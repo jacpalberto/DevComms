@@ -1,12 +1,13 @@
 package com.jacpalberto.devcomms.events
 
-import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jacpalberto.devcomms.data.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
@@ -52,8 +53,16 @@ class EventsRepository {
 
     private fun parseAgendaToDevCommsEvent(agenda: AgendaResponse): DevCommsEvent {
         with(agenda) {
+            val dateFormat = SimpleDateFormat("MMM dd", Locale.getDefault())
+            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+            val startDate = dateFormat.format(agenda.time_start)
+            val startTime = timeFormat.format(agenda.time_start)
+            val endDate = dateFormat.format(agenda.time_end)
+            val endTime = timeFormat.format(agenda.time_end)
+
             return DevCommsEvent(key = key, title = title, description = description, type = type,
-                    time_end = time_end, time_start = time_start, speakerDetail = speakerDetail, room = room)
+                    time_end = time_end, time_start = time_start, speakerDetail = speakerDetail, room = room,
+                    startDateString = startDate, startTimeString = startTime, endDateString = endDate, endTimeString = endTime)
         }
     }
 
