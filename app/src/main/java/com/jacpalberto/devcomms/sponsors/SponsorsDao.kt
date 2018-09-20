@@ -14,7 +14,7 @@ interface SponsorsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(sponsor: List<Sponsor>)
 
-    @Query("SELECT * FROM sponsors")
+    @Query("SELECT * FROM sponsors ORDER BY categoryPriority, name")
     fun getList(): List<Sponsor>
 
     @Query("DELETE FROM sponsors")

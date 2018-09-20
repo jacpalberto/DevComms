@@ -15,6 +15,7 @@ class EventsModel {
     private val repository = EventsRepository()
 
     fun fetchEvents(onResult: (DevCommsEventList) -> Unit) {
+        eventList = emptyList()
         lateinit var eventsResult: DevCommsEventList
         repository.fetchEvents { response ->
             if (response.status == DataState.FAILURE || response.status == DataState.ERROR) {
@@ -34,14 +35,13 @@ class EventsModel {
                 AsyncTask.execute {
                     eventList = eventsDao.getList()
                     eventsResult = DevCommsEventList(eventList, status = DataState.SUCCESS)
-                    eventsResult.eventList.forEach { Log.d("EventsRepo", it.time_start.toString() + " - " + it.time_start?.time) }
                     onResult(eventsResult)
                 }
             }
         }
     }
 
-    fun fetchFavoriteEvents(onResult: (DevCommsEventList) -> Unit ) {
+    fun fetchFavoriteEvents(onResult: (DevCommsEventList) -> Unit) {
         AsyncTask.execute {
             val favoriteList = eventsDao.getFavoriteList()
             val eventsResult = DevCommsEventList(favoriteList, status = DataState.SUCCESS)

@@ -48,6 +48,8 @@ data class Sponsor(@PrimaryKey(autoGenerate = true) val key: Int = 0,
                    val logo_url: String? = "",
                    val contact: String? = "",
                    val brief: String? = "",
+                   var category: String? = "",
+                   var categoryPriority: Int = 0,
                    val web: String? = "",
                    val name: String? = "") : Parcelable {
 

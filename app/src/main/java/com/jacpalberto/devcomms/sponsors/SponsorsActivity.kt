@@ -45,14 +45,20 @@ class SponsorsActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
+        showProgress()
         viewModel?.fetchSponsors()?.observe(this, Observer { handleSponsors(it) })
     }
 
+    private fun showProgress() {
+        if (!sponsorListSwipe.isRefreshing) progressBar.visibility = View.VISIBLE
+    }
+
     private fun handleSponsors(it: SponsorList?) {
-        if (it?.sponsorList == null)
-            showToast(getString(R.string.connectivity_error))
         if (it?.status == DataState.FAILURE || it?.status == DataState.ERROR) {
             showToast(getString(R.string.connectivity_error))
+            val adapter = SponsorsAdapter(emptyList(), onSponsorsLongClick, onSponsorsClick)
+            sponsorsRecyclerView.adapter = adapter
+            dismissProgress()
         } else if (it?.status == DataState.SUCCESS) {
             dismissProgress()
             showSponsors(it)
@@ -60,6 +66,7 @@ class SponsorsActivity : AppCompatActivity() {
     }
 
     private fun dismissProgress() {
+        progressBar.visibility = View.GONE
         if (sponsorListSwipe.isRefreshing)
             sponsorListSwipe.isRefreshing = false
     }

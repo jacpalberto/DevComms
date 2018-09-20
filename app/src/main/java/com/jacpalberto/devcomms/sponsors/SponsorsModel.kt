@@ -18,6 +18,7 @@ class SponsorsModel {
     private val repository = SponsorRepository()
 
     fun fetchSponsors(onResult: (SponsorList) -> Unit) {
+        sponsorsList = emptyList()
         lateinit var sponsorResult: SponsorList
         repository.fetchSponsors { response ->
             if (response.status == DataState.FAILURE || response.status == DataState.ERROR) {

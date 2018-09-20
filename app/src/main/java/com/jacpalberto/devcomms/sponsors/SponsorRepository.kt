@@ -1,5 +1,6 @@
 package com.jacpalberto.devcomms.sponsors
 
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -48,8 +49,13 @@ class SponsorRepository {
                 sponsors?.forEachIndexed { index, reference ->
                     reference.id?.get()?.addOnCompleteListener { sponsorResponse ->
                         if (sponsorResponse.isSuccessful) {
+                            Log.d("SponsorRepository", sponsorResponse.result.id)
                             val sponsor = sponsorResponse.result.toObject(Sponsor::class.java)
-                            if (sponsor != null) sponsorList.add(sponsor)
+                            if (sponsor != null) {
+                                sponsor.category = reference.category
+                                sponsor.categoryPriority = calculatePriority(reference.category)
+                                sponsorList.add(sponsor)
+                            }
                             if (index == sponsors.size - 1) {
                                 onResult(SponsorList(sponsorList, 0, DataState.SUCCESS))
                             }
@@ -59,6 +65,15 @@ class SponsorRepository {
             } else {
                 onResult(SponsorList(emptyList(), 400, DataState.ERROR))
             }
+        }
+    }
+
+    private fun calculatePriority(category: String): Int {
+        return when (category.toLowerCase()) {
+            "platinum" -> 1
+            "gold" -> 2
+            "silver" -> 3
+            else -> 99
         }
     }
 }

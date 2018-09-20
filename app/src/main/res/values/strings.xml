@@ -24,9 +24,10 @@
     <!-- include º before the hyperlink to make it clickable -->
     <!-- About -->
     <string name="about_app_title">About the app</string>
-    <string name="about_app_content">The Devcomms app is coded by the community members. Architecturally, this is built with the new Android Architecture components and Firebase. All of this is coded natively. \n\nSee the repo and read more at: ºhttps://github.com/GDLDevComms/DevComms</string>
+    <string name="about_app_content">The Devcomms app is coded by the community members. Architecturally, this is built with the new Android Architecture components and Firestore. All of this is coded natively. \n\nSee the repo and read more at: ºhttps://github.com/GDLDevComms/DevComms</string>
     <string name="about_event_title">About the community</string>
-    <string name="about_event_content">Devcomms conferences around the world support the Android platform and create a global network for developers and companies. \n\nWe offer best-in-class presentations from leaders in all parts of the Android ecosystem, including core development, embedded solutions, augmented reality, business solutions, and games</string>
+    <string name="about_event_content">DevComms is a community founded by leaders of different technical communities to promote the grow of technical skills in Guadalajara and Mexico.
+We are happy to bring content, software and help to members of different communities.</string>
 
     <!-- errors -->
     <string name="connectivity_error">Service is not available, please try again later.</string>
