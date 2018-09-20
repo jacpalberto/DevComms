@@ -60,8 +60,8 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
 
         private fun View.showSpeaker(speaker: SpeakerDetail?) {
             if (speaker?.first_name.isNullOrEmpty() && speaker?.last_name.isNullOrEmpty())
-                return
-            eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
+                eventSpeaker.text = ""
+            else eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
         }
 
         private fun View.showSpeakerImage(speakerPhotoUrl: String?) {

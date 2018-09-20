@@ -5,15 +5,21 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
+import android.view.Window
+import android.widget.ImageView
 import android.widget.Toast
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.SponsorsAdapter
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.data.SponsorList
-import com.jacpalberto.devcomms.utils.startWebIntent
+import com.jacpalberto.devcomms.sponsorDetail.SponsorDetailActivity
 import kotlinx.android.synthetic.main.activity_sponsors.*
 
 class SponsorsActivity : AppCompatActivity() {
@@ -90,8 +96,24 @@ class SponsorsActivity : AppCompatActivity() {
         true
     }
 
-    private val onSponsorsClick = { sponsor: Sponsor ->
-        startWebIntent(sponsor.contact)
+    private val onSponsorsClick = { sponsor: Sponsor, view: View ->
+        val transitionIntent = SponsorDetailActivity.newIntent(this, sponsor)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, *getSharedElementsPairList(view))
+        ActivityCompat.startActivity(this, transitionIntent, options.toBundle())
+    }
+
+    private fun getSharedElementsPairList(view: View): Array<android.support.v4.util.Pair<View, String>> {
+        val navigationBar = findViewById<View>(android.R.id.navigationBarBackground)
+        val statusBar = findViewById<View>(android.R.id.statusBarBackground)
+        val sponsorImage = view.findViewById<ImageView>(R.id.sponsorImg)
+
+        val pairList = mutableListOf(
+                Pair(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME),
+                Pair(sponsorImage as View, "sponsorImg")).apply {
+            if (navigationBar != null)
+                add(Pair(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME))
+        }
+        return pairList.toTypedArray()
     }
 
     private fun showToast(message: String) {

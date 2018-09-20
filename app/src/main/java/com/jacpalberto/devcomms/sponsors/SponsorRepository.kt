@@ -5,6 +5,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.jacpalberto.devcomms.BuildConfig
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.MainEventResponse
 import com.jacpalberto.devcomms.data.Sponsor
@@ -13,10 +14,9 @@ import com.jacpalberto.devcomms.data.SponsorList
 /**
  * Created by Alberto Carrillo on 9/15/18.
  */
-//TODO: replace jdd-18 from string to BuildConfig variable
 class SponsorRepository {
     private val db = FirebaseFirestore.getInstance()
-    private val event = "jdd-18"
+    private val event = BuildConfig.dbEventName
     private val eventRef = db.collection("events").document(event)
     private var sponsorList = mutableListOf<Sponsor>()
     private val connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected")

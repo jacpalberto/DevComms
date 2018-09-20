@@ -1,30 +1,37 @@
 <resources>
-    <string name="app_name">JavaDevDay</string>
-    //TODO: add db to buildTypes
+    <string name="app_name">Java Dev Day 2018</string>
+    <string name="sponsors_toolbar">Our Awesome sponsors</string>
+    <string name="my_agenda">My agenda</string>
+
     <string name="db_name">JavaDevDay</string>
+
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
-    <string name="filter">Filter</string>
-    <string name="filtered_by_time">Filtered by time</string>
-    <string name="filtered_by_room">Filtered by room</string>
-    <string name="speaker_photo">Speaker Photo</string>
+
+    <!-- Menu Drawer -->
     <string name="schedule">Schedule</string>
     <string name="agenda">Agenda</string>
-    <string name="my_agenda">My agenda</string>
-    <string name="complete_name">%s %s</string>
     <string name="sponsors">Sponsors</string>
     <string name="about">About</string>
-    <string name="about_app_title">About the app</string>
 
-    // include º before the hyperlink to make it clickable
+    <!-- content description -->
+    <string name="speaker_photo">Speaker Photo</string>
+    <string name="sponsor_logo">Sponsor logo</string>
+
+    <string name="complete_name">%s %s</string>
+    <string name="event_room_plus_date">%1s, %2s</string>
+
+    <!-- include º before the hyperlink to make it clickable -->
+    <!-- About -->
+    <string name="about_app_title">About the app</string>
     <string name="about_app_content">The Devcomms app is coded by the community members. Architecturally, this is built with the new Android Architecture components and Firebase. All of this is coded natively. \n\nSee the repo and read more at: ºhttps://github.com/GDLDevComms/DevComms</string>
     <string name="about_event_title">About the community</string>
     <string name="about_event_content">Devcomms conferences around the world support the Android platform and create a global network for developers and companies. \n\nWe offer best-in-class presentations from leaders in all parts of the Android ecosystem, including core development, embedded solutions, augmented reality, business solutions, and games</string>
 
-    <string name="sponsors_toolbar">Our Awesome sponsors</string>
-    <string name="connectivity_error">Ha ocurrido un error de conexión</string>
+    <!-- errors -->
+    <string name="connectivity_error">Service is not available, please try again later.</string>
     <string name="url_intent_error">No application can handle this request. Please install a web browser or check your URL.</string>
-    <string name="sponsor_logo">Sponsor logo</string>
-    <string name="event_room_plus_date">%1s, %2s</string>
+    <string name="empty_agenda">No talks have been added to your agenda yet</string>
+    <string name="contact_us">Contact us</string>
 
 </resources>

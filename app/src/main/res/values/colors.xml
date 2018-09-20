@@ -34,4 +34,7 @@
 
     <color name="navigationBackground">#ecf7ff</color>
     <color name="dividerColor">#d2d2d2</color>
+    <color name="shadow">#99323232</color>
+    <color name="contactUsNormalColor">#67b7f1</color>
+    <color name="contactUsHighlightedColor">#3F51B5</color>
 </resources>

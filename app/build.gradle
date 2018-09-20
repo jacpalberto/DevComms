@@ -13,6 +13,17 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions "version"
+    productFlavors {
+        jdd18 {
+            buildConfigField "String", "dbEventName", "\"jdd-18\""
+            buildConfigField "String", "roomDbName", "\"JavaDevDay18\""
+        }
+        posadev18 {
+            buildConfigField "String", "dbEventName", "\"posadev-18\""
+            buildConfigField "String", "roomDbName", "\"Posadev18\""
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -24,7 +35,6 @@ android {
     }
 }
 
-//TODO: add build configs and flavors to get the debug and production systems.
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

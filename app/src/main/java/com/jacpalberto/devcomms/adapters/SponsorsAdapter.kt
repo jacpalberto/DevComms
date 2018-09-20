@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_sponsor.view.*
  */
 class SponsorsAdapter(private var sponsors: List<Sponsor>,
                       private val onSponsorLongClick: (Sponsor) -> Boolean,
-                      private val onSponsorClick: (Sponsor) -> Unit) : RecyclerView.Adapter<SponsorsAdapter.ViewHolder>() {
+                      private val onSponsorClick: (Sponsor, View) -> Unit) : RecyclerView.Adapter<SponsorsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sponsor, parent, false)
@@ -30,7 +30,7 @@ class SponsorsAdapter(private var sponsors: List<Sponsor>,
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(sponsor: Sponsor,
-                 onSponsorClick: (Sponsor) -> Unit,
+                 onSponsorClick: (Sponsor, View) -> Unit,
                  onSponsorLongClick: (Sponsor) -> Boolean) = with(itemView) {
             if (sponsor.logo_url != null)
                 Picasso.get()
@@ -40,7 +40,7 @@ class SponsorsAdapter(private var sponsors: List<Sponsor>,
                         .centerInside()
                         .into(this.sponsorImg)
 
-            sponsorImg.setOnClickListener { onSponsorClick(sponsor) }
+            sponsorImg.setOnClickListener { onSponsorClick(sponsor, it) }
             sponsorImg.setOnLongClickListener { onSponsorLongClick(sponsor) }
         }
     }

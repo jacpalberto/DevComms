@@ -22,6 +22,13 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="AppTheme.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/shadow</item>
+    </style>
+
     <style name="NavigationTheme" parent="AppTheme">
         <item name="android:textSize">25sp</item>
         <item name="android:listPreferredItemHeightSmall">50dp</item>
@@ -103,7 +110,7 @@
     </style>
 
     <style name="DetailTextStyle.SpeakerTitle">
-        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/detailSpeakerTitle</item>
         <item name="android:textSize">@dimen/detail_title_font_size</item>
     </style>

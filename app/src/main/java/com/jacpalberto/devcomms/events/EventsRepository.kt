@@ -4,6 +4,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.BuildConfig
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jacpalberto.devcomms.data.*
 import java.text.SimpleDateFormat
@@ -16,7 +17,7 @@ class EventsRepository {
     private val database = FirebaseDatabase.getInstance()
     private val connectedRef = database.getReference(".info/connected")
     private val db = FirebaseFirestore.getInstance()
-    private val event = "jdd-18"
+    private val event = com.jacpalberto.devcomms.BuildConfig.dbEventName
     private val agendaRef = db.collection("events").document(event).collection("agenda")
     private val eventsList = mutableListOf<DevCommsEvent>()
 

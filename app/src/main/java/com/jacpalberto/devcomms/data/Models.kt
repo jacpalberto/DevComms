@@ -43,12 +43,13 @@ data class SpeakerDetail(val first_name: String? = "",
 }
 
 @Entity(tableName = "sponsors")
+@Parcelize
 data class Sponsor(@PrimaryKey(autoGenerate = true) val key: Int = 0,
                    val logo_url: String? = "",
                    val contact: String? = "",
                    val brief: String? = "",
                    val web: String? = "",
-                   val name: String? = "") {
+                   val name: String? = "") : Parcelable {
 
     @Ignore constructor() : this(0)
 }

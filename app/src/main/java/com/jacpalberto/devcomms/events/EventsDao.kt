@@ -17,7 +17,7 @@ interface EventsDao {
     @Query("SELECT * FROM events ORDER BY startTimeString")
     fun getList(): List<DevCommsEvent>
 
-    @Query("SELECT * FROM events WHERE isFavorite = 1")
+    @Query("SELECT * FROM events WHERE isFavorite = 1 ORDER BY startTimeString")
     fun getFavoriteList(): List<DevCommsEvent>
 
     @Query("DELETE FROM events")

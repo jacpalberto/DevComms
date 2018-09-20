@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.DevCommsEvent
+import com.jacpalberto.devcomms.data.SpeakerDetail
 import com.jacpalberto.devcomms.utils.CircleTransform
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_event.view.*
@@ -40,7 +41,7 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
         fun bind(event: DevCommsEvent?) = with(itemView) {
             val speaker = event?.speakerDetail
             eventTitle.text = event?.title
-            eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
+            showSpeaker(speaker)
             eventType.text = event?.type
             eventTime.text = "${event?.startTimeString} - ${event?.endTimeString}"
             eventRoom.visibility = View.VISIBLE
@@ -52,6 +53,12 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
                 favoriteImageView.setOnClickListener { onFavoriteClick(layoutPosition, devCommsEvent) }
             }
             showSpeakerImage(event?.speakerDetail?.photo_url)
+        }
+
+        private fun View.showSpeaker(speaker: SpeakerDetail?) {
+            if (speaker?.first_name.isNullOrEmpty() && speaker?.last_name.isNullOrEmpty())
+                eventSpeaker.text = ""
+            else eventSpeaker.text = context.getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
         }
 
         private fun View.showSpeakerImage(speakerPhotoUrl: String?) {
