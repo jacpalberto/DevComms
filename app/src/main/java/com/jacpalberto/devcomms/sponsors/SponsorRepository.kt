@@ -25,7 +25,7 @@ class SponsorRepository {
 
     fun fetchSponsors(onResult: (sponsors: SponsorList) -> Unit) {
         checkConnectivity(isConnected = { fetchFirestoreSponsors(onResult) },
-                isNotConnected = { onResult(SponsorList(emptyList(), 401, DataState.ERROR)) })
+                isNotConnected = { fetchFirestoreSponsors(onResult) })
     }
 
     private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
