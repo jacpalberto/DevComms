@@ -41,13 +41,12 @@ class SponsorRepository {
     }
 
     private fun fetchFirestoreSponsors(onResult: (sponsors: SponsorList) -> Unit) {
+        sponsorList = mutableSetOf()
         eventRef.get().addOnCompleteListener {
             if (it.isSuccessful) {
-                sponsorList = mutableSetOf()
                 val eventResponse = it.result.toObject(MainEventResponse::class.java)
                 val sponsors = eventResponse?.sponsors
-
-                sponsors?.forEachIndexed { index, reference ->
+                sponsors?.forEach { reference ->
                     reference.id?.get()?.addOnCompleteListener { sponsorResponse ->
                         if (sponsorResponse.isSuccessful) {
                             val sponsor = sponsorResponse.result.toObject(Sponsor::class.java)
@@ -56,7 +55,7 @@ class SponsorRepository {
                                 sponsor.categoryPriority = calculatePriority(reference.category)
                                 sponsorList.add(sponsor)
                             }
-                            if (index == sponsors.size - 1) {
+                            if (sponsorList.size - 1 == sponsors.size - 1) {
                                 onResult(SponsorList(sponsorList.toList(), 0, DataState.SUCCESS))
                             }
                         }
