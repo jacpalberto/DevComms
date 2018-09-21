@@ -15,6 +15,7 @@ import android.text.SpannableString
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -99,6 +100,7 @@ fun createAnimationOnAnimationEnd(animator: (p0: Animator?) -> Unit = {}): Anima
         }
 
         override fun onAnimationEnd(animation: Animator?) {
+            Log.d("AnimationEnd", "Ending now")
             animator(animation)
         }
 

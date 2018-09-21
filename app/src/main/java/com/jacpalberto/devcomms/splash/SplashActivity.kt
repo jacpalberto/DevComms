@@ -3,6 +3,7 @@ package com.jacpalberto.devcomms.splash
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.animation.AccelerateDecelerateInterpolator
+import com.jacpalberto.devcomms.BuildConfig
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.events.MainActivity
 import com.jacpalberto.devcomms.utils.createAnimationOnAnimationEnd
@@ -19,13 +20,14 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        tvAcSplashVersion.text = BuildConfig.VERSION_NAME
         logoImageView.animate()
-                .setDuration(1500L)
-                .setInterpolator(AccelerateDecelerateInterpolator())
-                .alpha(1F)
-                .setListener(createAnimationOnAnimationEnd {
-                    startActivity(MainActivity.newIntent(this@SplashActivity))
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                })
+            .setDuration(1500L)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .alpha(1F)
+            .setListener(createAnimationOnAnimationEnd {
+                startActivity(MainActivity.newIntent(this@SplashActivity))
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            })
     }
 }
