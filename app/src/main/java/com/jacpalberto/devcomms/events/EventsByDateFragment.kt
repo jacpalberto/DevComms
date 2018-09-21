@@ -75,9 +75,8 @@ class EventsByDateFragment : Fragment() {
 
     private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
         val fragmentList = mutableListOf<Fragment>()
-        eventsMap.forEach { _, list ->
-            fragmentList.add(EventFragment.newInstance(DevCommsEventList(list)))
-        }
+        eventsMap.forEach { fragmentList.add(EventFragment.newInstance(DevCommsEventList(it.value))) }
+
         viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(childFragmentManager, fragmentList) }
         dismissProgress()
     }
