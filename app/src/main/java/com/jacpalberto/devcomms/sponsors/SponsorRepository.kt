@@ -19,8 +19,9 @@ class SponsorRepository {
     private val db = FirebaseFirestore.getInstance()
     private val event = BuildConfig.dbEventName
     private val eventRef = db.collection("events").document(event)
-    private var sponsorList = mutableListOf<Sponsor>()
-    private val connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected")
+    private var sponsorList = mutableSetOf<Sponsor>()
+    private val database = FirebaseDatabase.getInstance()
+    private val connectedRef = database.getReference(".info/connected")
 
     fun fetchSponsors(onResult: (sponsors: SponsorList) -> Unit) {
         checkConnectivity(isConnected = { fetchFirestoreSponsors(onResult) },
@@ -30,7 +31,7 @@ class SponsorRepository {
     private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
         connectedRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val connected = snapshot.getValue(Boolean::class.java) ?: false
+                val connected = snapshot.getValue(Boolean::class.java) ?: true
                 if (connected) isConnected()
                 else isNotConnected()
             }
@@ -40,16 +41,15 @@ class SponsorRepository {
     }
 
     private fun fetchFirestoreSponsors(onResult: (sponsors: SponsorList) -> Unit) {
-        sponsorList = mutableListOf()
         eventRef.get().addOnCompleteListener {
             if (it.isSuccessful) {
+                sponsorList = mutableSetOf()
                 val eventResponse = it.result.toObject(MainEventResponse::class.java)
                 val sponsors = eventResponse?.sponsors
 
                 sponsors?.forEachIndexed { index, reference ->
                     reference.id?.get()?.addOnCompleteListener { sponsorResponse ->
                         if (sponsorResponse.isSuccessful) {
-                            Log.d("SponsorRepository", sponsorResponse.result.id)
                             val sponsor = sponsorResponse.result.toObject(Sponsor::class.java)
                             if (sponsor != null) {
                                 sponsor.category = reference.category
@@ -57,7 +57,7 @@ class SponsorRepository {
                                 sponsorList.add(sponsor)
                             }
                             if (index == sponsors.size - 1) {
-                                onResult(SponsorList(sponsorList, 0, DataState.SUCCESS))
+                                onResult(SponsorList(sponsorList.toList(), 0, DataState.SUCCESS))
                             }
                         }
                     }

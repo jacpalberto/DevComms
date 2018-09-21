@@ -19,7 +19,7 @@ class SponsorsModel {
 
     fun fetchSponsors(onResult: (SponsorList) -> Unit) {
         sponsorsList = emptyList()
-        lateinit var sponsorResult: SponsorList
+        var sponsorResult: SponsorList
         repository.fetchSponsors { response ->
             if (response.status == DataState.FAILURE || response.status == DataState.ERROR) {
                 sponsorsList = sponsorsDao.getList()
@@ -41,6 +41,8 @@ class SponsorsModel {
     private fun saveAll(sponsors: List<Sponsor>) {
         AsyncTask.execute {
             sponsorsDao.deleteAll()
+        }
+        AsyncTask.execute {
             sponsorsDao.save(sponsors)
         }
     }

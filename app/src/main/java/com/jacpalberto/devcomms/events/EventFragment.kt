@@ -6,17 +6,16 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.SimpleItemAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import kotlinx.android.synthetic.main.fragment_event.*
-import android.support.v7.widget.SimpleItemAnimator
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
@@ -59,6 +58,7 @@ class EventFragment : Fragment() {
         initRecycler()
         val devCommsListEvent = arguments?.getParcelable<DevCommsEventList>(EVENT_LIST)
         showEvents(devCommsListEvent?.eventList)
+        eventsListSwipe.setOnRefreshListener { viewModel?.fetchEvents() }
     }
 
     private fun showEvents(it: List<DevCommsEvent>?) {

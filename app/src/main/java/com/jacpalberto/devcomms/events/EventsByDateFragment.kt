@@ -3,6 +3,7 @@ package com.jacpalberto.devcomms.events
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -11,12 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.PagerAdapter
+import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.DevCommsEventList
 import com.jacpalberto.devcomms.utils.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class EventsByDateFragment : Fragment() {
@@ -25,30 +25,52 @@ class EventsByDateFragment : Fragment() {
         val TAG = EventsByDateFragment::class.java.name ?: "EventsByDateFragment"
     }
 
+    private lateinit var snackbar: Snackbar
     private var viewModel: EventsViewModel? = null
+    private lateinit var currentView: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_events_by_date, container, false)
+        currentView = inflater.inflate(R.layout.fragment_events_by_date, container, false)
+        return currentView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = activity?.let { ViewModelProviders.of(it).get(EventsViewModel::class.java) }
+        snackbar = Snackbar.make(currentView, getString(R.string.connectivity_error), Snackbar.LENGTH_INDEFINITE)
+                .setAction("RETRY") {
+                    viewModel?.fetchEvents()
+                }
         init()
     }
 
     private fun init() {
+        showProgress()
         setToolbarTitle()
-        viewModel?.fetchEvents()?.observe(this, Observer { filterEventsByDate(it) })
+        viewModel?.fetchEvents()?.observe(this, Observer { handleEventsByDate(it) })
     }
 
-    private fun filterEventsByDate(eventList: DevCommsEventList?) {
-        eventList?.let { events ->
-            val eventsMap = events.eventList.groupBy { it.startDateString }
-            setupTabLayout(eventsMap.keys)
-            setupViewPager(eventsMap)
+    private fun handleEventsByDate(eventList: DevCommsEventList?) {
+        dismissProgress()
+        if (eventList?.status == DataState.FAILURE || eventList?.status == DataState.ERROR) {
+            if (!snackbar.isShown) snackbar.show()
+        } else if (eventList?.status == DataState.SUCCESS) {
+            if (snackbar.isShown) snackbar.dismiss()
+            eventList.let { events ->
+                val eventsMap = events.eventList.groupBy { it.startDateString }
+                setupTabLayout(eventsMap.keys)
+                setupViewPager(eventsMap)
+            }
         }
+    }
+
+    private fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun dismissProgress() {
+        progressBar.visibility = View.GONE
     }
 
     private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
@@ -57,6 +79,7 @@ class EventsByDateFragment : Fragment() {
             fragmentList.add(EventFragment.newInstance(DevCommsEventList(list)))
         }
         viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(childFragmentManager, fragmentList) }
+        dismissProgress()
     }
 
     private fun setupTabLayout(keys: Set<String?>) {
