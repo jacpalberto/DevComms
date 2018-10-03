@@ -1,4 +1,4 @@
-package com.jacpalberto.devcomms.Agenda
+package com.jacpalberto.devcomms.agenda
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context

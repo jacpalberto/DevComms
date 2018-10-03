@@ -3,8 +3,6 @@
     <string name="sponsors_toolbar">Our Awesome sponsors</string>
     <string name="my_agenda">My agenda</string>
 
-    <string name="db_name">JavaDevDay</string>
-
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
 
@@ -36,5 +34,7 @@ We are happy to bring content, software and help to members of different communi
 
     <string name="contact_us">Contact us</string>
     <string name="time_format">%s - %s</string>
+    <string name="toggle_favorite">toggle_favorite</string>
+    <string name="sponsor_s_logo">sponsor\'s logo</string>
 
 </resources>

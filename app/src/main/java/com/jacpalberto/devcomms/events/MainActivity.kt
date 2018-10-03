@@ -10,9 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.MenuItem
-import com.jacpalberto.devcomms.Agenda.AgendaByDateFragment
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.about.AboutActivity
+import com.jacpalberto.devcomms.agenda.AgendaByDateFragment
 import com.jacpalberto.devcomms.sponsors.SponsorsActivity
 import com.jacpalberto.devcomms.utils.replaceFragment
 import kotlinx.android.synthetic.main.activity_main.*

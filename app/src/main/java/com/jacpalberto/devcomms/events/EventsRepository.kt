@@ -32,13 +32,13 @@ class EventsRepository {
         agendaRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val eventListResponse = task.result
-                eventListResponse.forEach { document ->
+                eventListResponse?.forEach { document ->
                     val agenda = document.toObject(AgendaResponse::class.java)
                     agenda.key = document.id
 
                     agenda.speaker?.get()?.addOnCompleteListener { speakerResponse ->
                         if (speakerResponse.isSuccessful) {
-                            val speaker = speakerResponse.result.toObject(SpeakerDetail::class.java)
+                            val speaker = speakerResponse.result?.toObject(SpeakerDetail::class.java)
                             agenda.speakerDetail = speaker
                             events.add(parseAgendaToDevCommsEvent(agenda))
                             if (events.size == eventListResponse.size()) {

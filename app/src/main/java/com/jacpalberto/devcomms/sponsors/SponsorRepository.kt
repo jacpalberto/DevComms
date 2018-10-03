@@ -45,13 +45,13 @@ class SponsorRepository {
 
         eventRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val eventResponse = task.result.toObject(MainEventResponse::class.java)
+                val eventResponse = task.result?.toObject(MainEventResponse::class.java)
                 val sponsors = eventResponse?.sponsors
 
                 sponsors?.forEach { reference ->
                     reference.id?.get()?.addOnCompleteListener { sponsorResponse ->
                         if (sponsorResponse.isSuccessful) {
-                            val sponsor = sponsorResponse.result.toObject(Sponsor::class.java)
+                            val sponsor = sponsorResponse.result?.toObject(Sponsor::class.java)
                             if (sponsor != null) {
                                 sponsor.category = reference.category
                                 sponsor.categoryPriority = calculatePriority(reference.category)

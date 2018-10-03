@@ -103,7 +103,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toTopOf="@id/speakerImageView"
-                tools:text="Robin Chander, Zebra Technologies" />
+                tools:text="Robin, Zebra Technologies" />
 
             <TextView
                 android:id="@+id/speakerDescriptionTextView"

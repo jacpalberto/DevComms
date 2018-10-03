@@ -60,14 +60,6 @@ fun TextView.applyClickableSpan(context: Context, text: String?, function: () ->
     this.setText(spannableString, TextView.BufferType.SPANNABLE)
 }
 
-fun AppCompatActivity.addFragment(@IdRes containerRes: Int, fragment: Fragment) {
-    val fragmentManager = supportFragmentManager
-    val fragmentTransaction = fragmentManager.beginTransaction()
-
-    fragmentTransaction.add(containerRes, fragment)
-    fragmentTransaction.commit()
-}
-
 fun AppCompatActivity.replaceFragment(@IdRes containerRes: Int,
                                       fragment: Fragment,
                                       tag: String = fragment.tag ?: "") {

@@ -14,8 +14,6 @@
     <color name="eventTimeBackground">#ecf7ff</color>
     <color name="eventTitleColor">#710106</color>
     <color name="eventSpeakerColor">#d13c13</color>
-    <color name="eventRoomColor">#040b89</color>
-    <color name="eventTypeColor">#ffffff</color>
     <color name="eventTimeColor">#048e37</color>
 
     <!--Detail-->

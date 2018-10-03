@@ -7,11 +7,6 @@ class DataResponse<T>(t: T, var status: DataState = DataState.NONE) {
     var error: Int = 0
     var data: T = t
 
-    fun setErrorStatus(errorCode: Int) {
-        status = DataState.ERROR
-        error = errorCode
-    }
-
     fun setFailureStatus() {
         status = DataState.FAILURE
     }

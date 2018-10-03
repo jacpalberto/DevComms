@@ -62,6 +62,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/sponsor_s_logo"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
@@ -73,7 +74,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sponsorLogo"
-                tools:text="EPAM" />
+                tools:text="Sponsor" />
 
             <TextView
                 android:id="@+id/sponsorBrief"
@@ -84,7 +85,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sponsorName"
-                tools:text="EPAM Systems, Inc., also known as EPAM, is a global provider of software engineering and IT consulting services headquartered in Newtown, Pennsylvania, United States. The company has software development centers and branch offices in North America, Europe, Asia and Australia." />
+                tools:text="Sponsor Systems, Inc., also known as Sponsor, is a global provider of software engineering and IT consulting services headquartered in SA, Pennsylvania, United States. The company has software development centers and branch offices in North America, Europe, Asia and Australia." />
 
             <TextView
                 android:id="@+id/sponsorWeb"
@@ -95,7 +96,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sponsorBrief"
-                tools:text="More info at: www.epam.com" />
+                tools:text="More info at: www.sponsor.com" />
 
             <Button
                 android:id="@+id/contactUsButton"

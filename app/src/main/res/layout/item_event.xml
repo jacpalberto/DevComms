@@ -44,6 +44,7 @@
             app:layout_constraintBottom_toBottomOf="@id/eventTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/eventTitle"
+            android:contentDescription="@string/toggle_favorite"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView

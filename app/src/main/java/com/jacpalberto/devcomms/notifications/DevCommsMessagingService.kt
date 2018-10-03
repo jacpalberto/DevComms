@@ -15,7 +15,7 @@ import com.jacpalberto.devcomms.events.MainActivity
 /**
  * Created by Alberto Carrillo on 9/6/18.
  */
-//TODO: filtrar notificaciones
+//TODO: filter notifications
 class DevCommsMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage?) {

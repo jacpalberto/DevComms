@@ -65,7 +65,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/speakerImageView"
-                tools:text="Stephen D'Amico" />
+                tools:text="Stephen D'Angels" />
 
             <ImageView
                 android:id="@+id/flagImageView"
@@ -117,7 +117,7 @@
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@+id/countryTextView"
-                tools:text="Sierisimo" />
+                tools:text="Twitter" />
 
             <ImageView
                 android:id="@+id/githubImageView"
@@ -143,7 +143,7 @@
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@+id/twitterTextView"
-                tools:text="github.com/stephenDamico" />
+                tools:text="github.com/stephenAngels" />
 
             <ImageView
                 android:id="@+id/descriptionImageView"
@@ -167,7 +167,7 @@
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@id/githubTextView"
-                tools:text="Android Tech Lead @SeatGeek, previously Android Engineer ESPN. Computer Engineering Ulowa. Wisconsin native,  Android Tech Lead @SeatGeek, previously Android Engineer ESPN. Computer Engineering Ulowa. Wisconsin native" />
+                tools:text="Android Tech Lead @SeatGeek, previously Android Engineer ESPN. Computer Engineering. Wisconsin native,  Android Tech Lead @SeatGeek, previously Android Engineer ESPN. Computer Engineering. Wisconsin native" />
 
             <android.support.constraint.Group
                 android:id="@+id/companyGroup"
