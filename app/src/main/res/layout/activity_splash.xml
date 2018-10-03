@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/logoBackground"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/logoBackground">
 
     <ImageView
         android:id="@+id/logoImageView"
@@ -13,8 +13,23 @@
         android:layout_centerInParent="true"
         android:alpha="0"
         android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/java_dev_day"
         tools:alpha="1"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvAcSplashVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginEnd="6dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="v0.0.0" />
 
 </android.support.constraint.ConstraintLayout>
