@@ -22,12 +22,12 @@ class SplashActivity : AppCompatActivity() {
     private fun init() {
         tvAcSplashVersion.text = BuildConfig.VERSION_NAME
         logoImageView.animate()
-            .setDuration(1500L)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .alpha(1F)
-            .setListener(createAnimationOnAnimationEnd {
-                startActivity(MainActivity.newIntent(this@SplashActivity))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-            })
+                .setDuration(1500L)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .alpha(1F)
+                .setListener(createAnimationOnAnimationEnd {
+                    startActivity(MainActivity.newIntent(this@SplashActivity))
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                })
     }
 }

@@ -14,8 +14,8 @@
         android:background="@android:color/white"
         android:contentDescription="@string/sponsor_logo"
         android:padding="8dp"
-        android:transitionName="sponsorImg"
         android:scaleType="centerInside"
+        android:transitionName="sponsorImg"
         app:layout_constraintDimensionRatio="H,1:1"
         tools:src="@tools:sample/backgrounds/scenic" />
 </android.support.constraint.ConstraintLayout>

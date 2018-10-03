@@ -33,7 +33,7 @@ class AgendaFragment : Fragment() {
     private lateinit var adapter: AgendaAdapter
 
     private val onEmptyAgenda = {
-        if (viewModel != null){
+        if (viewModel != null) {
             viewModel!!.updateAgenda()
         }
     }

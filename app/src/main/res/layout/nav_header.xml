@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="180dp"
+    android:background="@color/logoBackground"
     android:fitsSystemWindows="true"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/logoBackground"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
