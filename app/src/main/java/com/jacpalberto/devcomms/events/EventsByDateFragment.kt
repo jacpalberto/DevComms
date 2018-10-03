@@ -12,9 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.PagerAdapter
+import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.DevCommsEventList
+import com.jacpalberto.devcomms.data.EventListWrapper
 import com.jacpalberto.devcomms.utils.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
 
@@ -51,14 +52,14 @@ class EventsByDateFragment : Fragment() {
         viewModel?.fetchEvents()?.observe(this, Observer { handleEventsByDate(it) })
     }
 
-    private fun handleEventsByDate(eventList: DevCommsEventList?) {
+    private fun handleEventsByDate(eventList: DataResponse<List<DevCommsEvent>>?) {
         dismissProgress()
         if (eventList?.status == DataState.FAILURE || eventList?.status == DataState.ERROR) {
             if (!snackbar.isShown) snackbar.show()
         } else if (eventList?.status == DataState.SUCCESS) {
             if (snackbar.isShown) snackbar.dismiss()
             eventList.let { events ->
-                val eventsMap = events.eventList.groupBy { it.startDateString }
+                val eventsMap = events.data.groupBy { it.startDateString }
                 setupTabLayout(eventsMap.keys)
                 setupViewPager(eventsMap)
             }
@@ -75,8 +76,7 @@ class EventsByDateFragment : Fragment() {
 
     private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
         val fragmentList = mutableListOf<Fragment>()
-        eventsMap.forEach { fragmentList.add(EventFragment.newInstance(DevCommsEventList(it.value))) }
-
+        eventsMap.forEach { fragmentList.add(EventFragment.newInstance(EventListWrapper(it.value))) }
         viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(childFragmentManager, fragmentList) }
         dismissProgress()
     }

@@ -14,7 +14,7 @@ interface EventsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(events: List<DevCommsEvent>)
 
-    @Query("SELECT * FROM events ORDER BY startTimeString")
+    @Query("SELECT * FROM events ORDER BY startTimeString, title")
     fun getList(): List<DevCommsEvent>
 
     @Query("SELECT * FROM events WHERE isFavorite = 1 ORDER BY startTimeString")

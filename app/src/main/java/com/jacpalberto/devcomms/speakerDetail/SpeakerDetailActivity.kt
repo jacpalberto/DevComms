@@ -2,8 +2,10 @@ package com.jacpalberto.devcomms.speakerDetail
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.transition.Fade
 import android.view.View
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.SpeakerDetail
@@ -12,8 +14,6 @@ import com.jacpalberto.devcomms.utils.applyClickableSpan
 import com.jacpalberto.devcomms.utils.startWebIntent
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_speaker_detail.*
-import android.os.Build
-import android.transition.Fade
 
 
 class SpeakerDetailActivity : AppCompatActivity() {
@@ -81,6 +81,7 @@ class SpeakerDetailActivity : AppCompatActivity() {
         countryTextView.text = country
     }
 
+    //TODO: change companyGroup by Twitter group in refactor commit
     private fun showTwitter(twitter: String?) {
         if (twitter.isNullOrEmpty()) return
         companyGroup.visibility = View.VISIBLE

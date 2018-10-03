@@ -16,9 +16,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.SponsorsAdapter
+import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.Sponsor
-import com.jacpalberto.devcomms.data.SponsorList
 import com.jacpalberto.devcomms.sponsorDetail.SponsorDetailActivity
 import kotlinx.android.synthetic.main.activity_sponsors.*
 
@@ -53,7 +53,7 @@ class SponsorsActivity : AppCompatActivity() {
         if (!sponsorListSwipe.isRefreshing) progressBar.visibility = View.VISIBLE
     }
 
-    private fun handleSponsors(it: SponsorList?) {
+    private fun handleSponsors(it: DataResponse<List<Sponsor>>?) {
         if (it?.status == DataState.FAILURE || it?.status == DataState.ERROR) {
             showToast(getString(R.string.connectivity_error))
             val adapter = SponsorsAdapter(emptyList(), onSponsorsLongClick, onSponsorsClick)
@@ -61,7 +61,7 @@ class SponsorsActivity : AppCompatActivity() {
             dismissProgress()
         } else if (it?.status == DataState.SUCCESS) {
             dismissProgress()
-            showSponsors(it)
+            showSponsors(it.data)
         }
     }
 
@@ -71,9 +71,9 @@ class SponsorsActivity : AppCompatActivity() {
             sponsorListSwipe.isRefreshing = false
     }
 
-    private fun showSponsors(sponsorList: SponsorList?) {
-        sponsorList?.let {
-            val adapter = SponsorsAdapter(it.sponsorList, onSponsorsLongClick, onSponsorsClick)
+    private fun showSponsors(sponsorList: List<Sponsor>) {
+        sponsorList.let {
+            val adapter = SponsorsAdapter(it, onSponsorsLongClick, onSponsorsClick)
             sponsorsRecyclerView.adapter = adapter
         }
     }

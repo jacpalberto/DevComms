@@ -10,7 +10,6 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.ImageView

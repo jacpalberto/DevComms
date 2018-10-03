@@ -1,13 +1,14 @@
 package com.jacpalberto.devcomms.data
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.Embedded
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import com.google.firebase.firestore.DocumentReference
-import com.google.gson.annotations.SerializedName
 import com.jacpalberto.devcomms.sponsors.models.Location
 import com.jacpalberto.devcomms.sponsors.models.SponsorResponse
 import kotlinx.android.parcel.Parcelize
-import java.time.OffsetDateTime
 import java.util.*
 
 /**
@@ -71,36 +72,20 @@ data class AgendaResponse(
 }
 
 data class MainEventResponse(
-        @SerializedName("name")
         val name: String = "",
-        @SerializedName("locations")
         val locations: List<Location> = emptyList(),
-        @SerializedName("communities")
         val communities: List<DocumentReference> = emptyList(),
-        @SerializedName("dates")
         val dates: List<Date> = emptyList(),
-        @SerializedName("description")
         val description: String = "",
-        @SerializedName("sponsors")
         val sponsors: List<SponsorResponse> = mutableListOf()
 )
 
 @Parcelize
-data class DevCommsEventList(val eventList: List<DevCommsEvent>,
-                             override var errorCode: Int = 0,
-                             override var status: DataState = DataState.PROCESS) : Parcelable, BaseModel(errorCode, status)
-
-data class SponsorList(val sponsorList: List<Sponsor> = emptyList(),
-                       override var errorCode: Int = 0,
-                       override var status: DataState = DataState.PROCESS) : BaseModel(errorCode, status)
-
-open class BaseModel(open var errorCode: Int = 0,
-                     open var status: DataState = DataState.NONE)
+data class EventListWrapper(val eventList: List<DevCommsEvent>) : Parcelable
 
 enum class DataState {
     NONE,
     SUCCESS,
-    PROCESS,
     ERROR,
     FAILURE
 }

@@ -1,9 +1,10 @@
 package com.jacpalberto.devcomms.events
 
 import android.os.AsyncTask
-import android.util.Log
 import com.jacpalberto.devcomms.DevCommsApp
-import com.jacpalberto.devcomms.data.*
+import com.jacpalberto.devcomms.data.DataResponse
+import com.jacpalberto.devcomms.data.DataState
+import com.jacpalberto.devcomms.data.DevCommsEvent
 
 /**
  * Created by Alberto Carrillo on 8/30/18.
@@ -11,41 +12,37 @@ import com.jacpalberto.devcomms.data.*
 class EventsModel {
     private val db by lazy { DevCommsApp.database }
     private val eventsDao by lazy { db!!.eventsDao() }
-    private var eventList: List<DevCommsEvent> = emptyList()
     private val repository = EventsRepository()
 
-    fun fetchEvents(onResult: (DevCommsEventList) -> Unit) {
-        eventList = emptyList()
-        lateinit var eventsResult: DevCommsEventList
+    fun fetchEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
+        var events: List<DevCommsEvent>
+        val finalResponse = DataResponse<List<DevCommsEvent>>(emptyList(), DataState.SUCCESS)
+
         repository.fetchEvents { response ->
-            if (response.status == DataState.FAILURE || response.status == DataState.ERROR) {
-                eventList = eventsDao.getList()
-                eventsResult = if (eventList.isEmpty())
-                    DevCommsEventList(eventList, status = DataState.FAILURE)
-                else DevCommsEventList(eventList, status = DataState.SUCCESS)
-                onResult(eventsResult)
+            if (response.isStatusFailedOrError()) {
+                events = eventsDao.getList()
+                if (events.isEmpty()) onResult(finalResponse.apply { setFailureStatus() })
+                else onResult(finalResponse.apply { updateSuccessValue(events) })
             } else {
                 val favoriteList = eventsDao.getFavoriteList()
                 if (favoriteList.isEmpty()) {
-                    saveAll(response.eventList)
+                    saveAll(response.data)
                 } else {
                     updateFavoriteFields(favoriteList, response)
-                    saveAll(response.eventList)
+                    saveAll(response.data)
                 }
                 AsyncTask.execute {
-                    eventList = eventsDao.getList()
-                    eventsResult = DevCommsEventList(eventList, status = DataState.SUCCESS)
-                    onResult(eventsResult)
+                    events = eventsDao.getList()
+                    onResult(finalResponse.apply { updateSuccessValue(events) })
                 }
             }
         }
     }
 
-    fun fetchFavoriteEvents(onResult: (DevCommsEventList) -> Unit) {
+    fun fetchFavoriteEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
         AsyncTask.execute {
             val favoriteList = eventsDao.getFavoriteList()
-            val eventsResult = DevCommsEventList(favoriteList, status = DataState.SUCCESS)
-            onResult(eventsResult)
+            onResult(DataResponse(favoriteList, DataState.SUCCESS))
         }
     }
 
@@ -53,9 +50,9 @@ class EventsModel {
         eventsDao.updateFavorite(key, isFavorite)
     }
 
-    private fun updateFavoriteFields(favoriteList: List<DevCommsEvent>, response: DevCommsEventList) {
+    private fun updateFavoriteFields(favoriteList: List<DevCommsEvent>, response: DataResponse<List<DevCommsEvent>>) {
         for (item in favoriteList) {
-            for (res in response.eventList) {
+            for (res in response.data) {
                 if (res.key == item.key) {
                     res.isFavorite = true
                     break

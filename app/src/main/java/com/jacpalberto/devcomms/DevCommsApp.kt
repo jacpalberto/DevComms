@@ -10,7 +10,7 @@ class DevCommsApp : Application() {
     companion object {
         var database: DevCommsDatabase? = null
     }
-
+//TODO: remove MainThreadQueriesAllowed
     override fun onCreate() {
         super.onCreate()
         DevCommsApp.database = Room.databaseBuilder(this,

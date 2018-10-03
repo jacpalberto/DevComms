@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.DevCommsEventList
+import com.jacpalberto.devcomms.data.EventListWrapper
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import kotlinx.android.synthetic.main.fragment_event.*
 
@@ -23,8 +23,8 @@ import kotlinx.android.synthetic.main.fragment_event.*
 class EventFragment : Fragment() {
     companion object {
         const val EVENT_LIST = "EVENT_LIST"
-        fun newInstance(eventList: DevCommsEventList) = EventFragment().apply {
-            arguments = Bundle().apply { putParcelable(EVENT_LIST, eventList) }
+        fun newInstance(eventListWrapper: EventListWrapper) = EventFragment().apply {
+            arguments = Bundle().apply { putParcelable(EVENT_LIST, eventListWrapper) }
         }
     }
 
@@ -56,7 +56,7 @@ class EventFragment : Fragment() {
 
     private fun init() {
         initRecycler()
-        val devCommsListEvent = arguments?.getParcelable<DevCommsEventList>(EVENT_LIST)
+        val devCommsListEvent = arguments?.getParcelable<EventListWrapper>(EVENT_LIST)
         showEvents(devCommsListEvent?.eventList)
         eventsListSwipe.setOnRefreshListener { viewModel?.fetchEvents() }
     }

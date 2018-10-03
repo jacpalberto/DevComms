@@ -1,16 +1,15 @@
 package com.jacpalberto.devcomms.sponsors
 
-import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jacpalberto.devcomms.BuildConfig
+import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.MainEventResponse
 import com.jacpalberto.devcomms.data.Sponsor
-import com.jacpalberto.devcomms.data.SponsorList
 
 /**
  * Created by Alberto Carrillo on 9/15/18.
@@ -19,11 +18,11 @@ class SponsorRepository {
     private val db = FirebaseFirestore.getInstance()
     private val event = BuildConfig.dbEventName
     private val eventRef = db.collection("events").document(event)
-    private var sponsorList = mutableSetOf<Sponsor>()
     private val database = FirebaseDatabase.getInstance()
     private val connectedRef = database.getReference(".info/connected")
 
-    fun fetchSponsors(onResult: (sponsors: SponsorList) -> Unit) {
+    //TODO: ADD TIMEOUT TO FIRESTORE
+    fun fetchSponsors(onResult: (response: DataResponse<List<Sponsor>>) -> Unit) {
         checkConnectivity(isConnected = { fetchFirestoreSponsors(onResult) },
                 isNotConnected = { fetchFirestoreSponsors(onResult) })
     }
@@ -40,12 +39,15 @@ class SponsorRepository {
         })
     }
 
-    private fun fetchFirestoreSponsors(onResult: (sponsors: SponsorList) -> Unit) {
-        sponsorList = mutableSetOf()
-        eventRef.get().addOnCompleteListener {
-            if (it.isSuccessful) {
-                val eventResponse = it.result.toObject(MainEventResponse::class.java)
+    private fun fetchFirestoreSponsors(onResult: (response: DataResponse<List<Sponsor>>) -> Unit) {
+        val finalResponse = DataResponse<List<Sponsor>>(emptyList(), DataState.SUCCESS)
+        val sponsorList = mutableSetOf<Sponsor>()
+
+        eventRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val eventResponse = task.result.toObject(MainEventResponse::class.java)
                 val sponsors = eventResponse?.sponsors
+
                 sponsors?.forEach { reference ->
                     reference.id?.get()?.addOnCompleteListener { sponsorResponse ->
                         if (sponsorResponse.isSuccessful) {
@@ -56,23 +58,23 @@ class SponsorRepository {
                                 sponsorList.add(sponsor)
                             }
                             if (sponsorList.size - 1 == sponsors.size - 1) {
-                                onResult(SponsorList(sponsorList.toList(), 0, DataState.SUCCESS))
+                                finalResponse.updateSuccessValue(sponsorList.toList())
+                                onResult(finalResponse)
                             }
                         }
                     }
                 }
             } else {
-                onResult(SponsorList(emptyList(), 400, DataState.ERROR))
+                finalResponse.setFailureStatus()
+                onResult(finalResponse)
             }
         }
     }
 
-    private fun calculatePriority(category: String): Int {
-        return when (category.toLowerCase()) {
-            "platinum" -> 1
-            "gold" -> 2
-            "silver" -> 3
-            else -> 99
-        }
+    private fun calculatePriority(category: String) = when (category.toLowerCase()) {
+        "platinum" -> 1
+        "gold" -> 2
+        "silver" -> 3
+        else -> 99
     }
 }

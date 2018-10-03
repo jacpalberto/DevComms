@@ -2,7 +2,8 @@ package com.jacpalberto.devcomms.events
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.jacpalberto.devcomms.data.DevCommsEventList
+import com.jacpalberto.devcomms.data.DataResponse
+import com.jacpalberto.devcomms.data.DevCommsEvent
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
@@ -10,10 +11,10 @@ import com.jacpalberto.devcomms.data.DevCommsEventList
 class EventsViewModel : ViewModel() {
     var fragmentTag: String = EventsByDateFragment.TAG
     private var model = EventsModel()
-    private var events: MutableLiveData<DevCommsEventList>? = null
-    private var favoriteEvents: MutableLiveData<DevCommsEventList>? = null
+    private var events: MutableLiveData<DataResponse<List<DevCommsEvent>>>? = null
+    private var favoriteEvents: MutableLiveData<DataResponse<List<DevCommsEvent>>>? = null
 
-    fun fetchEvents(): MutableLiveData<DevCommsEventList>? {
+    fun fetchEvents(): MutableLiveData<DataResponse<List<DevCommsEvent>>>? {
         if (events == null) {
             events = MutableLiveData()
         }
@@ -21,7 +22,7 @@ class EventsViewModel : ViewModel() {
         return events
     }
 
-    fun fetchFavoriteEvents(): MutableLiveData<DevCommsEventList>? {
+    fun fetchFavoriteEvents(): MutableLiveData<DataResponse<List<DevCommsEvent>>>? {
         if (favoriteEvents == null) {
             favoriteEvents = MutableLiveData()
         }

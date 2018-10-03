@@ -33,6 +33,8 @@ We are happy to bring content, software and help to members of different communi
     <string name="connectivity_error">Service is not available, try again later.</string>
     <string name="url_intent_error">No application can handle this request. Please install a web browser or check your URL.</string>
     <string name="empty_agenda">No talks have been added to your agenda yet</string>
+
     <string name="contact_us">Contact us</string>
+    <string name="time_format">%s - %s</string>
 
 </resources>

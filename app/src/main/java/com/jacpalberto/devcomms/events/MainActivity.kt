@@ -8,21 +8,15 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.annotations.SerializedName
 import com.jacpalberto.devcomms.Agenda.AgendaByDateFragment
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.about.AboutActivity
-import com.jacpalberto.devcomms.data.SpeakerDetail
 import com.jacpalberto.devcomms.sponsors.SponsorsActivity
 import com.jacpalberto.devcomms.utils.replaceFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import java.util.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

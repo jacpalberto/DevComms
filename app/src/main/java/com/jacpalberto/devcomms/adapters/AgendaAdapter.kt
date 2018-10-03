@@ -1,7 +1,6 @@
 package com.jacpalberto.devcomms.adapters
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +45,7 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
             eventTitle.text = event?.title
             showSpeaker(speaker)
             eventType.text = event?.type
-            eventTime.text = "${event?.startTimeString} - ${event?.endTimeString}"
+            eventTime.text = context.getString(R.string.time_format, event?.startTimeString, event?.endTimeString)
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
             event?.let { devCommsEvent ->

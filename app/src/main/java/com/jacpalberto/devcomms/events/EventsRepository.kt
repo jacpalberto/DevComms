@@ -4,7 +4,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.BuildConfig
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jacpalberto.devcomms.data.*
 import java.text.SimpleDateFormat
@@ -19,18 +18,20 @@ class EventsRepository {
     private val db = FirebaseFirestore.getInstance()
     private val event = com.jacpalberto.devcomms.BuildConfig.dbEventName
     private val agendaRef = db.collection("events").document(event).collection("agenda")
-    private val eventsList = mutableListOf<DevCommsEvent>()
 
-    fun fetchEvents(onResult: (events: DevCommsEventList) -> Unit) {
+    //TODO: ADD TIMEOUT TO FIRESTORE
+    fun fetchEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
         checkConnectivity(isConnected = { fetchFirestoreEvents(onResult) },
-                isNotConnected = { onResult(DevCommsEventList(emptyList(), 400, DataState.ERROR)) })
+                isNotConnected = { fetchFirestoreEvents(onResult) })
     }
 
-    private fun fetchFirestoreEvents(onResult: (events: DevCommsEventList) -> Unit) {
-        eventsList.clear()
-        agendaRef.get().addOnCompleteListener {
-            if (it.isSuccessful) {
-                val eventListResponse = it.result
+    private fun fetchFirestoreEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
+        val events = mutableListOf<DevCommsEvent>()
+        val finalResponse = DataResponse<List<DevCommsEvent>>(emptyList(), DataState.SUCCESS)
+
+        agendaRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val eventListResponse = task.result
                 eventListResponse.forEach { document ->
                     val agenda = document.toObject(AgendaResponse::class.java)
                     agenda.key = document.id
@@ -39,15 +40,15 @@ class EventsRepository {
                         if (speakerResponse.isSuccessful) {
                             val speaker = speakerResponse.result.toObject(SpeakerDetail::class.java)
                             agenda.speakerDetail = speaker
-                            eventsList.add(parseAgendaToDevCommsEvent(agenda))
-                            if (eventsList.size == eventListResponse.size()) {
-                                onResult(DevCommsEventList(eventsList, 0, DataState.SUCCESS))
+                            events.add(parseAgendaToDevCommsEvent(agenda))
+                            if (events.size == eventListResponse.size()) {
+                                onResult(finalResponse.apply { updateSuccessValue(events) })
                             }
                         }
                     }
                 }
             } else {
-                onResult(DevCommsEventList(emptyList(), 400, DataState.ERROR))
+                onResult(finalResponse.apply { setFailureStatus() })
             }
         }
     }

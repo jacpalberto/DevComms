@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.AgendaAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.DevCommsEventList
+import com.jacpalberto.devcomms.data.EventListWrapper
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import com.jacpalberto.devcomms.events.EventsViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
@@ -24,8 +24,8 @@ import kotlinx.android.synthetic.main.fragment_event.*
 class AgendaFragment : Fragment() {
     companion object {
         const val EVENT_LIST = "EVENT_LIST"
-        fun newInstance(eventList: DevCommsEventList) = AgendaFragment().apply {
-            arguments = Bundle().apply { putParcelable(EVENT_LIST, eventList) }
+        fun newInstance(eventListWrapper: EventListWrapper) = AgendaFragment().apply {
+            arguments = Bundle().apply { putParcelable(EVENT_LIST, eventListWrapper) }
         }
     }
 
@@ -63,7 +63,7 @@ class AgendaFragment : Fragment() {
 
     private fun init() {
         initRecycler()
-        val devCommsListEvent = arguments?.getParcelable<DevCommsEventList>(EVENT_LIST)
+        val devCommsListEvent = arguments?.getParcelable<EventListWrapper>(EVENT_LIST)
         showEvents(devCommsListEvent?.eventList)
     }
 
