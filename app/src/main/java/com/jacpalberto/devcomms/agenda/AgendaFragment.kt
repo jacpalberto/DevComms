@@ -63,8 +63,14 @@ class AgendaFragment : Fragment() {
 
     private fun init() {
         initRecycler()
+        disableSwipeLayout()
         val devCommsListEvent = arguments?.getParcelable<EventListWrapper>(EVENT_LIST)
         showEvents(devCommsListEvent?.eventList)
+    }
+
+    private fun disableSwipeLayout() {
+        eventsListSwipe.isRefreshing = false
+        eventsListSwipe.isEnabled = false
     }
 
     private fun showEvents(it: List<DevCommsEvent>?) {

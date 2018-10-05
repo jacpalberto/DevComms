@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated version on dependecy: `com.google.firebase:firebase-database` 16.0.1 -> 16.0.2
 - Updated version on dependecy: `com.google.firebase:firebase-database` 17.3.1 -> 17.3.2
+- Updated kotlin version: kotlin_version = '1.2.70' -> '1.2.71'
 - Updated responsesModels to DataResponse to handle errors and status
 
 [Unreleased]: https://github.com/GDLDevComms/DevComms/compare/v1.0.1...HEAD

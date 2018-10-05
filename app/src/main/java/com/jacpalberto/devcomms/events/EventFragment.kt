@@ -58,7 +58,10 @@ class EventFragment : Fragment() {
         initRecycler()
         val devCommsListEvent = arguments?.getParcelable<EventListWrapper>(EVENT_LIST)
         showEvents(devCommsListEvent?.eventList)
-        eventsListSwipe.setOnRefreshListener { viewModel?.fetchEvents() }
+        eventsListSwipe.setOnRefreshListener {
+            viewModel?.fetchEvents()
+            if (eventsListSwipe.isRefreshing) eventsListSwipe.isRefreshing = false
+        }
     }
 
     private fun showEvents(it: List<DevCommsEvent>?) {

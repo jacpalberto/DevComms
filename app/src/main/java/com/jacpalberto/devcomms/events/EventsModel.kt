@@ -1,5 +1,6 @@
 package com.jacpalberto.devcomms.events
 
+import android.arch.lifecycle.MutableLiveData
 import android.os.AsyncTask
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataResponse
@@ -14,15 +15,15 @@ class EventsModel {
     private val eventsDao by lazy { db!!.eventsDao() }
     private val repository = EventsRepository()
 
-    fun fetchEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
+    fun fetchEvents(liveData: MutableLiveData<DataResponse<List<DevCommsEvent>>>) {
         var events: List<DevCommsEvent>
         val finalResponse = DataResponse<List<DevCommsEvent>>(emptyList(), DataState.SUCCESS)
 
         repository.fetchEvents { response ->
             if (response.isStatusFailedOrError()) {
                 events = eventsDao.getList()
-                if (events.isEmpty()) onResult(finalResponse.apply { setFailureStatus() })
-                else onResult(finalResponse.apply { updateSuccessValue(events) })
+                if (events.isEmpty()) liveData.postValue(finalResponse.apply { setFailureStatus() })
+                else liveData.postValue (finalResponse.apply { updateSuccessValue(events) })
             } else {
                 val favoriteList = eventsDao.getFavoriteList()
                 if (favoriteList.isEmpty()) {
@@ -33,16 +34,16 @@ class EventsModel {
                 }
                 AsyncTask.execute {
                     events = eventsDao.getList()
-                    onResult(finalResponse.apply { updateSuccessValue(events) })
+                    liveData.postValue(finalResponse.apply { updateSuccessValue(events) })
                 }
             }
         }
     }
 
-    fun fetchFavoriteEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
+    fun fetchFavoriteEvents(liveData: MutableLiveData<DataResponse<List<DevCommsEvent>>>) {
         AsyncTask.execute {
             val favoriteList = eventsDao.getFavoriteList()
-            onResult(DataResponse(favoriteList, DataState.SUCCESS))
+            liveData.postValue(DataResponse(favoriteList, DataState.SUCCESS))
         }
     }
 

@@ -57,7 +57,7 @@ class AgendaByDateFragment : Fragment() {
 
     private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
         val fragmentList = mutableListOf<Fragment>()
-        eventsMap.forEach { _, list -> fragmentList.add(AgendaFragment.newInstance(EventListWrapper(list))) }
+        eventsMap.forEach { fragmentList.add(AgendaFragment.newInstance(EventListWrapper(it.value))) }
         viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(childFragmentManager, fragmentList) }
     }
 

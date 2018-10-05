@@ -11,27 +11,21 @@ import com.jacpalberto.devcomms.data.DevCommsEvent
 class EventsViewModel : ViewModel() {
     var fragmentTag: String = EventsByDateFragment.TAG
     private var model = EventsModel()
-    private var events: MutableLiveData<DataResponse<List<DevCommsEvent>>>? = null
-    private var favoriteEvents: MutableLiveData<DataResponse<List<DevCommsEvent>>>? = null
+    private var eventsLiveData: MutableLiveData<DataResponse<List<DevCommsEvent>>> = MutableLiveData()
+    private var favoriteEventsLiveData: MutableLiveData<DataResponse<List<DevCommsEvent>>> = MutableLiveData()
 
-    fun fetchEvents(): MutableLiveData<DataResponse<List<DevCommsEvent>>>? {
-        if (events == null) {
-            events = MutableLiveData()
-        }
-        model.fetchEvents { events?.postValue(it) }
-        return events
+    fun fetchEvents(): MutableLiveData<DataResponse<List<DevCommsEvent>>> {
+        model.fetchEvents(eventsLiveData)
+        return eventsLiveData
     }
 
-    fun fetchFavoriteEvents(): MutableLiveData<DataResponse<List<DevCommsEvent>>>? {
-        if (favoriteEvents == null) {
-            favoriteEvents = MutableLiveData()
-        }
-        model.fetchFavoriteEvents { favoriteEvents?.postValue(it) }
-        return favoriteEvents
+    fun fetchFavoriteEvents(): MutableLiveData<DataResponse<List<DevCommsEvent>>> {
+        model.fetchFavoriteEvents(favoriteEventsLiveData)
+        return favoriteEventsLiveData
     }
 
     fun updateAgenda() {
-        model.fetchFavoriteEvents { favoriteEvents?.postValue(it) }
+        model.fetchFavoriteEvents(favoriteEventsLiveData)
     }
 
     fun toggleFavorite(key: String, isFavorite: Boolean) {

@@ -1,5 +1,6 @@
 package com.jacpalberto.devcomms.sponsors
 
+import android.arch.lifecycle.MutableLiveData
 import android.os.AsyncTask
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataResponse
@@ -15,25 +16,29 @@ class SponsorsModel {
     private var sponsors: List<Sponsor> = emptyList()
     private val repository = SponsorRepository()
 
-    fun fetchSponsors(onResult: (response: DataResponse<List<Sponsor>>) -> Unit) {
+    fun fetchSponsors(liveData: MutableLiveData<DataResponse<List<Sponsor>>>?) {
         sponsors = emptyList()
         val finalResponse = DataResponse<List<Sponsor>>(emptyList())
 
         repository.fetchSponsors { response ->
             if (response.isStatusFailedOrError()) {
-                sponsors = sponsorsDao.getList()
-                if (sponsors.isEmpty()) onResult(finalResponse.apply { setFailureStatus() })
-                else onResult(finalResponse.apply { updateSuccessValue(sponsors) })
+                sponsors = fetchSponsorListFromRoom()
+                if (sponsors.isEmpty()) liveData?.postValue(finalResponse.apply { setFailureStatus() })
+                else liveData?.postValue(finalResponse.apply { updateSuccessValue(sponsors) })
             } else {
                 saveAll(response.data)
                 AsyncTask.execute {
-                    sponsors = sponsorsDao.getList()
-                    onResult(finalResponse.apply { updateSuccessValue(sponsors) })
+                    sponsors = fetchSponsorListFromRoom()
+                    liveData?.postValue(finalResponse.apply { updateSuccessValue(sponsors) })
                 }
             }
         }
     }
 
+    //TODO: change request for RxRoom
+    private fun fetchSponsorListFromRoom() = sponsorsDao.getList()
+
+    //TODO: change request for RxRoom
     private fun saveAll(sponsors: List<Sponsor>) {
         AsyncTask.execute {
             sponsorsDao.deleteAll()

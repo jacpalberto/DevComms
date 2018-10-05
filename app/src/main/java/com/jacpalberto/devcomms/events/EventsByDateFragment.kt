@@ -29,6 +29,7 @@ class EventsByDateFragment : Fragment() {
     private lateinit var snackbar: Snackbar
     private var viewModel: EventsViewModel? = null
     private lateinit var currentView: View
+    private var currentEventList: List<DevCommsEvent>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -54,15 +55,33 @@ class EventsByDateFragment : Fragment() {
 
     private fun handleEventsByDate(eventList: DataResponse<List<DevCommsEvent>>?) {
         dismissProgress()
-        if (eventList?.status == DataState.FAILURE || eventList?.status == DataState.ERROR) {
-            if (!snackbar.isShown) snackbar.show()
-        } else if (eventList?.status == DataState.SUCCESS) {
-            if (snackbar.isShown) snackbar.dismiss()
-            eventList.let { events ->
-                val eventsMap = events.data.groupBy { it.startDateString }
-                setupTabLayout(eventsMap.keys)
-                setupViewPager(eventsMap)
+        if (eventList == null && eventList?.isStatusFailedOrError() != false) {
+            showNetworkErrorSnackbar()
+        } else if (eventList.status == DataState.SUCCESS) {
+            dismissNetworkErrorSnackbar()
+            if (currentEventList == null) {
+                currentEventList = eventList.data
+                filterEventsByDate(eventList)
+            } else if (eventList.data != currentEventList) {
+                currentEventList = eventList.data
+                filterEventsByDate(eventList)
             }
+        }
+    }
+
+    private fun dismissNetworkErrorSnackbar() {
+        if (snackbar.isShown) snackbar.dismiss()
+    }
+
+    private fun showNetworkErrorSnackbar() {
+        if (!snackbar.isShown) snackbar.show()
+    }
+
+    private fun filterEventsByDate(eventList: DataResponse<List<DevCommsEvent>>) {
+        eventList.let { events ->
+            val eventsMap = events.data.groupBy { it.startDateString }
+            setupTabLayout(eventsMap.keys)
+            setupViewPager(eventsMap)
         }
     }
 

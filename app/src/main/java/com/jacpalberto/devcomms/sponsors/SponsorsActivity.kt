@@ -53,15 +53,16 @@ class SponsorsActivity : AppCompatActivity() {
         if (!sponsorListSwipe.isRefreshing) progressBar.visibility = View.VISIBLE
     }
 
-    private fun handleSponsors(it: DataResponse<List<Sponsor>>?) {
-        if (it?.status == DataState.FAILURE || it?.status == DataState.ERROR) {
+    private fun handleSponsors(response: DataResponse<List<Sponsor>>?) {
+        if (response == null) return
+        if (response.isStatusFailedOrError()) {
             showToast(getString(R.string.connectivity_error))
             val adapter = SponsorsAdapter(emptyList(), onSponsorsLongClick, onSponsorsClick)
             sponsorsRecyclerView.adapter = adapter
             dismissProgress()
-        } else if (it?.status == DataState.SUCCESS) {
+        } else if (response.status == DataState.SUCCESS) {
             dismissProgress()
-            showSponsors(it.data)
+            showSponsors(response.data)
         }
     }
 
