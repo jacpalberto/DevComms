@@ -13,7 +13,6 @@ import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.PagerAdapter
 import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.EventListWrapper
 import com.jacpalberto.devcomms.events.EventsViewModel
 import com.jacpalberto.devcomms.utils.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
@@ -24,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_events_by_date.*
  */
 
 class AgendaByDateFragment : Fragment() {
-
     companion object {
         fun newInstance() = AgendaByDateFragment()
         val TAG = AgendaByDateFragment::class.java.name ?: "AgendaByDateFragment"
@@ -57,8 +55,12 @@ class AgendaByDateFragment : Fragment() {
 
     private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
         val fragmentList = mutableListOf<Fragment>()
-        eventsMap.forEach { fragmentList.add(AgendaFragment.newInstance(EventListWrapper(it.value))) }
-        viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(childFragmentManager, fragmentList) }
+        eventsMap.forEach {
+            fragmentList.add(AgendaFragment.newInstance(it.value.toCollection(ArrayList())))
+        }
+        viewPager.adapter = activity?.supportFragmentManager?.let {
+            PagerAdapter(childFragmentManager, fragmentList)
+        }
     }
 
     private fun setupTabLayout(keys: Set<String?>) {

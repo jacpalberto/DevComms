@@ -15,7 +15,6 @@ import com.jacpalberto.devcomms.adapters.PagerAdapter
 import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.EventListWrapper
 import com.jacpalberto.devcomms.utils.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
 
@@ -94,10 +93,14 @@ class EventsByDateFragment : Fragment() {
     }
 
     private fun setupViewPager(eventsMap: Map<String?, List<DevCommsEvent>>) {
-        val fragmentList = mutableListOf<Fragment>()
-        eventsMap.forEach { fragmentList.add(EventFragment.newInstance(EventListWrapper(it.value))) }
-        viewPager.adapter = activity?.supportFragmentManager?.let { PagerAdapter(childFragmentManager, fragmentList) }
         dismissProgress()
+        val fragmentList = mutableListOf<Fragment>()
+        eventsMap.forEach {
+            fragmentList.add(EventFragment.newInstance(it.value.toCollection(ArrayList())))
+        }
+        viewPager.adapter = activity?.supportFragmentManager?.let {
+            PagerAdapter(childFragmentManager, fragmentList)
+        }
     }
 
     private fun setupTabLayout(keys: Set<String?>) {

@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.AgendaAdapter
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.EventListWrapper
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import com.jacpalberto.devcomms.events.EventsViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
@@ -24,8 +23,8 @@ import kotlinx.android.synthetic.main.fragment_event.*
 class AgendaFragment : Fragment() {
     companion object {
         const val EVENT_LIST = "EVENT_LIST"
-        fun newInstance(eventListWrapper: EventListWrapper) = AgendaFragment().apply {
-            arguments = Bundle().apply { putParcelable(EVENT_LIST, eventListWrapper) }
+        fun newInstance(eventList: ArrayList<DevCommsEvent>) = AgendaFragment().apply {
+            arguments = Bundle().apply { putParcelableArrayList(EVENT_LIST, eventList) }
         }
     }
 
@@ -64,8 +63,8 @@ class AgendaFragment : Fragment() {
     private fun init() {
         initRecycler()
         disableSwipeLayout()
-        val devCommsListEvent = arguments?.getParcelable<EventListWrapper>(EVENT_LIST)
-        showEvents(devCommsListEvent?.eventList)
+        val devCommsListEvent : ArrayList<DevCommsEvent>? = arguments?.getParcelableArrayList(EVENT_LIST)
+        showEvents(devCommsListEvent)
     }
 
     private fun disableSwipeLayout() {

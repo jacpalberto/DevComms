@@ -1,10 +1,7 @@
 package com.jacpalberto.devcomms.events
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.jacpalberto.devcomms.BuildConfig
 import com.jacpalberto.devcomms.data.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -13,21 +10,25 @@ import java.util.*
  * Created by Alberto Carrillo on 7/13/18.
  */
 class EventsRepository {
-    private val database = FirebaseDatabase.getInstance()
-    private val connectedRef = database.getReference(".info/connected")
     private val db = FirebaseFirestore.getInstance()
-    private val event = com.jacpalberto.devcomms.BuildConfig.dbEventName
+    private val event = BuildConfig.dbEventName
     private val agendaRef = db.collection("events").document(event).collection("agenda")
 
-    //TODO: ADD TIMEOUT TO FIRESTORE
     fun fetchEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
         checkConnectivity(isConnected = { fetchFirestoreEvents(onResult) },
-                isNotConnected = { fetchFirestoreEvents(onResult) })
+                isNotConnected = { onResult(DataResponse(emptyList(), DataState.FAILURE)) })
+    }
+
+    private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
+        db.enableNetwork().addOnCompleteListener { task ->
+            if (task.isSuccessful) isConnected()
+            else isNotConnected()
+        }.addOnFailureListener { isNotConnected() }
     }
 
     private fun fetchFirestoreEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
         val events = mutableListOf<DevCommsEvent>()
-        val finalResponse = DataResponse<List<DevCommsEvent>>(emptyList(), DataState.SUCCESS)
+        val finalResponse = DataResponse<List<DevCommsEvent>>(emptyList())
 
         agendaRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -50,7 +51,7 @@ class EventsRepository {
             } else {
                 onResult(finalResponse.apply { setFailureStatus() })
             }
-        }
+        }.addOnFailureListener { onResult(finalResponse.apply { setFailureStatus() }) }
     }
 
     private fun parseAgendaToDevCommsEvent(agenda: AgendaResponse): DevCommsEvent {
@@ -66,17 +67,5 @@ class EventsRepository {
                     time_end = time_end, time_start = time_start, speakerDetail = speakerDetail, room = room,
                     startDateString = startDate, startTimeString = startTime, endDateString = endDate, endTimeString = endTime)
         }
-    }
-
-    private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
-        connectedRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val connected = snapshot.getValue(Boolean::class.java) ?: false
-                if (connected) isConnected()
-                else isNotConnected()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
     }
 }

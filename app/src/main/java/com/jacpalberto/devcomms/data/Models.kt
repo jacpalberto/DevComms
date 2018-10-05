@@ -80,9 +80,6 @@ data class MainEventResponse(
         val sponsors: List<SponsorResponse> = mutableListOf()
 )
 
-@Parcelize
-data class EventListWrapper(val eventList: List<DevCommsEvent>) : Parcelable
-
 enum class DataState {
     NONE,
     SUCCESS,

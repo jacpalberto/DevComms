@@ -1,9 +1,5 @@
 package com.jacpalberto.devcomms.sponsors
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jacpalberto.devcomms.BuildConfig
 import com.jacpalberto.devcomms.data.DataResponse
@@ -18,25 +14,17 @@ class SponsorRepository {
     private val db = FirebaseFirestore.getInstance()
     private val event = BuildConfig.dbEventName
     private val eventRef = db.collection("events").document(event)
-    private val database = FirebaseDatabase.getInstance()
-    private val connectedRef = database.getReference(".info/connected")
 
-    //TODO: ADD TIMEOUT TO FIRESTORE
     fun fetchSponsors(onResult: (response: DataResponse<List<Sponsor>>) -> Unit) {
         checkConnectivity(isConnected = { fetchFirestoreSponsors(onResult) },
-                isNotConnected = { fetchFirestoreSponsors(onResult) })
+                isNotConnected = { onResult(DataResponse(emptyList(), DataState.FAILURE)) })
     }
 
     private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
-        connectedRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val connected = snapshot.getValue(Boolean::class.java) ?: true
-                if (connected) isConnected()
-                else isNotConnected()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        db.enableNetwork().addOnCompleteListener { task ->
+            if (task.isSuccessful) isConnected()
+            else isNotConnected()
+        }
     }
 
     private fun fetchFirestoreSponsors(onResult: (response: DataResponse<List<Sponsor>>) -> Unit) {
@@ -58,15 +46,13 @@ class SponsorRepository {
                                 sponsorList.add(sponsor)
                             }
                             if (sponsorList.size - 1 == sponsors.size - 1) {
-                                finalResponse.updateSuccessValue(sponsorList.toList())
-                                onResult(finalResponse)
+                                onResult(finalResponse.apply { updateSuccessValue(sponsorList.toList()) })
                             }
                         }
                     }
                 }
             } else {
-                finalResponse.setFailureStatus()
-                onResult(finalResponse)
+                onResult(finalResponse.apply { setFailureStatus() })
             }
         }
     }

@@ -12,8 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.DevCommsEventAdapter
+import com.jacpalberto.devcomms.agenda.AgendaFragment
 import com.jacpalberto.devcomms.data.DevCommsEvent
-import com.jacpalberto.devcomms.data.EventListWrapper
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import kotlinx.android.synthetic.main.fragment_event.*
 
@@ -23,8 +23,8 @@ import kotlinx.android.synthetic.main.fragment_event.*
 class EventFragment : Fragment() {
     companion object {
         const val EVENT_LIST = "EVENT_LIST"
-        fun newInstance(eventListWrapper: EventListWrapper) = EventFragment().apply {
-            arguments = Bundle().apply { putParcelable(EVENT_LIST, eventListWrapper) }
+        fun newInstance(eventList: ArrayList<DevCommsEvent>) = EventFragment().apply {
+            arguments = Bundle().apply { putParcelableArrayList(AgendaFragment.EVENT_LIST, eventList) }
         }
     }
 
@@ -56,8 +56,12 @@ class EventFragment : Fragment() {
 
     private fun init() {
         initRecycler()
-        val devCommsListEvent = arguments?.getParcelable<EventListWrapper>(EVENT_LIST)
-        showEvents(devCommsListEvent?.eventList)
+        val devCommsListEvent: ArrayList<DevCommsEvent>? = arguments?.getParcelableArrayList(EventFragment.EVENT_LIST)
+        showEvents(devCommsListEvent)
+        setupSwipeLayout()
+    }
+
+    private fun setupSwipeLayout() {
         eventsListSwipe.setOnRefreshListener {
             viewModel?.fetchEvents()
             if (eventsListSwipe.isRefreshing) eventsListSwipe.isRefreshing = false
