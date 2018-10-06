@@ -5,6 +5,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.jacpalberto.devcomms.data.Sponsor
+import io.reactivex.Single
 
 /**
  * Created by Alberto Carrillo on 8/20/18.
@@ -15,7 +16,7 @@ interface SponsorsDao {
     fun save(sponsor: List<Sponsor>)
 
     @Query("SELECT * FROM sponsors ORDER BY categoryPriority, name")
-    fun getList(): List<Sponsor>
+    fun getList(): Single<List<Sponsor>>
 
     @Query("DELETE FROM sponsors")
     fun deleteAll()
