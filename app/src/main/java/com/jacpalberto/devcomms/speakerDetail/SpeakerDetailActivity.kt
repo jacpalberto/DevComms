@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.transition.Fade
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.SpeakerDetail
 import com.jacpalberto.devcomms.utils.CircleTransform

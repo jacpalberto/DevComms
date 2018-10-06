@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint
@@ -14,6 +12,8 @@ import android.text.style.ClickableSpan
 import android.transition.Fade
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.utils.startWebIntent

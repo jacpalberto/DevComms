@@ -1,6 +1,6 @@
 package com.jacpalberto.devcomms.sponsors
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.Sponsor

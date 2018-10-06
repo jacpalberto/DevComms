@@ -3,8 +3,6 @@ package com.jacpalberto.devcomms.about
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -13,6 +11,8 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.utils.startWebIntent
 import kotlinx.android.synthetic.main.activity_about.*

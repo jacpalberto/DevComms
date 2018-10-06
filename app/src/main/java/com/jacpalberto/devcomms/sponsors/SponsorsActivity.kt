@@ -1,19 +1,19 @@
 package com.jacpalberto.devcomms.sponsors
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.util.Pair
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import android.view.Window
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.SponsorsAdapter
 import com.jacpalberto.devcomms.data.DataResponse
@@ -110,7 +110,7 @@ class SponsorsActivity : AppCompatActivity() {
         ActivityCompat.startActivity(this, transitionIntent, options.toBundle())
     }
 
-    private fun getSharedElementsPairList(view: View): Array<android.support.v4.util.Pair<View, String>> {
+    private fun getSharedElementsPairList(view: View): Array<androidx.core.util.Pair<View, String>> {
         val navigationBar = findViewById<View>(android.R.id.navigationBarBackground)
         val statusBar = findViewById<View>(android.R.id.statusBarBackground)
         val sponsorImage = view.findViewById<ImageView>(R.id.sponsorImg)

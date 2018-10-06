@@ -1,10 +1,10 @@
 package com.jacpalberto.devcomms.data
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.google.firebase.firestore.DocumentReference
 import com.jacpalberto.devcomms.sponsors.models.Location
 import com.jacpalberto.devcomms.sponsors.models.SponsorResponse

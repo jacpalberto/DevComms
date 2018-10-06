@@ -1,9 +1,9 @@
 package com.jacpalberto.devcomms.adapters
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.Sponsor
 import com.squareup.picasso.Picasso
