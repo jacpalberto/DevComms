@@ -28,7 +28,9 @@ class EventFragment : Fragment() {
         }
     }
 
+    //TODO: inject viewModel
     private var viewModel: EventsViewModel? = null
+
     private lateinit var adapter: DevCommsEventAdapter
 
     private val onEventClick = { event: DevCommsEvent ->

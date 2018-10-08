@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - fix forEach bug that crashed
+- fix twitter bug that showed twitter even when it was null
 
 ### Changed
 - Updated version on dependecy: `com.google.firebase:firebase-database` 16.0.1 -> 16.0.2

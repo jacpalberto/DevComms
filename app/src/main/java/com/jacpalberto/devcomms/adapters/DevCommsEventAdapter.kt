@@ -46,6 +46,7 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
             eventTime.text = context.getString(R.string.time_format, event?.startTimeString, event?.endTimeString)
             eventRoom.visibility = View.VISIBLE
             eventRoom.text = event?.room
+
             event?.let { devCommsEvent ->
                 if (devCommsEvent.isFavorite == true) favoriteImageView.setImageResource(R.drawable.ic_favorite)
                 else favoriteImageView.setImageResource(R.drawable.ic_not_favorite)

@@ -10,8 +10,10 @@ import java.util.*
  * Created by Alberto Carrillo on 7/13/18.
  */
 class EventsRepository {
+    //TODO: inject properties
     private val db = FirebaseFirestore.getInstance()
     private val event = BuildConfig.dbEventName
+
     private val agendaRef = db.collection("events").document(event).collection("agenda")
 
     fun fetchEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {

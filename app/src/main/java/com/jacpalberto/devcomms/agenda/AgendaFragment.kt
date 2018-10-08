@@ -28,6 +28,7 @@ class AgendaFragment : Fragment() {
         }
     }
 
+    //TODO: inject viewModel
     private var viewModel: EventsViewModel? = null
     private lateinit var adapter: AgendaAdapter
 

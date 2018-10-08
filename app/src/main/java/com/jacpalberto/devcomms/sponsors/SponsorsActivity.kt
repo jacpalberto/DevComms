@@ -27,7 +27,9 @@ class SponsorsActivity : AppCompatActivity() {
         fun newIntent(context: Context) = Intent(context, SponsorsActivity::class.java)
     }
 
+    //TODO: inject viewModel
     private var viewModel: SponsorsViewModel? = null
+
     private var toast: Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

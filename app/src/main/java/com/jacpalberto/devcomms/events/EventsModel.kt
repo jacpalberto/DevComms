@@ -11,6 +11,7 @@ import com.jacpalberto.devcomms.data.DevCommsEvent
  * Created by Alberto Carrillo on 8/30/18.
  */
 class EventsModel {
+    //TODO: inject properties
     private val db by lazy { DevCommsApp.database }
     private val eventsDao by lazy { db!!.eventsDao() }
     private val repository = EventsRepository()

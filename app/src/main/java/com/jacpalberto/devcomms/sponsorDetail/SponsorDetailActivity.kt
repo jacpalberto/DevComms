@@ -45,11 +45,15 @@ class SponsorDetailActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        window.statusBarColor = ContextCompat.getColor(this, R.color.shadow)
         extractSponsorDetail()
         sponsorDetail?.let { showSponsor(it) }
         shadowedSponsorDetailLayout.setOnClickListener { onBackPressed() }
         scrollSponsorDetailLayout.setOnClickListener { onBackPressed() }
+        setupTransitionConfig()
+    }
+
+    private fun setupTransitionConfig() {
+        window.statusBarColor = ContextCompat.getColor(this, R.color.shadow)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val fade = Fade()
             fade.excludeTarget(R.id.toolbar, true)
@@ -68,6 +72,7 @@ class SponsorDetailActivity : AppCompatActivity() {
                 .resize(500, 500)
                 .centerInside()
                 .into(sponsorLogo)
+
         setVisibilities(sponsor)
         sponsorName.text = sponsor.name
         sponsorBrief.text = sponsor.brief
@@ -88,11 +93,10 @@ class SponsorDetailActivity : AppCompatActivity() {
             }
         }
         val flag = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        val spannableString = SpannableString("More info at: " + text)
+        val spannableString = SpannableString("More info at: $text")
         spannableString.setSpan(url, 14, spannableString.length, flag)
         sponsorWeb.movementMethod = LinkMovementMethod.getInstance()
         sponsorWeb.setText(spannableString, TextView.BufferType.SPANNABLE)
-
     }
 
     private fun setVisibilities(sponsor: Sponsor) {

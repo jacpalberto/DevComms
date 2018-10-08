@@ -59,8 +59,7 @@ private fun TextView.addHyperlinkSpannables(context: Context) {
     splitAppText.forEach {
         if (!it.isEmpty()) {
             if (it.startsWith("º")) {
-                ssb.append("\n")
-                ssb.append(createHyperlinkSpannable(it, context))
+                ssb.append("\n").append(createHyperlinkSpannable(it, context))
             } else ssb.append("$it ")
         }
     }

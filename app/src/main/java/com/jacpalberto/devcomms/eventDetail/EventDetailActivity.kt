@@ -32,9 +32,10 @@ class EventDetailActivity : AppCompatActivity() {
             }
         }
     }
+    //TODO: inject viewModel
+    private var viewModel: EventDetailViewModel? = null
 
     private var devCommsEvent: DevCommsEvent? = null
-    private var viewModel: EventDetailViewModel? = null
     private var speakerDetail: SpeakerDetail? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

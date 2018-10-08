@@ -14,10 +14,12 @@ import io.reactivex.schedulers.Schedulers
  * Created by Alberto Carrillo on 8/20/18.
  */
 class SponsorsModel {
+    //TODO: inject this properties
     private val db by lazy { DevCommsApp.database }
     private val sponsorsDao by lazy { db!!.sponsorsDao() }
-    private var sponsors: List<Sponsor> = emptyList()
     private val repository = SponsorRepository()
+
+    private var sponsors: List<Sponsor> = emptyList()
 
     fun fetchSponsors(liveData: MutableLiveData<DataResponse<List<Sponsor>>>?) {
         sponsors = emptyList()

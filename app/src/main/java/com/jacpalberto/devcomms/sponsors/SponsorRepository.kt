@@ -11,8 +11,10 @@ import com.jacpalberto.devcomms.data.Sponsor
  * Created by Alberto Carrillo on 9/15/18.
  */
 class SponsorRepository {
+    //TODO: inject properties
     private val db = FirebaseFirestore.getInstance()
     private val event = BuildConfig.dbEventName
+
     private val eventRef = db.collection("events").document(event)
 
     fun fetchSponsors(onResult: (response: DataResponse<List<Sponsor>>) -> Unit) {

@@ -68,33 +68,7 @@
                 tools:text="Stephen D'Angels" />
 
             <ImageView
-                android:id="@+id/flagImageView"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_twitter"
-                app:layout_constraintBottom_toBottomOf="@+id/twitterTextView"
-                app:layout_constraintEnd_toEndOf="@id/guidelineStart"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/twitterTextView"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/countryTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:textAppearance="@style/DetailTextStyle.Normal"
-                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@+id/speakerTitle"
-                tools:text="Mexico" />
-
-            <ImageView
-                android:id="@+id/companyImageView"
+                android:id="@+id/countryImageView"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_flag"
@@ -106,13 +80,39 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/countryTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textAppearance="@style/DetailTextStyle.Normal"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@+id/speakerTitle"
+                tools:text="Mexico" />
+
+            <ImageView
+                android:id="@+id/twitterImageView"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_twitter"
+                app:layout_constraintBottom_toBottomOf="@+id/twitterTextView"
+                app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/twitterTextView"
+                tools:ignore="ContentDescription" />
+
+            <TextView
                 android:id="@+id/twitterTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:paddingBottom="8dp"
                 android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:textAppearance="@style/DetailTextStyle.Hyperlink"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
@@ -137,8 +137,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:paddingBottom="8dp"
                 android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:textAppearance="@style/DetailTextStyle.Hyperlink"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
@@ -170,11 +170,19 @@
                 tools:text="Android Tech Lead @SeatGeek, previously Android Engineer ESPN. Computer Engineering. Wisconsin native,  Android Tech Lead @SeatGeek, previously Android Engineer ESPN. Computer Engineering. Wisconsin native" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/companyGroup"
+                android:id="@+id/countryGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="companyImageView,twitterTextView"
+                app:constraint_referenced_ids="countryImageView,countryTextView"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/twitterGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="twitterImageView,twitterTextView"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Group

@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fun newIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 
+    //TODO: inject viewModel
     private var viewModel: EventsViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

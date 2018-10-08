@@ -28,6 +28,7 @@ class AgendaByDateFragment : Fragment() {
         val TAG = AgendaByDateFragment::class.java.name ?: "AgendaByDateFragment"
     }
 
+    //TODO: inject viewModel
     private var viewModel: EventsViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

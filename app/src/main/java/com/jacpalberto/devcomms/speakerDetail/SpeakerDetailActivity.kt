@@ -37,6 +37,7 @@ class SpeakerDetailActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        setupTransition()
         initToolbar()
         showSpeakerDetail()
     }
@@ -47,6 +48,9 @@ class SpeakerDetailActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_back_white)
         }
+    }
+
+    private fun setupTransition() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val fade = Fade()
             fade.excludeTarget(R.id.toolbar, true)
@@ -77,14 +81,13 @@ class SpeakerDetailActivity : AppCompatActivity() {
 
     private fun showCountry(country: String?) {
         if (country.isNullOrEmpty()) return
-        companyGroup.visibility = View.VISIBLE
+        countryGroup.visibility = View.VISIBLE
         countryTextView.text = country
     }
 
-    //TODO: change companyGroup by Twitter group in refactor commit
     private fun showTwitter(twitter: String?) {
         if (twitter.isNullOrEmpty()) return
-        companyGroup.visibility = View.VISIBLE
+        twitterGroup.visibility = View.VISIBLE
         twitterTextView.applyClickableSpan(applicationContext, twitter) {
             startWebIntent("www.twitter.com/$twitter")
         }

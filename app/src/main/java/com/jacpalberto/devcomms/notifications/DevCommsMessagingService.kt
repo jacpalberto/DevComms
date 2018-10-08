@@ -19,10 +19,13 @@ import com.jacpalberto.devcomms.events.MainActivity
 class DevCommsMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage?) {
-        sendMyNotification(message!!.notification!!.body)
+        sendMyNotification(message)
     }
 
-    private fun sendMyNotification(message: String?) {
+    private fun sendMyNotification(remoteMessage: RemoteMessage?) {
+        if (remoteMessage == null) return
+
+        val message = remoteMessage.notification?.body ?: ""
         val intent = MainActivity.newIntent(this).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
