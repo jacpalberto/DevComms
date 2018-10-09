@@ -4,9 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.Sponsor
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 
@@ -19,51 +20,46 @@ class SponsorsModel {
     private val sponsorsDao by lazy { db!!.sponsorsDao() }
     private val repository = SponsorRepository()
 
-    private var sponsors: List<Sponsor> = emptyList()
+    private val compositeDisposable = CompositeDisposable()
 
     fun fetchSponsors(liveData: MutableLiveData<DataResponse<List<Sponsor>>>?) {
-        sponsors = emptyList()
         val finalResponse = DataResponse<List<Sponsor>>(emptyList())
 
         repository.fetchSponsors { response ->
-            if (response.isStatusFailedOrError()) {
-                fetchSponsorsFromRoom({ list ->
-                    liveData?.postValue(finalResponse.apply { updateSuccessValue(list) })
-                },
-                        { liveData?.postValue(finalResponse.apply { setFailureStatus() }) })
-            } else {
-                replaceRoomDataForResponse(response.data,
-                        { list -> liveData?.postValue(finalResponse.apply { updateSuccessValue(list) }) },
-                        { liveData?.postValue(finalResponse.apply { setFailureStatus() }) })
-            }
+            if (response.isStatusFailedOrError()) fetchSponsorsFromRoom(
+                    { liveData?.postValue(finalResponse.apply { updateSuccessValue(it) }) },
+                    { liveData?.postValue(finalResponse.apply { setFailureStatus() }) })
+            else replaceRoomDataForResponse(response.data,
+                    { liveData?.postValue(finalResponse.apply { updateSuccessValue(it) }) },
+                    { liveData?.postValue(finalResponse.apply { setFailureStatus() }) })
         }
-    }
-
-    private fun fetchSponsorsFromRoom(onSuccess: (sponsorList: List<Sponsor>) -> Unit, onError: () -> Unit) {
-        sponsorsDao.getList().toObservable()
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .doOnNext { onSuccess(it) }
-                .doOnError { onError() }
-                .subscribe { }
     }
 
     private fun replaceRoomDataForResponse(sponsors: List<Sponsor>, onSuccess: (sponsorList: List<Sponsor>) -> Unit, onError: () -> Unit) {
         Single.fromCallable { sponsorsDao.deleteAll() }
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe { _ ->
-                    saveSponsors(sponsors, onSuccess, onError)
-                }
+                .subscribe({ saveSponsors(sponsors, onSuccess, onError) }) { onError() }
+                .addTo(compositeDisposable)
     }
 
     private fun saveSponsors(sponsors: List<Sponsor>, onSuccess: (sponsorList: List<Sponsor>) -> Unit, onError: () -> Unit) {
-        Observable.just(sponsors)
+        Single.fromCallable { sponsorsDao.save(sponsors) }
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe({ sponsorList ->
-                    sponsorsDao.save(sponsorList)
-                    fetchSponsorsFromRoom(onSuccess, onError)
-                }, { _ -> onError() })
+                .subscribe({ fetchSponsorsFromRoom(onSuccess, onError) }) { onError() }
+                .addTo(compositeDisposable)
+    }
+
+    private fun fetchSponsorsFromRoom(onSuccess: (sponsorList: List<Sponsor>) -> Unit, onError: () -> Unit) {
+        sponsorsDao.getList().toObservable()
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe({ onSuccess(it) }) { onError() }
+                .addTo(compositeDisposable)
+    }
+
+    fun onDestroy() {
+        compositeDisposable.clear()
     }
 }

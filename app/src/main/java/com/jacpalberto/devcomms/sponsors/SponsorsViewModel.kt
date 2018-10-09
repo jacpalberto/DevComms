@@ -25,4 +25,8 @@ class SponsorsViewModel : ViewModel() {
     fun refreshSponsors() {
         model.fetchSponsors(sponsorsLiveData)
     }
+
+    fun onDestroy() {
+        model.onDestroy()
+    }
 }

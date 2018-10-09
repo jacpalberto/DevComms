@@ -39,6 +39,11 @@ class SponsorsActivity : AppCompatActivity() {
         init()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel?.onDestroy()
+    }
+
     private fun init() {
         sponsorListSwipe.setOnRefreshListener { viewModel?.refreshSponsors() }
         initToolbar()
@@ -55,16 +60,20 @@ class SponsorsActivity : AppCompatActivity() {
         if (!sponsorListSwipe.isRefreshing) progressBar.visibility = View.VISIBLE
     }
 
+    private var currentSponsorList: List<Sponsor>? = null
+
     private fun handleSponsors(response: DataResponse<List<Sponsor>>?) {
         if (response == null) return
+        dismissProgress()
         if (response.isStatusFailedOrError()) {
             showToast(getString(R.string.connectivity_error))
             val adapter = SponsorsAdapter(emptyList(), onSponsorsLongClick, onSponsorsClick)
             sponsorsRecyclerView.adapter = adapter
-            dismissProgress()
         } else if (response.status == DataState.SUCCESS) {
-            dismissProgress()
-            showSponsors(response.data)
+            if (currentSponsorList == null || response.data != currentSponsorList) {
+                currentSponsorList = response.data
+                showSponsors(response.data)
+            }
         }
     }
 

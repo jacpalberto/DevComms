@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Version to the SplashScreen based on `BuildConfig.VERSION_NAME`
+- Added RxKotlin 2.3.0
 
 ### Removed
 
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated kotlin version: kotlin_version = '1.2.70' -> '1.2.71'
 - Updated responsesModels to DataResponse to handle errors and status
 - Updated migration to AndroidX
+- Updated room queries to RxRoom with RxKotlin
 
 [Unreleased]: https://github.com/GDLDevComms/DevComms/compare/v1.0.1...HEAD
 [1.0.1]: https://github.com/GDLDevComms/DevComms/compare/v1.0.1...v1.0.0

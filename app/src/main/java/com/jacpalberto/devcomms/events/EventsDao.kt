@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.jacpalberto.devcomms.data.DevCommsEvent
+import io.reactivex.Single
 
 /**
  * Created by Alberto Carrillo on 8/30/18.
@@ -15,10 +16,10 @@ interface EventsDao {
     fun save(events: List<DevCommsEvent>)
 
     @Query("SELECT * FROM events ORDER BY startTimeString, title")
-    fun getList(): List<DevCommsEvent>
+    fun getList(): Single<List<DevCommsEvent>>
 
     @Query("SELECT * FROM events WHERE isFavorite = 1 ORDER BY startTimeString")
-    fun getFavoriteList(): List<DevCommsEvent>
+    fun getFavoriteList(): Single<List<DevCommsEvent>>
 
     @Query("DELETE FROM events")
     fun deleteAll()
