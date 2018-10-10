@@ -12,7 +12,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.SponsorsAdapter
@@ -21,31 +20,29 @@ import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.Sponsor
 import com.jacpalberto.devcomms.sponsorDetail.SponsorDetailActivity
 import kotlinx.android.synthetic.main.activity_sponsors.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SponsorsActivity : AppCompatActivity() {
     companion object {
         fun newIntent(context: Context) = Intent(context, SponsorsActivity::class.java)
     }
 
-    //TODO: inject viewModel
-    private var viewModel: SponsorsViewModel? = null
-
+    private val viewModel: SponsorsViewModel by viewModel()
     private var toast: Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sponsors)
-        viewModel = ViewModelProviders.of(this).get(SponsorsViewModel::class.java)
         init()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel?.onDestroy()
+        viewModel.onDestroy()
     }
 
     private fun init() {
-        sponsorListSwipe.setOnRefreshListener { viewModel?.refreshSponsors() }
+        sponsorListSwipe.setOnRefreshListener { viewModel.refreshSponsors() }
         initToolbar()
         initRecyclerView()
         initObservers()
@@ -53,7 +50,7 @@ class SponsorsActivity : AppCompatActivity() {
 
     private fun initObservers() {
         showProgress()
-        viewModel?.fetchSponsors()?.observe(this, Observer { handleSponsors(it) })
+        viewModel.fetchSponsors()?.observe(this, Observer { handleSponsors(it) })
     }
 
     private fun showProgress() {

@@ -13,7 +13,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.SpeakerDetail
@@ -21,6 +20,7 @@ import com.jacpalberto.devcomms.speakerDetail.SpeakerDetailActivity
 import com.jacpalberto.devcomms.utils.CircleTransform
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_event_detail.*
+import org.koin.android.ext.android.inject
 
 class EventDetailActivity : AppCompatActivity() {
     companion object {
@@ -32,18 +32,14 @@ class EventDetailActivity : AppCompatActivity() {
             }
         }
     }
-    //TODO: inject viewModel
-    private var viewModel: EventDetailViewModel? = null
-
+    private val viewModel: EventDetailViewModel by inject()
     private var devCommsEvent: DevCommsEvent? = null
     private var speakerDetail: SpeakerDetail? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
-
         devCommsEvent = intent.getParcelableExtra(EVENT)
-        viewModel = ViewModelProviders.of(this).get(EventDetailViewModel::class.java)
         init()
     }
 
@@ -51,8 +47,8 @@ class EventDetailActivity : AppCompatActivity() {
         initSpeakerDetail()
         initListeners()
         initToolbar()
-        devCommsEvent?.let { viewModel?.setEvent(it) }
-        viewModel?.getEvent()?.observe(this, Observer { showEventDetail(it) })
+        devCommsEvent?.let { viewModel.setEvent(it) }
+        viewModel.getEvent()?.observe(this, Observer { showEventDetail(it) })
     }
 
     private fun initSpeakerDetail() {
@@ -88,7 +84,6 @@ class EventDetailActivity : AppCompatActivity() {
 
         speakerDetail?.let {
             val transitionIntent = SpeakerDetailActivity.newIntent(this, it)
-
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, *getSharedElementsPairList())
             ActivityCompat.startActivity(this, transitionIntent, options.toBundle())
         }

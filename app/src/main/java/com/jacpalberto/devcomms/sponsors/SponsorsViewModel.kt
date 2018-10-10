@@ -8,10 +8,7 @@ import com.jacpalberto.devcomms.data.Sponsor
 /**
  * Created by Alberto Carrillo on 8/13/18.
  */
-class SponsorsViewModel : ViewModel() {
-    //TODO: inject model
-    private val model = SponsorsModel()
-
+class SponsorsViewModel(private val model: SponsorsModel) : ViewModel() {
     private var sponsorsLiveData: MutableLiveData<DataResponse<List<Sponsor>>>? = null
 
     fun fetchSponsors(): MutableLiveData<DataResponse<List<Sponsor>>>? {

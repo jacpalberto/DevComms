@@ -11,12 +11,9 @@ import com.jacpalberto.devcomms.sponsors.models.SponsorResponse
 /**
  * Created by Alberto Carrillo on 9/15/18.
  */
-class SponsorRepository {
-    //TODO: inject properties
-    private val db = FirebaseFirestore.getInstance()
+class SponsorRepository(private val firestore: FirebaseFirestore) {
     private val event = BuildConfig.dbEventName
-
-    private val eventRef = db.collection("events").document(event)
+    private val eventRef = firestore.collection("events").document(event)
 
     fun fetchSponsors(onResult: (response: DataResponse<List<Sponsor>>) -> Unit) {
         checkConnectivity(isConnected = { fetchFirestoreSponsors(onResult) },
@@ -24,7 +21,7 @@ class SponsorRepository {
     }
 
     private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
-        db.enableNetwork().addOnCompleteListener { task ->
+        firestore.enableNetwork().addOnCompleteListener { task ->
             if (task.isSuccessful) isConnected()
             else isNotConnected()
         }

@@ -1,7 +1,6 @@
 package com.jacpalberto.devcomms.sponsors
 
 import androidx.lifecycle.MutableLiveData
-import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.Sponsor
 import io.reactivex.Single
@@ -14,12 +13,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Alberto Carrillo on 8/20/18.
  */
-class SponsorsModel {
-    //TODO: inject this properties
-    private val db by lazy { DevCommsApp.database }
-    private val sponsorsDao by lazy { db!!.sponsorsDao() }
-    private val repository = SponsorRepository()
-
+class SponsorsModel(private val repository: SponsorRepository, private val sponsorsDao: SponsorsDao) {
     private val compositeDisposable = CompositeDisposable()
 
     fun fetchSponsors(liveData: MutableLiveData<DataResponse<List<Sponsor>>>?) {

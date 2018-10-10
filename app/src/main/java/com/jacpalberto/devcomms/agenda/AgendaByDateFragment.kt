@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.tabs.TabLayout
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.adapters.PagerAdapter
@@ -16,6 +15,7 @@ import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.events.EventsViewModel
 import com.jacpalberto.devcomms.utils.doOnTabSelected
 import kotlinx.android.synthetic.main.fragment_events_by_date.*
+import org.koin.android.ext.android.inject
 
 
 /**
@@ -28,8 +28,7 @@ class AgendaByDateFragment : Fragment() {
         val TAG = AgendaByDateFragment::class.java.name ?: "AgendaByDateFragment"
     }
 
-    //TODO: inject viewModel
-    private var viewModel: EventsViewModel? = null
+    private val viewModel: EventsViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,12 +37,11 @@ class AgendaByDateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = activity?.let { ViewModelProviders.of(it).get(EventsViewModel::class.java) }
         init()
     }
 
     private fun init() {
-        viewModel?.fetchFavoriteEvents()?.observe(this, Observer { filterEventsByDate(it) })
+        viewModel.fetchFavoriteEvents().observe(this, Observer { filterEventsByDate(it) })
     }
 
     private fun filterEventsByDate(eventList: DataResponse<List<DevCommsEvent>>?) {

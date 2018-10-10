@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.navigation.NavigationView
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.about.AboutActivity
@@ -16,20 +15,18 @@ import com.jacpalberto.devcomms.sponsors.SponsorsActivity
 import com.jacpalberto.devcomms.utils.replaceFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     companion object {
         fun newIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 
-    //TODO: inject viewModel
-    private var viewModel: EventsViewModel? = null
+    private val viewModel: EventsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = ViewModelProviders.of(this).get(EventsViewModel::class.java)
         init()
     }
 
@@ -40,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initFragment() {
-        val fragmentTag = viewModel?.fragmentTag ?: EventsByDateFragment.TAG
+        val fragmentTag = viewModel.fragmentTag
         when (fragmentTag) {
             EventsByDateFragment.TAG -> replaceFragment(R.id.containerLayout, EventsByDateFragment.newInstance(), fragmentTag)
             AgendaByDateFragment.TAG -> replaceFragment(R.id.containerLayout, AgendaByDateFragment.newInstance(), fragmentTag)
@@ -87,13 +84,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun showAgendaFragment() {
         val tag = AgendaByDateFragment.TAG
-        viewModel?.fragmentTag = tag
+        viewModel.fragmentTag = tag
         replaceFragment(R.id.containerLayout, AgendaByDateFragment.newInstance(), tag)
     }
 
     private fun showScheduleFragment() {
         val tag = EventsByDateFragment.TAG
-        viewModel?.fragmentTag = tag
+        viewModel.fragmentTag = tag
         replaceFragment(R.id.containerLayout, EventsByDateFragment.newInstance(), tag)
     }
 }

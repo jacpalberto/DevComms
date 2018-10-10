@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.jacpalberto.devcomms.R
@@ -16,6 +15,7 @@ import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import com.jacpalberto.devcomms.events.EventsViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
+import org.koin.android.ext.android.inject
 
 /**
  * Created by Alberto Carrillo on 9/7/18.
@@ -28,14 +28,10 @@ class AgendaFragment : Fragment() {
         }
     }
 
-    //TODO: inject viewModel
-    private var viewModel: EventsViewModel? = null
+    private val viewModel: EventsViewModel by inject()
     private lateinit var adapter: AgendaAdapter
-
     private val onEmptyAgenda = {
-        if (viewModel != null) {
-            viewModel!!.updateAgenda()
-        }
+        viewModel.updateAgenda()
     }
 
     private val onEventClick = { event: DevCommsEvent ->
@@ -43,11 +39,9 @@ class AgendaFragment : Fragment() {
     }
 
     private val onFavoriteClick = { position: Int, event: DevCommsEvent ->
-        if (viewModel != null) {
-            val isFavorite = event.isFavorite ?: false
-            viewModel?.toggleFavorite(event.key, !isFavorite)
-            adapter.removeEventFromFavorites(position)
-        }
+        val isFavorite = event.isFavorite ?: false
+        viewModel.toggleFavorite(event.key, !isFavorite)
+        adapter.removeEventFromFavorites(position)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -57,14 +51,13 @@ class AgendaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = activity?.let { ViewModelProviders.of(it).get(EventsViewModel::class.java) }
         init()
     }
 
     private fun init() {
         initRecycler()
         disableSwipeLayout()
-        val devCommsListEvent : ArrayList<DevCommsEvent>? = arguments?.getParcelableArrayList(EVENT_LIST)
+        val devCommsListEvent: ArrayList<DevCommsEvent>? = arguments?.getParcelableArrayList(EVENT_LIST)
         showEvents(devCommsListEvent)
     }
 

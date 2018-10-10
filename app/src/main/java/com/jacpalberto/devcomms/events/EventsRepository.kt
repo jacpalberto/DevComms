@@ -9,12 +9,9 @@ import java.util.*
 /**
  * Created by Alberto Carrillo on 7/13/18.
  */
-class EventsRepository {
-    //TODO: inject properties
-    private val db = FirebaseFirestore.getInstance()
+class EventsRepository(private val firestore: FirebaseFirestore) {
     private val event = BuildConfig.dbEventName
-
-    private val agendaRef = db.collection("events").document(event).collection("agenda")
+    private val agendaRef = firestore.collection("events").document(event).collection("agenda")
 
     fun fetchEvents(onResult: (events: DataResponse<List<DevCommsEvent>>) -> Unit) {
         checkConnectivity(isConnected = { fetchFirestoreEvents(onResult) },
@@ -22,7 +19,7 @@ class EventsRepository {
     }
 
     private fun checkConnectivity(isConnected: () -> Unit, isNotConnected: () -> Unit) {
-        db.enableNetwork().addOnCompleteListener { task ->
+        firestore.enableNetwork().addOnCompleteListener { task ->
             if (task.isSuccessful) isConnected()
             else isNotConnected()
         }.addOnFailureListener { isNotConnected() }

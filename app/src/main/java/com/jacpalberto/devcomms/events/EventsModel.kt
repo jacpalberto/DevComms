@@ -1,7 +1,6 @@
 package com.jacpalberto.devcomms.events
 
 import androidx.lifecycle.MutableLiveData
-import com.jacpalberto.devcomms.DevCommsApp
 import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.DataState
 import com.jacpalberto.devcomms.data.DevCommsEvent
@@ -14,12 +13,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Alberto Carrillo on 8/30/18.
  */
-class EventsModel {
-    //TODO: inject properties
-    private val db by lazy { DevCommsApp.database }
-    private val eventsDao by lazy { db!!.eventsDao() }
-    private val repository = EventsRepository()
-
+class EventsModel(private val repository: EventsRepository, private val eventsDao: EventsDao) {
     private val compositeDisposable = CompositeDisposable()
 
     fun fetchEvents(liveData: MutableLiveData<DataResponse<List<DevCommsEvent>>>) {

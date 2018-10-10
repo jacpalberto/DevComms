@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.jacpalberto.devcomms.R
@@ -16,6 +15,7 @@ import com.jacpalberto.devcomms.agenda.AgendaFragment
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.eventDetail.EventDetailActivity
 import kotlinx.android.synthetic.main.fragment_event.*
+import org.koin.android.ext.android.inject
 
 /**
  * Created by Alberto Carrillo on 7/13/18.
@@ -28,9 +28,7 @@ class EventFragment : Fragment() {
         }
     }
 
-    //TODO: inject viewModel
-    private var viewModel: EventsViewModel? = null
-
+    private val viewModel: EventsViewModel by inject()
     private lateinit var adapter: DevCommsEventAdapter
 
     private val onEventClick = { event: DevCommsEvent ->
@@ -38,11 +36,9 @@ class EventFragment : Fragment() {
     }
 
     private val onFavoriteClick = { position: Int, event: DevCommsEvent ->
-        if (viewModel != null) {
-            val isFavorite = event.isFavorite ?: false
-            viewModel?.toggleFavorite(event.key, !isFavorite)
-            adapter.updateFavoriteStatus(position, !isFavorite)
-        }
+        val isFavorite = event.isFavorite ?: false
+        viewModel.toggleFavorite(event.key, !isFavorite)
+        adapter.updateFavoriteStatus(position, !isFavorite)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +48,6 @@ class EventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = activity?.let { ViewModelProviders.of(it).get(EventsViewModel::class.java) }
         init()
     }
 
@@ -65,7 +60,7 @@ class EventFragment : Fragment() {
 
     private fun setupSwipeLayout() {
         eventsListSwipe.setOnRefreshListener {
-            viewModel?.fetchEvents()
+            viewModel.fetchEvents()
             if (eventsListSwipe.isRefreshing) eventsListSwipe.isRefreshing = false
         }
     }

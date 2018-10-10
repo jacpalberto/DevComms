@@ -8,10 +8,7 @@ import com.jacpalberto.devcomms.data.DevCommsEvent
 /**
  * Created by Alberto Carrillo on 7/13/18.
  */
-class EventsViewModel : ViewModel() {
-    //TODO: inject model
-    private var model = EventsModel()
-
+class EventsViewModel(private var model: EventsModel) : ViewModel() {
     var fragmentTag: String = EventsByDateFragment.TAG
     private var eventsLiveData: MutableLiveData<DataResponse<List<DevCommsEvent>>> = MutableLiveData()
     private var favoriteEventsLiveData: MutableLiveData<DataResponse<List<DevCommsEvent>>> = MutableLiveData()
