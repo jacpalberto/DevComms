@@ -74,11 +74,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:minHeight="32dp"
+                android:gravity="center_vertical"
                 android:textAppearance="@style/DetailTextStyle.Normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
                 app:layout_constraintTop_toTopOf="@id/descriptionImageView"
-                tools:text="In this session, we will walk through the code needed to integrate Barcode Scanning into your application using DataWedge on Zebra Android Devices." />
+                tools:text="In this session" />
 
             <ImageView
                 android:id="@+id/speakerImageView"
