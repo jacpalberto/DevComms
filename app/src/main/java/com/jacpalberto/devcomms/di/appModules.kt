@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jacpalberto.devcomms.BuildConfig
 import com.jacpalberto.devcomms.DevCommsDatabase
+import com.jacpalberto.devcomms.eventDetail.EventDetailViewModel
 import com.jacpalberto.devcomms.events.EventsModel
 import com.jacpalberto.devcomms.events.EventsRepository
 import com.jacpalberto.devcomms.events.EventsViewModel
@@ -25,6 +26,7 @@ val sponsorsModule = module {
 }
 val eventsModule = module {
     viewModel { EventsViewModel(get()) }
+    viewModel { EventDetailViewModel() }
     single { EventsModel(get(), get()) }
     single { EventsRepository(get()) }
     single { get<DevCommsDatabase>().eventsDao() }
