@@ -89,7 +89,7 @@ class SponsorsActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         sponsorsRecyclerView.hasFixedSize()
-        sponsorsRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        sponsorsRecyclerView.layoutManager = GridLayoutManager(this, 1)
     }
 
     private fun initToolbar() {
