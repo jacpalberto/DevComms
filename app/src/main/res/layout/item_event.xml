@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toStartOf="@id/guidelineStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/eventTitle"
-            tools:src="@drawable/java_dev_day" />
+            tools:src="@drawable/logo_community" />
 
         <TextView
             android:id="@+id/eventSpeaker"

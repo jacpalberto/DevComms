@@ -16,26 +16,36 @@
         app:title="@string/about"
         app:titleTextColor="@android:color/white" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".3" />
+
     <ImageView
-        android:id="@+id/aboutAppIcon"
-        style="@style/AboutIcons"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:ignore="ContentDescription" />
+        android:id="@+id/communityImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/description_community_logo"
+        android:paddingTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_community" />
 
     <TextView
         android:id="@+id/aboutAppTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/about_app_title"
         android:textAppearance="@style/AboutTitleStyle"
-        app:layout_constraintBottom_toBottomOf="@+id/aboutAppIcon"
-        app:layout_constraintStart_toEndOf="@+id/aboutAppIcon"
-        app:layout_constraintTop_toTopOf="@+id/aboutAppIcon" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/communityImage" />
 
     <TextView
         android:id="@+id/aboutAppContent"
@@ -47,29 +57,20 @@
         android:text="@string/about_app_content"
         android:textAppearance="@style/AboutTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/aboutAppIcon"
-        app:layout_constraintTop_toBottomOf="@+id/aboutAppTitle" />
-
-    <ImageView
-        android:id="@+id/aboutEventIcon"
-        style="@style/AboutIcons"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutAppContent"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/aboutAppTitle"
+        app:layout_goneMarginEnd="16dp" />
 
     <TextView
         android:id="@+id/aboutEventTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/about_event_title"
         android:textAppearance="@style/AboutTitleStyle"
-        app:layout_constraintBottom_toBottomOf="@+id/aboutEventIcon"
-        app:layout_constraintStart_toEndOf="@+id/aboutEventIcon"
-        app:layout_constraintTop_toTopOf="@+id/aboutEventIcon" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutAppContent" />
 
     <TextView
         android:id="@+id/aboutEventContent"
@@ -82,7 +83,9 @@
         android:textAppearance="@style/AboutTextStyle"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/aboutEventIcon"
-        app:layout_constraintTop_toBottomOf="@+id/aboutEventTitle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutEventTitle"
+        app:layout_goneMarginEnd="16dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

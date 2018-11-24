@@ -15,6 +15,7 @@
     <!-- content description -->
     <string name="speaker_photo">Speaker Photo</string>
     <string name="sponsor_logo">Sponsor logo</string>
+    <string name="description_community_logo">Community logo</string>
 
     <string name="complete_name">%s %s</string>
     <string name="event_room_plus_date">%1s, %2s</string>

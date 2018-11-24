@@ -66,7 +66,7 @@ class DevCommsEventAdapter(private var events: List<DevCommsEvent?>,
             Picasso.get()
                     .load(if (!speakerPhotoUrl.isNullOrEmpty()) speakerPhotoUrl else "placeholder")
                     .transform(CircleTransform())
-                    .error(R.drawable.java_dev_day)
+                    .error(R.drawable.logo_community)
                     .resize(300, 300)
                     .centerCrop()
                     .into(this.speakerImageView)

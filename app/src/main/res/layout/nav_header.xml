@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/java_dev_day"
+        android:src="@drawable/logo_community"
         tools:ignore="ContentDescription" />
 </FrameLayout>
 
