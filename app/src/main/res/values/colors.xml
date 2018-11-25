@@ -2,19 +2,17 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#93040b</color>
-    <!--<color name="colorPrimaryDark">#365b8d</color>-->
     <color name="colorAccent">#ce373e</color>
     <color name="toolbarColor">#ce373e</color>
-    <!--<color name="toolbarColor">#699dd5</color>-->
     <color name="logoBackground">#f1f1f2</color>
 
     <!--Event-->
     <color name="eventCardColor">#FFFFFF</color>
     <color name="eventTitleBackground">#ecf7ff</color>
-    <color name="eventTimeBackground">#ecf7ff</color>
-    <color name="eventTitleColor">#710106</color>
-    <color name="eventSpeakerColor">#d13c13</color>
-    <color name="eventTimeColor">#048e37</color>
+    <color name="eventTimeBackground">#b39ddb</color>
+    <color name="eventTitleColor">#ab040c</color>
+    <color name="eventSpeakerColor">#048e37</color>
+    <color name="eventTimeColor">#FFFFFF</color>
 
     <!--Detail-->
     <color name="detailSpeakerTitle">#070094</color>
@@ -25,12 +23,15 @@
     <!--About-->
     <color name="aboutTitle">#017c28</color>
 
-
+    <!--Tab-->
     <color name="tabLayoutColor">#ffffff</color>
     <color name="tabTextColor">#040b89</color>
     <color name="tabIndicatorColor">#0694fc</color>
 
-    <color name="navigationBackground">#ecf7ff</color>
+    <!-- Navigation-->
+    <color name="navigationBackground">#ffffff</color>
+    <color name="navigationTextColor">#d40000</color>
+
     <color name="dividerColor">#d2d2d2</color>
     <color name="shadow">#99323232</color>
     <color name="contactUsNormalColor">#67b7f1</color>

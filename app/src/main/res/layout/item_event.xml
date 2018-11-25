@@ -4,59 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/eventCardView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="135dp"
     android:layout_marginBottom="8dp"
     app:cardBackgroundColor="@color/eventCardColor"
     app:cardCornerRadius="0dp"
-    app:cardElevation="1dp">
+    app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="135dp">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.35" />
+            app:layout_constraintGuide_percent="0.3" />
 
         <TextView
             android:id="@+id/eventTitle"
-            style="@style/EventTitle"
+            style="@style/EventData"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
             android:maxLines="2"
             android:textAppearance="@style/TitleTextStyle"
-            app:layout_constraintEnd_toStartOf="@id/favoriteImageView"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/eventSpeaker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guidelineStart"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Firebase Realtime DatabaseFirebase Realtime Database" />
+            app:layout_constraintVertical_chainStyle="spread"
+            tools:text="e Database Aasdaskmdalskd" />
 
         <ImageView
             android:id="@+id/favoriteImageView"
             android:layout_width="36dp"
-            android:layout_height="0dp"
-            android:background="@color/eventTitleBackground"
+            android:layout_height="64dp"
+            android:contentDescription="@string/toggle_favorite"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_not_favorite"
-            app:layout_constraintBottom_toBottomOf="@id/eventTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/speakerImageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/eventTitle"
-            android:contentDescription="@string/toggle_favorite"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/speakerImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="4dp"
             android:contentDescription="@string/speaker_photo"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/eventTime"
+            android:elevation="27dp"
+            android:padding="4dp"
+            app:layout_constraintBottom_toTopOf="@id/eventTime"
             app:layout_constraintEnd_toStartOf="@id/guidelineStart"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             tools:src="@drawable/logo_community" />
 
         <TextView
@@ -64,42 +70,45 @@
             style="@style/EventData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="32dp"
             android:textAppearance="@style/RegularTextStyle"
-            app:layout_constraintBottom_toTopOf="@+id/eventRoom"
+            app:layout_constraintBottom_toTopOf="@+id/eventType"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/eventTitle"
             tools:text="Speaker: Alberto Carrillo" />
-
-        <TextView
-            android:id="@+id/eventRoom"
-            style="@style/EventData"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/RegularTextStyle"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/eventType"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@+id/eventSpeaker"
-            tools:text="Room: Room1"
-            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/eventType"
             style="@style/EventData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
             android:textAppearance="@style/RegularTextStyle"
-            app:layout_constraintBottom_toTopOf="@+id/eventTime"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/speakerImageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@+id/eventRoom"
-            tools:text="Workshop" />
+            app:layout_constraintTop_toBottomOf="@+id/eventSpeaker"
+            tools:text="Talk"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/eventRoom"
+            style="@style/EventTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TimeTextStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/eventTime"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/speakerImageView"
+            app:layout_constraintVertical_bias="1.0"
+            tools:text="Audotorio" />
 
         <TextView
             android:id="@+id/eventTime"
@@ -110,8 +119,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@+id/eventType"
+            app:layout_constraintStart_toEndOf="@+id/eventRoom"
             tools:text="2:00 - 2:45" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

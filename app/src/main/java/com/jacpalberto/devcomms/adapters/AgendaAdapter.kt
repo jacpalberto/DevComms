@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.SpeakerDetail
-import com.jacpalberto.devcomms.utils.CircleTransform
+import com.jacpalberto.devcomms.utils.BorderedCircleTransform
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_event.view.*
 
@@ -44,10 +44,10 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
             val speaker = event?.speakerDetail
             eventTitle.text = event?.title
             showSpeaker(speaker)
-            eventType.text = event?.type
+            eventRoom.text = event?.type
             eventTime.text = context.getString(R.string.time_format, event?.startTimeString, event?.endTimeString)
-            eventRoom.visibility = View.VISIBLE
-            eventRoom.text = event?.room
+            eventType.visibility = View.VISIBLE
+            eventType.text = event?.room
 
             event?.let { devCommsEvent ->
                 if (devCommsEvent.isFavorite == true) favoriteImageView.setImageResource(R.drawable.ic_favorite)
@@ -68,7 +68,7 @@ class AgendaAdapter(private var events: MutableList<DevCommsEvent?>,
             if (speakerPhotoUrl != null)
                 Picasso.get()
                         .load(if (!speakerPhotoUrl.isNullOrEmpty()) speakerPhotoUrl else "placeholder")
-                        .transform(CircleTransform())
+                        .transform(BorderedCircleTransform())
                         .error(R.drawable.logo_community)
                         .resize(300, 300)
                         .centerCrop()

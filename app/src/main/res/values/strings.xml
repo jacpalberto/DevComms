@@ -7,10 +7,10 @@
     <string name="navigation_drawer_close">close</string>
 
     <!-- Menu Drawer -->
-    <string name="schedule">Schedule</string>
-    <string name="agenda">Agenda</string>
-    <string name="sponsors">Sponsors</string>
-    <string name="about">About</string>
+    <string name="schedule">SCHEDULE</string>
+    <string name="agenda">AGENDA</string>
+    <string name="sponsors">SPONSORS</string>
+    <string name="about">ABOUT</string>
 
     <!-- content description -->
     <string name="speaker_photo">Speaker Photo</string>

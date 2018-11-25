@@ -70,6 +70,7 @@
     <style name="TitleTextStyle">
         <item name="android:textColor">@color/eventTitleColor</item>
         <item name="android:textSize">@dimen/event_title_font_size</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- About Styles-->
