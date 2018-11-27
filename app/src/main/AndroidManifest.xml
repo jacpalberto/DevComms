@@ -33,10 +33,6 @@
         <activity
             android:name=".eventDetail.EventDetailActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity
-            android:name=".speakerDetail.SpeakerDetailActivity"
-            android:theme="@style/AppThemeNoActionBar" />
-
         <service android:name=".notifications.DevCommsMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

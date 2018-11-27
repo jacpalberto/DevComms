@@ -13,7 +13,6 @@
         android:background="@color/toolbarColor"
         android:elevation="7dp"
         android:minHeight="?android:attr/actionBarSize"
-        android:transitionName="toolbar"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/app_name"
         app:titleTextColor="@android:color/white" />
@@ -27,22 +26,17 @@
             android:layout_height="wrap_content"
             android:paddingBottom="16dp">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.2" />
-
             <TextView
                 android:id="@+id/eventTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="72dp"
-                android:textAppearance="@style/DetailTextStyle.Title"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TitleTextStyle"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Easily Integrate barcode scanning in your Enterprise Android Application" />
 
@@ -50,81 +44,126 @@
                 android:id="@+id/eventRoomDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:textAppearance="@style/DetailTextStyle.Normal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/eventTitle"
                 tools:text="Code Lab (Hub 2), 9:00 - 9:40 AM" />
-
-            <ImageView
-                android:id="@+id/descriptionImageView"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_document"
-                app:layout_constraintEnd_toEndOf="@id/guidelineStart"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/eventRoomDate"
-                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/eventDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:minHeight="32dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
                 android:gravity="center_vertical"
+                android:minHeight="32dp"
                 android:textAppearance="@style/DetailTextStyle.Normal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toTopOf="@id/descriptionImageView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/eventRoomDate"
                 tools:text="In this session" />
 
             <ImageView
                 android:id="@+id/speakerImageView"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/placeholder_speaker"
-                android:transitionName="speakerImage"
-                app:layout_constraintEnd_toEndOf="@id/guidelineStart"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/eventDescription"
-                tools:ignore="ContentDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/eventDescription"
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/speakerTitle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:textAppearance="@style/DetailTextStyle.SpeakerTitle"
-                android:transitionName="speakerName"
-                app:layout_constraintBottom_toBottomOf="@id/speakerImageView"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toTopOf="@id/speakerImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/speakerImageView"
                 tools:text="Robin, Zebra Technologies" />
+
+            <TextView
+                android:id="@+id/speakerCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/DetailTextStyle.Normal"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/speakerTitle"
+                tools:text="Mexico"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/speakerDescriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:textAppearance="@style/DetailTextStyle.Normal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/speakerTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/speakerCountry"
                 tools:text="Part of the software sustaining team at Zebra Technologies, Robin has deep platform level knowledge in the Linux and Android based products with versatile development experience across kernel, framework and applications" />
+
+            <ImageView
+                android:id="@+id/speakerTwitter"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_twitter"
+                android:tint="@android:color/holo_red_dark"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/speakerGithub"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/speakerDescriptionTextView"
+                tools:ignore="ContentDescription"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/speakerGithub"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_github"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/speakerTwitter"
+                app:layout_constraintTop_toBottomOf="@+id/speakerDescriptionTextView"
+                tools:ignore="ContentDescription"
+                tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/descriptionGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="descriptionImageView,eventDescription"
+                app:constraint_referenced_ids="eventDescription"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Group
@@ -132,8 +171,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="speakerImageView,speakerTitle,speakerDescriptionTextView"
+                app:constraint_referenced_ids="speakerTitle,speakerDescriptionTextView"
                 tools:visibility="visible" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,19 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.data.DevCommsEvent
 import com.jacpalberto.devcomms.data.SpeakerDetail
-import com.jacpalberto.devcomms.speakerDetail.SpeakerDetailActivity
-import com.jacpalberto.devcomms.utils.CircleTransform
+import com.jacpalberto.devcomms.utils.BorderedCircleTransform
+import com.jacpalberto.devcomms.utils.startWebIntent
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import org.koin.android.ext.android.inject
@@ -32,6 +26,7 @@ class EventDetailActivity : AppCompatActivity() {
             }
         }
     }
+
     private val viewModel: EventDetailViewModel by inject()
     private var devCommsEvent: DevCommsEvent? = null
     private var speakerDetail: SpeakerDetail? = null
@@ -54,13 +49,10 @@ class EventDetailActivity : AppCompatActivity() {
     private fun initSpeakerDetail() {
         if (devCommsEvent == null) return
         speakerDetail = devCommsEvent?.speakerDetail
-
     }
 
     private fun initListeners() {
-        speakerImageView.setOnClickListener { startSpeakerDetail() }
-        speakerTitle.setOnClickListener { startSpeakerDetail() }
-        speakerDescriptionTextView.setOnClickListener { startSpeakerDetail() }
+
     }
 
     private fun initToolbar() {
@@ -74,19 +66,6 @@ class EventDetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
-    }
-
-    private fun startSpeakerDetail() {
-        if (speakerDetail == null || (speakerDetail?.twitter.isNullOrEmpty()
-                        && speakerDetail?.github.isNullOrEmpty()
-                        && speakerDetail?.bio.isNullOrEmpty()))
-            return
-
-        speakerDetail?.let {
-            val transitionIntent = SpeakerDetailActivity.newIntent(this, it)
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, *getSharedElementsPairList())
-            ActivityCompat.startActivity(this, transitionIntent, options.toBundle())
-        }
     }
 
     private fun showEventDetail(event: DevCommsEvent?) {
@@ -103,18 +82,28 @@ class EventDetailActivity : AppCompatActivity() {
         val speaker = event.speakerDetail
         if (speaker?.first_name.isNullOrEmpty())
             return
-        speakerGroup.visibility = View.VISIBLE
-        speakerTitle.text = getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
-        speakerDescriptionTextView.text = speaker?.bio
+        applySpeakerVisibility(speaker)
         showSpeakerPhoto(speaker?.photo_url)
+        speakerTitle.text = getString(R.string.complete_name, speaker?.first_name, speaker?.last_name)
+        speakerCountry.text = "${speaker?.country}"
+        speakerDescriptionTextView.text = speaker?.bio
+        speakerGithub.setOnClickListener { startWebIntent("www.github.com/${speaker?.github}") }
+        speakerTwitter.setOnClickListener { startWebIntent("www.github.com/${speaker?.twitter}") }
+    }
+
+    private fun applySpeakerVisibility(speaker: SpeakerDetail?) {
+        speakerGroup.visibility = View.VISIBLE
+        if (!speaker?.country.isNullOrBlank()) speakerCountry.visibility = View.VISIBLE else View.GONE
+        if (!speaker?.twitter.isNullOrEmpty()) speakerTwitter.visibility = View.VISIBLE else View.GONE
+        if (!speaker?.github.isNullOrEmpty()) speakerGithub.visibility = View.VISIBLE else View.GONE
     }
 
     private fun showSpeakerPhoto(speakerPhotoUrl: String?) {
         val url = if (speakerPhotoUrl.isNullOrEmpty()) "SpeakerPlaceHolder" else speakerPhotoUrl
         Picasso.get()
                 .load(url)
-                .transform(CircleTransform())
-                .error(R.drawable.placeholder_speaker)
+                .transform(BorderedCircleTransform())
+                .error(R.drawable.placeholder_speaker_big)
                 .resize(300, 300)
                 .centerCrop()
                 .into(speakerImageView)
@@ -125,22 +114,5 @@ class EventDetailActivity : AppCompatActivity() {
             return
         descriptionGroup.visibility = View.VISIBLE
         eventDescription.text = event.description
-    }
-
-    private fun getSharedElementsPairList(): Array<androidx.core.util.Pair<View, String>> {
-        val navigationBar = findViewById<View>(android.R.id.navigationBarBackground)
-        val statusBar = findViewById<View>(android.R.id.statusBarBackground)
-        val speakerImage = findViewById<ImageView>(R.id.speakerImageView)
-        val speakerTitle = findViewById<TextView>(R.id.speakerTitle)
-
-        val pairList = mutableListOf(
-                Pair(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME),
-                Pair(toolbar as View, "toolbar"),
-                Pair(speakerImage as View, "speakerImage"),
-                Pair(speakerTitle as View, "speakerName")).apply {
-            if (navigationBar != null)
-                add(Pair(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME))
-        }
-        return pairList.toTypedArray()
     }
 }
