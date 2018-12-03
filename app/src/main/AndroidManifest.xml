@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jacpalberto.devcomms">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".DevCommsApp"
         android:allowBackup="true"
@@ -10,6 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCXqbQiGqIl-hsS0SspsZhW15X2vrUTpyg" />
+
+
         <activity
             android:name=".splash.SplashActivity"
             android:noHistory="true"
@@ -33,15 +42,19 @@
         <activity
             android:name=".eventDetail.EventDetailActivity"
             android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".sponsorDetail.SponsorDetailActivity"
+            android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".address.AddressActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait"/>
+
         <service android:name=".notifications.DevCommsMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <activity
-            android:name=".sponsorDetail.SponsorDetailActivity"
-            android:theme="@style/AppTheme.Dialog" />
     </application>
 
 </manifest>

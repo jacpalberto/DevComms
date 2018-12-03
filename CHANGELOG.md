@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Version to the SplashScreen based on `BuildConfig.VERSION_NAME`
+- Speaker and Event Detail are Merged in the same screen
+- Add Maps screen to know how to Arrive
 - Added RxKotlin 2.3.0
 
 ### Removed

@@ -17,6 +17,10 @@
         android:id="@+id/settingsGroup"
         android:checkableBehavior="none">
         <item
+            android:id="@+id/mapMenuItem"
+            android:icon="@drawable/ic_github"
+            android:title="@string/how_to_arrive" />
+        <item
             android:id="@+id/sponsorsMenuItem"
             android:icon="@drawable/ic_sponsors"
             android:title="@string/sponsors" />

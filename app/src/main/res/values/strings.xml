@@ -11,6 +11,7 @@
     <string name="agenda">AGENDA</string>
     <string name="sponsors">SPONSORS</string>
     <string name="about">ABOUT</string>
+    <string name="how_to_arrive">HOW TO ARRIVE</string>
 
     <!-- content description -->
     <string name="speaker_photo">Speaker Photo</string>
@@ -37,5 +38,6 @@ We are happy to bring content, software and help to members of different communi
     <string name="time_format">%s - %s</string>
     <string name="toggle_favorite">toggle_favorite</string>
     <string name="sponsor_s_logo">sponsor\'s logo</string>
+    <string name="how_to_arrive_lower">How to arrive</string>
 
 </resources>

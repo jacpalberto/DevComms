@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.jacpalberto.devcomms.R
 import com.jacpalberto.devcomms.about.AboutActivity
+import com.jacpalberto.devcomms.address.AddressActivity
 import com.jacpalberto.devcomms.agenda.AgendaByDateFragment
 import com.jacpalberto.devcomms.sponsors.SponsorsActivity
 import com.jacpalberto.devcomms.utils.replaceFragment
@@ -70,6 +71,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             } else drawerLayout.openDrawer(GravityCompat.START)
             R.id.scheduleMenuItem -> showScheduleFragment()
             R.id.agendaMenuItem -> showAgendaFragment()
+            R.id.mapMenuItem -> {
+                startActivity(AddressActivity.newIntent(this@MainActivity))
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            }
             R.id.sponsorsMenuItem -> {
                 startActivity(SponsorsActivity.newIntent(this@MainActivity))
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)

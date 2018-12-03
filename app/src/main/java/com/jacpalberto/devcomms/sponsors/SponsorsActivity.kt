@@ -107,7 +107,7 @@ class SponsorsActivity : AppCompatActivity() {
 
     private val onSponsorsLongClick = { sponsor: Sponsor ->
         val title: String = if (sponsor.name.isNullOrEmpty()) "An awesome sponsor"
-        else sponsor.name ?: "An awesome sponsor"
+        else sponsor.name
         showToast(title)
         true
     }
