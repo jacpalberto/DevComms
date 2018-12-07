@@ -18,7 +18,7 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/mapMenuItem"
-            android:icon="@drawable/ic_github"
+            android:icon="@drawable/ic_location"
             android:title="@string/how_to_arrive" />
         <item
             android:id="@+id/sponsorsMenuItem"

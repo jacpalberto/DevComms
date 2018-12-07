@@ -36,7 +36,7 @@ class SponsorsAdapter(private var sponsors: List<Sponsor>,
                 Picasso.get()
                         .load(if (sponsor.logo_url.isNotEmpty()) sponsor.logo_url else "placeholder")
                         .error(R.drawable.logo_community)
-                        .resize(500, 500)
+                        .resize(800, 800)
                         .centerInside()
                         .into(this.sponsorImg)
 

@@ -56,13 +56,13 @@
             <ImageView
                 android:id="@+id/sponsorLogo"
                 android:layout_width="0dp"
-                android:layout_height="128dp"
+                android:layout_height="168dp"
+                android:contentDescription="@string/sponsor_s_logo"
                 android:scaleType="centerInside"
                 android:transitionName="sponsorImg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/sponsor_s_logo"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
@@ -87,31 +87,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/sponsorName"
                 tools:text="Sponsor Systems, Inc., also known as Sponsor, is a global provider of software engineering and IT consulting services headquartered in SA, Pennsylvania, United States. The company has software development centers and branch offices in North America, Europe, Asia and Australia." />
 
-            <TextView
-                android:id="@+id/sponsorWeb"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/webButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textAppearance="@style/DetailTextStyle.Normal"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_web"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/contactUsButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sponsorBrief"
-                tools:text="More info at: www.sponsor.com" />
+                app:layout_constraintTop_toBottomOf="@id/sponsorBrief"
+                app:layout_constraintVertical_bias="0.7" />
 
-            <Button
+            <ImageView
                 android:id="@+id/contactUsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/selector_contact_us_button"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
-                android:text="@string/contact_us"
-                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_mail"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sponsorWeb" />
+                app:layout_constraintStart_toEndOf="@id/webButton"
+                app:layout_constraintTop_toBottomOf="@+id/sponsorBrief"
+                app:layout_constraintVertical_bias="0.7" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
