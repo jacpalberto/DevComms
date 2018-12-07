@@ -74,15 +74,6 @@
     </style>
 
     <!-- About Styles-->
-    <style name="AboutIcons">
-        <item name="android:layout_marginStart">16dp</item>
-        <item name="android:layout_marginTop">16dp</item>
-        <item name="android:padding">4dp</item>
-        <item name="android:scaleType">centerCrop</item>
-        <item name="android:src">@drawable/ic_about</item>
-        <item name="android:tint">@color/colorPrimary</item>
-    </style>
-
     <style name="AboutTitleStyle">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/aboutTitle</item>

@@ -7,15 +7,13 @@
     android:fitsSystemWindows="true"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/logo_community"
+        android:src="@drawable/community_header"
         tools:ignore="ContentDescription" />
 </FrameLayout>
 

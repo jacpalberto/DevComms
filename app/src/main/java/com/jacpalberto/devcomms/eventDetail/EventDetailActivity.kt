@@ -88,7 +88,7 @@ class EventDetailActivity : AppCompatActivity() {
         speakerCountry.text = "${speaker?.country}"
         speakerDescriptionTextView.text = speaker?.bio
         speakerGithub.setOnClickListener { startWebIntent("www.github.com/${speaker?.github}") }
-        speakerTwitter.setOnClickListener { startWebIntent("www.github.com/${speaker?.twitter}") }
+        speakerTwitter.setOnClickListener { startWebIntent("www.twitter.com/${speaker?.twitter}") }
     }
 
     private fun applySpeakerVisibility(speaker: SpeakerDetail?) {

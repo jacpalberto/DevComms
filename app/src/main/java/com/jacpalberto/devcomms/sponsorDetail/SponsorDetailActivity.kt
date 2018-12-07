@@ -68,7 +68,7 @@ class SponsorDetailActivity : AppCompatActivity() {
     private fun showSponsor(sponsor: Sponsor) {
         Picasso.get()
                 .load(if (sponsor.logo_url.isNullOrEmpty()) "placeholder" else sponsor.logo_url)
-                .error(R.drawable.placeholder_speaker)
+                .error(R.drawable.logo_community)
                 .resize(500, 500)
                 .centerInside()
                 .into(sponsorLogo)
