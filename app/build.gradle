@@ -22,6 +22,7 @@ android {
         posadev18 {
             buildConfigField "String", "dbEventName", "\"posadev-18\""
             buildConfigField "String", "roomDbName", "\"Posadev18\""
+            applicationIdSuffix ".posadev"
         }
     }
     buildTypes {
@@ -42,7 +43,7 @@ dependencies {
     //Design
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
