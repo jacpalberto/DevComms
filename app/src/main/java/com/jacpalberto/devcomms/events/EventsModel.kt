@@ -1,5 +1,6 @@
 package com.jacpalberto.devcomms.events
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.jacpalberto.devcomms.data.DataResponse
 import com.jacpalberto.devcomms.data.DataState
@@ -9,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import java.lang.Exception
 
 /**
  * Created by Alberto Carrillo on 8/30/18.
@@ -18,19 +20,23 @@ class EventsModel(private val repository: EventsRepository, private val eventsDa
 
     fun fetchEvents(liveData: MutableLiveData<DataResponse<List<DevCommsEvent>>>) {
         val finalResponse = DataResponse<List<DevCommsEvent>>(emptyList(), DataState.SUCCESS)
-
-        repository.fetchEvents { response ->
-            if (response.isStatusFailedOrError()) fetchEventsFromRoom(
-                    { liveData.postValue(finalResponse.apply { updateSuccessValue(it) }) },
-                    { liveData.postValue(finalResponse.apply { setFailureStatus() }) })
-            else {
-                fetchFavoriteEventsFromRoom { list ->
-                    updateFavoriteFields(list, response.data)
-                    saveEvents(response.data,
-                            { liveData.postValue(finalResponse.apply { updateSuccessValue(it) }) },
-                            { liveData.postValue(finalResponse.apply { setFailureStatus() }) })
+        try {
+            repository.fetchEvents { response ->
+                Log.d("Error", "$response")
+                if (response.isStatusFailedOrError()) fetchEventsFromRoom(
+                        { liveData.postValue(finalResponse.apply { updateSuccessValue(it) }) },
+                        { liveData.postValue(finalResponse.apply { setFailureStatus() }) })
+                else {
+                    fetchFavoriteEventsFromRoom { list ->
+                        updateFavoriteFields(list, response.data)
+                        saveEvents(response.data,
+                                { liveData.postValue(finalResponse.apply { updateSuccessValue(it) }) },
+                                { liveData.postValue(finalResponse.apply { setFailureStatus() }) })
+                    }
                 }
             }
+        } catch (ex: Exception) {
+            Log.d("Error", ex.localizedMessage)
         }
     }
 

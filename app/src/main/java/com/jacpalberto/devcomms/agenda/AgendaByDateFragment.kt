@@ -25,7 +25,7 @@ import org.koin.android.ext.android.inject
 class AgendaByDateFragment : Fragment() {
     companion object {
         fun newInstance() = AgendaByDateFragment()
-        val TAG = AgendaByDateFragment::class.java.name ?: "AgendaByDateFragment"
+        val TAG = AgendaByDateFragment::class.java.name
     }
 
     private val viewModel: EventsViewModel by inject()

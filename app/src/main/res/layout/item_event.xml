@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/eventCardView"
     android:layout_width="match_parent"
-    android:layout_height="135dp"
+    android:layout_height="140dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="@color/eventCardColor"
-    app:cardCornerRadius="0dp"
-    app:cardElevation="2dp">
+    android:padding="0dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp"
+    app:cardPreventCornerOverlap="true"
+    app:contentPadding="0dp"
+    app:layout_constraintCircleRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="135dp">
+        android:layout_height="140dp">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineStart"
@@ -24,6 +31,7 @@
         <TextView
             android:id="@+id/eventTitle"
             style="@style/EventData"
+            android:ellipsize="end"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -36,7 +44,7 @@
             app:layout_constraintStart_toEndOf="@+id/guidelineStart"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
-            tools:text="e Database Aasdaskmdalskd" />
+            tools:text="e Database " />
 
         <ImageView
             android:id="@+id/favoriteImageView"
@@ -122,4 +130,4 @@
             app:layout_constraintStart_toEndOf="@+id/eventRoom"
             tools:text="2:00 - 2:45" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

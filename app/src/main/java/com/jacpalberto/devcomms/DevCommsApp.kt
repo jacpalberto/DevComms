@@ -7,6 +7,7 @@ import com.jacpalberto.devcomms.di.eventsModule
 import com.jacpalberto.devcomms.di.generalModule
 import com.jacpalberto.devcomms.di.sponsorsModule
 import org.koin.android.ext.android.startKoin
+import kotlin.math.min
 
 /**
  * Created by Alberto Carrillo on 8/24/18.
@@ -19,7 +20,7 @@ class DevCommsApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin(this, listOf(sponsorsModule, eventsModule, generalModule, addressModule))
-        DevCommsApp.database = Room.databaseBuilder(this,
+        database = Room.databaseBuilder(this,
                 DevCommsDatabase::class.java,
                 BuildConfig.roomDbName)
                 .allowMainThreadQueries()

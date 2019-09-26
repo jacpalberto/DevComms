@@ -1,5 +1,6 @@
 package com.jacpalberto.devcomms.events
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jacpalberto.devcomms.BuildConfig
 import com.jacpalberto.devcomms.data.*
@@ -33,12 +34,14 @@ class EventsRepository(private val firestore: FirebaseFirestore) {
             if (task.isSuccessful) {
                 val eventListResponse = task.result
                 eventListResponse?.forEach { document ->
+                    Log.d("EventsRepo", document.toString())
                     val agenda = document.toObject(AgendaResponse::class.java)
                     agenda.key = document.id
 
                     agenda.speaker?.get()?.addOnCompleteListener { speakerResponse ->
                         if (speakerResponse.isSuccessful) {
                             val speaker = speakerResponse.result?.toObject(SpeakerDetail::class.java)
+                            Log.d("EventsRepo", speaker.toString())
                             agenda.speakerDetail = speaker
                             events.add(parseAgendaToDevCommsEvent(agenda))
                             if (events.size == eventListResponse.size()) {

@@ -18,8 +18,8 @@ import com.jacpalberto.devcomms.events.MainActivity
 //TODO: filter notifications
 class DevCommsMessagingService : FirebaseMessagingService() {
 
-    override fun onMessageReceived(message: RemoteMessage?) {
-        sendMyNotification(message)
+    override fun onMessageReceived(p0: RemoteMessage) {
+        sendMyNotification(p0)
     }
 
     private fun sendMyNotification(remoteMessage: RemoteMessage?) {

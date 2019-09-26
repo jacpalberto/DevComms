@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_events_by_date.*
 class EventsByDateFragment : Fragment() {
     companion object {
         fun newInstance() = EventsByDateFragment()
-        val TAG = EventsByDateFragment::class.java.name ?: "EventsByDateFragment"
+        val TAG = EventsByDateFragment::class.java.name
     }
 
     private lateinit var snackbar: Snackbar

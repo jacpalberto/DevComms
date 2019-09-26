@@ -35,7 +35,9 @@ fun Context.startWebIntent(webPageUrl: String?) {
             webPageUrl
         } else "http://$webPageUrl"
         val webPage = Uri.parse(url)
-        startActivity(Intent(Intent.ACTION_VIEW, webPage))
+        val intent = Intent(Intent.ACTION_VIEW, webPage)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     } catch (e: ActivityNotFoundException) {
         showToast(getString(R.string.url_intent_error))
         e.printStackTrace()
