@@ -52,8 +52,15 @@ class AddressActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         val bounds = builder.build()
-        val cu = CameraUpdateFactory.newLatLngBounds(bounds, 400)
-        gMap?.moveCamera(cu)
+        if (locations?.data?.size == 1) {
+            val location = locations?.data?.get(0)
+            val cu = CameraUpdateFactory.newLatLngZoom(
+                    LatLng(location.lat.toDouble(), location.lon.toDouble()), 15F)
+            gMap?.animateCamera(cu)
+        } else {
+            val cu = CameraUpdateFactory.newLatLngBounds(bounds, 400)
+            gMap?.moveCamera(cu)
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

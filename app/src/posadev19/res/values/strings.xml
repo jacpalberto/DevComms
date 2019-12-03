@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Posadev 2019</string>
+    <string name="sponsors_toolbar">Our Awesome sponsors</string>
+    <string name="my_agenda">My agenda</string>
+
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+
+    <!-- Menu Drawer -->
+    <string name="schedule">SCHEDULE</string>
+    <string name="agenda">AGENDA</string>
+    <string name="sponsors">SPONSORS</string>
+    <string name="about">ABOUT</string>
+    <string name="how_to_arrive">HOW TO ARRIVE</string>
+
+    <!-- content description -->
+    <string name="speaker_photo">Speaker Photo</string>
+    <string name="sponsor_logo">Sponsor logo</string>
+    <string name="description_community_logo">Community logo</string>
+
+    <string name="complete_name">%s %s</string>
+    <string name="event_room_plus_date">%1s, %2s</string>
+
+    <!-- include º before the hyperlink to make it clickable -->
+    <!-- About -->
+    <string name="about_app_title">About the app</string>
+    <string name="about_app_content">The Devcomms app is coded by the community members. Architecturally, this is built with the new Android Architecture components and Firestore. All of this is coded natively. \n\nSee the repo and read more at: ºhttps://github.com/GDLDevComms/DevComms</string>
+    <string name="about_event_title">About the community</string>
+    <string name="about_event_content">DevComms is a community founded by leaders of different technical communities to promote the grow of technical skills in Guadalajara and Mexico.
+We are happy to bring content, software and help to members of different communities.</string>
+
+    <!-- errors -->
+    <string name="connectivity_error">Service is not available, try again later.</string>
+    <string name="url_intent_error">No application can handle this request. Please install a web browser or check your URL.</string>
+    <string name="empty_agenda">No talks have been added to your agenda yet</string>
+
+    <string name="contact_us">Contact us</string>
+    <string name="time_format">%s - %s</string>
+    <string name="toggle_favorite">toggle_favorite</string>
+    <string name="sponsor_s_logo">sponsor\'s logo</string>
+    <string name="how_to_arrive_lower">How to arrive</string>
+    <string name="about_lower">About</string>
+
+</resources>

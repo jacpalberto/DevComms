@@ -22,7 +22,12 @@ android {
         posadev18 {
             buildConfigField "String", "dbEventName", "\"posadev-18\""
             buildConfigField "String", "roomDbName", "\"Posadev18\""
-            applicationIdSuffix ".posadev"
+            //applicationIdSuffix ".posadev"
+        }
+        posadev19 {
+            buildConfigField "String", "dbEventName", "\"posadev-19\""
+            buildConfigField "String", "roomDbName", "\"Posadev19\""
+            //applicationIdSuffix ".posadev19"
         }
     }
     buildTypes {
